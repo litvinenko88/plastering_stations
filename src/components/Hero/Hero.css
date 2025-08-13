@@ -25,6 +25,18 @@
   z-index: 2;
 }
 
+@media (min-width: 640px) {
+  .hero-container {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-container {
+    padding: 0 2rem;
+  }
+}
+
 .hero-content {
   display: grid;
   grid-template-columns: 1fr 1fr;

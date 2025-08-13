@@ -10,6 +10,18 @@
   padding: 0 1rem;
 }
 
+@media (min-width: 640px) {
+  .counters-container {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .counters-container {
+    padding: 0 2rem;
+  }
+}
+
 .counters-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));

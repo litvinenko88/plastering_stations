@@ -9,6 +9,18 @@
   padding: 0 1rem;
 }
 
+@media (min-width: 640px) {
+  .reviews-container {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .reviews-container {
+    padding: 0 2rem;
+  }
+}
+
 .reviews-title {
   font-size: var(--font-3xl);
   color: var(--color-primary);

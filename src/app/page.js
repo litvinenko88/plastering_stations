@@ -217,7 +217,7 @@ export default function Home() {
         <main>
           {/* Преимущества */}
           <section id="advantages" style={{ padding: '4rem 0' }}>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="container">
               <h2 style={{ 
                 fontSize: 'var(--font-3xl)', 
                 color: 'var(--color-primary)',
@@ -245,7 +245,7 @@ export default function Home() {
             backgroundColor: 'var(--color-gray-light)', 
             padding: '4rem 0' 
           }}>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="container">
               <h2 style={{ 
                 fontSize: 'var(--font-3xl)', 
                 color: 'var(--color-primary)',
@@ -275,7 +275,7 @@ export default function Home() {
 
           {/* Полный каталог товаров */}
           <section id="full-catalog" style={{ padding: '4rem 0' }}>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="container">
               <h2 style={{ 
                 fontSize: 'var(--font-3xl)', 
                 color: 'var(--color-primary)',
@@ -312,7 +312,7 @@ export default function Home() {
             padding: '4rem 0',
             backgroundColor: 'var(--color-secondary)'
           }}>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="container">
               <h2 style={{ 
                 fontSize: 'var(--font-3xl)', 
                 color: 'var(--color-primary)',
@@ -484,7 +484,7 @@ export default function Home() {
 
           {/* Контакты */}
           <section id="contacts" style={{ padding: '4rem 0' }}>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="container">
               <h2 style={{ 
                 fontSize: 'var(--font-3xl)', 
                 color: 'var(--color-primary)',
@@ -584,7 +584,7 @@ export default function Home() {
           color: 'var(--color-secondary)',
           padding: '3rem 0 2rem',
         }}>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="container">
             <div style={{ 
               display: 'grid', 
               gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
