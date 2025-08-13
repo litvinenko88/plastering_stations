@@ -1,0 +1,154 @@
+.consultation-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  opacity: 0;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.consultation-modal {
+  background-color: var(--color-white);
+  border-radius: 0.75rem;
+  padding: 2rem;
+  max-width: 500px;
+  width: 100%;
+  position: relative;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  transform: scale(0.9);
+  animation: scaleIn 0.3s ease forwards;
+}
+
+.consultation-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--color-gray);
+  cursor: pointer;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.consultation-close:hover {
+  background-color: var(--color-gray-light);
+  color: var(--color-primary);
+}
+
+.consultation-title {
+  font-size: var(--font-2xl);
+  font-weight: bold;
+  color: var(--color-primary);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.consultation-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-label {
+  font-size: var(--font-sm);
+  font-weight: 500;
+  color: var(--color-dark);
+}
+
+.form-input {
+  padding: 0.75rem;
+  border: 2px solid var(--color-gray-light);
+  border-radius: 0.5rem;
+  font-size: var(--font-base);
+  transition: border-color 0.3s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.checkbox-input {
+  margin-top: 0.25rem;
+  accent-color: var(--color-primary);
+}
+
+.checkbox-label {
+  font-size: var(--font-sm);
+  color: var(--color-gray);
+  line-height: 1.4;
+}
+
+.submit-btn {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  padding: 0.875rem 2rem;
+  border-radius: 0.5rem;
+  font-size: var(--font-base);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.submit-btn:hover {
+  background-color: #6a0109;
+  transform: translateY(-1px);
+}
+
+.submit-btn:disabled {
+  background-color: var(--color-gray);
+  cursor: not-allowed;
+  transform: none;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  to {
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 640px) {
+  .consultation-modal {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+  
+  .consultation-title {
+    font-size: var(--font-xl);
+  }
+}

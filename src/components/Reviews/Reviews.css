@@ -1,0 +1,114 @@
+.reviews {
+  padding: 4rem 0;
+  background: linear-gradient(135deg, var(--color-gray-light), #f8f9fa);
+}
+
+.reviews-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.reviews-title {
+  font-size: var(--font-3xl);
+  color: var(--color-primary);
+  text-align: center;
+  margin-bottom: 3rem;
+  font-weight: bold;
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.review-card {
+  background: var(--color-white);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--color-gray-light);
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.review-card:hover {
+  transform: translateY(-3px);
+}
+
+.review-card::before {
+  content: '"';
+  position: absolute;
+  top: -1rem;
+  left: 1.5rem;
+  font-size: 4rem;
+  color: var(--color-primary);
+  font-family: serif;
+  opacity: 0.3;
+}
+
+.review-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.review-avatar {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-white);
+  font-weight: bold;
+  font-size: var(--font-lg);
+}
+
+.review-info h4 {
+  font-size: var(--font-base);
+  font-weight: 600;
+  color: var(--color-dark);
+  margin: 0;
+}
+
+.review-info .review-role {
+  font-size: var(--font-sm);
+  color: var(--color-gray);
+  margin: 0;
+}
+
+.review-stars {
+  display: flex;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.review-text {
+  font-size: var(--font-base);
+  color: var(--color-gray-dark);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.review-product {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-gray-light);
+  font-size: var(--font-sm);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .reviews-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .review-card {
+    padding: 1.5rem;
+  }
+}

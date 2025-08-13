@@ -1,0 +1,111 @@
+.comparison {
+  padding: 4rem 0;
+  background-color: var(--color-white);
+}
+
+.comparison-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.comparison-title {
+  font-size: var(--font-3xl);
+  color: var(--color-primary);
+  text-align: center;
+  margin-bottom: 3rem;
+  font-weight: bold;
+}
+
+.comparison-table {
+  background: var(--color-white);
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--color-gray-light);
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.comparison-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.comparison-table th,
+.comparison-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--color-gray-light);
+}
+
+.comparison-table th {
+  background-color: var(--color-secondary);
+  font-weight: 600;
+  color: var(--color-dark);
+  font-size: var(--font-sm);
+}
+
+.comparison-table td {
+  font-size: var(--font-sm);
+  color: var(--color-gray-dark);
+}
+
+.comparison-table .our-column {
+  background-color: rgba(125, 1, 11, 0.05);
+  font-weight: 600;
+}
+
+.comparison-table .price-cell {
+  font-size: var(--font-lg);
+  font-weight: bold;
+  color: var(--color-primary);
+}
+
+.comparison-advantages {
+  margin-top: 2rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, var(--color-secondary), #f5f0f8);
+  border-radius: 1rem;
+}
+
+.comparison-advantages h3 {
+  font-size: var(--font-xl);
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.advantages-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.advantages-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  font-size: var(--font-base);
+  color: var(--color-dark);
+}
+
+.advantages-list li::before {
+  content: '✅';
+  font-size: var(--font-lg);
+}
+
+@media (max-width: 768px) {
+  .comparison-table th,
+  .comparison-table td {
+    padding: 0.75rem 0.5rem;
+    font-size: var(--font-xs);
+  }
+  
+  .comparison-title {
+    font-size: var(--font-2xl);
+  }
+}

@@ -1,0 +1,82 @@
+'use client'
+import { useState, useEffect } from 'react'
+import './Counter.css'
+
+export default function Counter() {
+  const [salesCount, setSalesCount] = useState(147)
+  const [actionDays, setActionDays] = useState(5)
+  const [actionHours, setActionHours] = useState(14)
+  const [actionMinutes, setActionMinutes] = useState(32)
+
+  useEffect(() => {
+    // Счетчик продаж (увеличивается каждые 30 секунд)
+    const salesInterval = setInterval(() => {
+      setSalesCount(prev => prev + 1)
+    }, 30000)
+
+    // Обратный отсчет акции
+    const actionInterval = setInterval(() => {
+      setActionMinutes(prev => {
+        if (prev > 0) return prev - 1
+        
+        setActionHours(prevHours => {
+          if (prevHours > 0) return prevHours - 1
+          
+          setActionDays(prevDays => {
+            if (prevDays > 0) return prevDays - 1
+            return 0
+          })
+          return 23
+        })
+        return 59
+      })
+    }, 60000)
+
+    return () => {
+      clearInterval(salesInterval)
+      clearInterval(actionInterval)
+    }
+  }, [])
+
+  return (
+    <section className="counters">
+      <div className="counters-container">
+        <div className="counters-grid">
+          <div className="counter-item">
+            <span className="counter-number">{salesCount}</span>
+            <div className="counter-label">
+              Продано станций <br />
+              <span className="counter-accent">в этом месяце</span>
+            </div>
+          </div>
+          
+          <div className="counter-item">
+            <span className="counter-number">10+</span>
+            <div className="counter-label">
+              Лет на рынке <br />
+              <span className="counter-accent">строительного оборудования</span>
+            </div>
+          </div>
+          
+          <div className="counter-item">
+            <span className="counter-number">2-3</span>
+            <div className="counter-label">
+              Года гарантии <br />
+              <span className="counter-accent">на все оборудование</span>
+            </div>
+          </div>
+          
+          <div className="counter-item">
+            <span className="counter-number">
+              {actionDays}д {actionHours}ч {actionMinutes}м
+            </span>
+            <div className="counter-label">
+              До окончания <br />
+              <span className="counter-accent">специальной акции</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
