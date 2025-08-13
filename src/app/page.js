@@ -1,27 +1,21 @@
 // ГЛАВНАЯ СТРАНИЦА САЙТА
-// Здесь импортируются и используются компоненты
-
-// КАК ДОБАВИТЬ КОМПОНЕНТ:
-// 1. Создайте файл в папке src/components/ (например: Header.js)
-// 2. Импортируйте: import Header from '../components/Header'
-// 3. Используйте в JSX: <Header />
-
-// ПРИМЕР ИМПОРТА КОМПОНЕНТОВ:
-// import Header from '../components/Header'
-// import Footer from '../components/Footer'
-// import Button from '../components/Button'
+import Header from '../components/Header'
 
 export default function Home() {
   return (
     <div>
-      <h1>Plastering Stations</h1>
+      {/* Шапка с логотипом и навигацией */}
+      <Header />
       
-      {/* Здесь добавляйте ваши компоненты */}
-      {/* <Header /> */}
-      {/* <Button /> */}
-      {/* <Footer /> */}
-      
-      <p>Проект готов к работе!</p>
+      {/* Основной контент */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <h1 style={{ fontSize: 'var(--font-3xl)', color: 'var(--color-primary)' }}>
+          MIXON - Штукатурные станции
+        </h1>
+        <p style={{ fontSize: 'var(--font-lg)', color: 'var(--color-gray)' }}>
+          Профессиональное оборудование для штукатурных работ
+        </p>
+      </main>
     </div>
   )
 }

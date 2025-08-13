@@ -2,7 +2,53 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Базовые стили для проекта */
-body {
-  font-family: system-ui, -apple-system, sans-serif;
+/* CSS переменные */
+:root {
+  /* Цвета */
+  --color-primary: #7d010b;
+  --color-secondary: #eee8f4;
+  --color-dark: #2f2b35;
+  --color-white: #ffffff;
+  --color-gray-light: #f5f5f5;
+  --color-gray: #666666;
+  --color-gray-dark: #333333;
+  
+  /* Размеры шрифтов */
+  --font-xs: 0.75rem;     /* 12px */
+  --font-sm: 0.875rem;    /* 14px */
+  --font-base: 1rem;      /* 16px */
+  --font-lg: 1.125rem;    /* 18px */
+  --font-xl: 1.25rem;     /* 20px */
+  --font-2xl: 1.5rem;     /* 24px */
+  --font-3xl: 1.875rem;   /* 30px */
+  --font-4xl: 2.25rem;    /* 36px */
+  --font-5xl: 3rem;       /* 48px */
 }
+
+/* Базовые стили */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'TTProstoSans', Arial, sans-serif;
+  line-height: 1.6;
+  color: var(--color-gray-dark);
+  background-color: var(--color-white);
+  font-size: var(--font-base);
+}
+
+/* Утилитарные классы для переменных */
+.text-primary { color: var(--color-primary); }
+.text-secondary { color: var(--color-secondary); }
+.text-dark { color: var(--color-dark); }
+
+.bg-primary { background-color: var(--color-primary); }
+.bg-secondary { background-color: var(--color-secondary); }
+.bg-dark { background-color: var(--color-dark); }
+
+.border-primary { border-color: var(--color-primary); }
+.border-secondary { border-color: var(--color-secondary); }
+.border-dark { border-color: var(--color-dark); }
