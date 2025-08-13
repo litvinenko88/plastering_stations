@@ -40,7 +40,7 @@ export default function FloatingContacts() {
           rel="noopener noreferrer"
           aria-label="WhatsApp"
         >
-          📱
+          <img src="/icons/whatsapp.svg" alt="WhatsApp" />
         </a>
         
         <a 
@@ -50,7 +50,7 @@ export default function FloatingContacts() {
           rel="noopener noreferrer"
           aria-label="Telegram"
         >
-          ✈️
+          <img src="/icons/telegram.svg" alt="Telegram" />
         </a>
         
         <a 
@@ -58,7 +58,7 @@ export default function FloatingContacts() {
           className="contact-btn phone"
           aria-label="Позвонить"
         >
-          📞
+          <img src="/icons/phone.svg" alt="Phone" />
         </a>
       </div>
     </>
