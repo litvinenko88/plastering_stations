@@ -1,36 +1,109 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# MIXON - Штукатурные станции
 
-## Getting Started
+Профессиональный сайт для продажи штукатурных станций и оборудования для механизированной штукатурки.
 
-First, run the development server:
+## 🚀 Технологии
 
-```bash
+- **Next.js 14** - React фреймворк
+- **CSS Variables** - кастомная система дизайна
+- **Статическая генерация** - для любого хостинга
+- **Адаптивный дизайн** - мобильные, планшеты, десктоп
+
+## 📋 Функционал
+
+### 🎯 Основные секции:
+- Hero с фоновым видео
+- Живые счетчики продаж и акций
+- Интерактивный квиз для подбора станции
+- Каталог из 12 моделей станций
+- Сравнение с немецкими аналогами
+- Отзывы клиентов
+- FAQ с раскрывающимися ответами
+- Информация о компании
+
+### 🎮 Интерактивные элементы:
+- Плавающие контакты (WhatsApp, Telegram, Телефон)
+- Сообщение оператора
+- Кнопка прокрутки вверх
+- Форма консультации
+- Hover эффекты
+
+### 📱 SEO оптимизация:
+- Структурированные данные
+- Правильная иерархия заголовков
+- Meta теги и Open Graph
+- Sitemap и robots.txt
+
+## 🛠️ Установка и запуск
+
+\`\`\`bash
+# Установка зависимостей
+npm install
+
+# Запуск в режиме разработки
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Сборка для продакшена
+npm run build
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+# Статическая генерация
+npm run export
+\`\`\`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📂 Структура проекта
 
-## Learn More
+\`\`\`
+src/
+├── app/
+│   ├── globals.css
+│   ├── layout.js
+│   └── page.js
+├── components/
+│   ├── Header/
+│   ├── Hero/
+│   ├── Counter/
+│   ├── Quiz/
+│   ├── ProductCard/
+│   ├── Comparison/
+│   ├── Reviews/
+│   ├── FAQ/
+│   ├── FloatingContacts/
+│   └── ScrollToTop/
+public/
+├── icons/
+├── images/
+└── videos/
+\`\`\`
 
-To learn more about Next.js, take a look at the following resources:
+## 🎨 Дизайн система
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Использует CSS переменные для единообразия:
+- Цвета: primary, secondary, dark, gray
+- Шрифты: xs, sm, base, lg, xl, 2xl, 3xl, 4xl, 5xl
+- Адаптивные контейнеры
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📱 Адаптивность
 
-## Deploy on Vercel
+- **Мобильные** (до 640px)
+- **Планшеты** (640px - 1024px)  
+- **Десктоп** (1024px+)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🚀 Деплой
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Сайт готов для деплоя на любой статический хостинг:
+- GitHub Pages
+- Netlify
+- Vercel
+- Обычный хостинг
+
+После \`npm run build\` загрузите папку \`out/\` на хостинг.
+
+## 📞 Контакты
+
+- Телефон: +7 (800) 000-00-00
+- Email: info@mixon-plastering.ru
+- Адрес: г. Ставрополь
+
+---
+
+© 2024 MIXON. Все права защищены.
