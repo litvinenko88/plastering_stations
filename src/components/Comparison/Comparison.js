@@ -72,10 +72,10 @@ export default function Comparison() {
         <div className="comparison-advantages">
           <h3>Почему наша станция выгоднее?</h3>
           <ul className="advantages-list">
-            <li><span className="comparison-icon weight"></span>Легче на 25 кг за счет оптимизации конструкции</li>
-            <li><span className="comparison-icon volume"></span>Больший объем бункера (150 л против 120 л)</li>
-            <li><span className="comparison-icon pressure"></span>Выше давление подачи (до 30 бар против 25)</li>
-            <li><span className="comparison-icon money"></span>Экономия более 400 000 рублей при покупке</li>
+            <li>Легче на 25 кг за счет оптимизации конструкции</li>
+            <li>Больший объем бункера (150 л против 120 л)</li>
+            <li>Выше давление подачи (до 30 бар против 25)</li>
+            <li>Экономия более 400 000 рублей при покупке</li>
           </ul>
         </div>
       </div>

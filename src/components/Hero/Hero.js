@@ -9,10 +9,10 @@ export default function Hero() {
             <h1>Профессиональные штукатурные станции</h1>
 
             <div className="hero-features">
-              <div className="hero-feature"><span className="hero-icon warranty"></span>Гарантия 2-3 года</div>
-              <div className="hero-feature"><span className="hero-icon education"></span>Обучение работе</div>
-              <div className="hero-feature"><span className="hero-icon parts"></span>Доступные запчасти</div>
-              <div className="hero-feature"><span className="hero-icon price"></span>Выгодные цены</div>
+              <div className="hero-feature">Гарантия 2-3 года</div>
+              <div className="hero-feature">Обучение работе</div>
+              <div className="hero-feature">Доступные запчасти</div>
+              <div className="hero-feature">Выгодные цены</div>
             </div>
 
             <div className="hero-cta">
