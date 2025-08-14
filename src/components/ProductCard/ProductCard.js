@@ -29,17 +29,33 @@ export default function ProductCard({ product }) {
             <span className="spec-value">{product.productivity}</span>
           </li>
           <li>
-            <span className="spec-label">Электропитание:</span>
+            <span className="spec-label">Напряжение:</span>
             <span className="spec-value">{product.power}</span>
           </li>
-          <li>
-            <span className="spec-label">Вес:</span>
-            <span className="spec-value">{product.weight}</span>
-          </li>
-          <li>
-            <span className="spec-label">Гарантия:</span>
-            <span className="spec-value">{product.warranty}</span>
-          </li>
+          {product.motorPower && (
+            <li>
+              <span className="spec-label">Мощность:</span>
+              <span className="spec-value">{product.motorPower}</span>
+            </li>
+          )}
+          {product.weight && (
+            <li>
+              <span className="spec-label">Вес:</span>
+              <span className="spec-value">{product.weight}</span>
+            </li>
+          )}
+          {product.distance && (
+            <li>
+              <span className="spec-label">Дальность:</span>
+              <span className="spec-value">{product.distance}</span>
+            </li>
+          )}
+          {product.efficiency && (
+            <li>
+              <span className="spec-label">Эффективность:</span>
+              <span className="spec-value">{product.efficiency}</span>
+            </li>
+          )}
         </ul>
         
         <div className="product-price">{product.price}</div>

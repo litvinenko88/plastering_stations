@@ -135,10 +135,7 @@
 .product-price {
   font-size: var(--font-xl);
   font-weight: 800;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--color-primary);
   margin: 1rem 0;
   text-align: center;
   min-height: 1.5rem;
