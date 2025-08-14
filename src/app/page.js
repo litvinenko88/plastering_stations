@@ -1,3 +1,5 @@
+'use client'
+import { useState } from 'react'
 import Header from '../components/Header/Header'
 import Hero from '../components/Hero/Hero'
 import Counter from '../components/Counter/Counter'
@@ -10,9 +12,12 @@ import ProductCard from '../components/ProductCard/ProductCard'
 import Comparison from '../components/Comparison/Comparison'
 import Reviews from '../components/Reviews/Reviews'
 import FAQ from '../components/FAQ/FAQ'
-import Quiz from '../components/Quiz/Quiz'
+import QuizModal from '../components/QuizModal/QuizModal'
+import { products } from '../data/products'
 
 export default function Home() {
+  const [isQuizOpen, setIsQuizOpen] = useState(false)
+
   const advantages = [
     {
       title: 'Гарантия 2 года + сервис',
@@ -54,121 +59,7 @@ export default function Home() {
     }
   ]
 
-  const products = [
-    {
-      name: 'Станция "Профи-220"',
-      badge: { type: 'hit', text: 'Хит продаж' },
-      productivity: 'бункер 30 м²/час',
-      power: '220 В, а также 380в для более мощного оборудования.',
-      weight: 'бункер 75 кг',
-      warranty: 'kaleta 2 года',
-      distance: 'до 30 м',
-      price: '145 000 ₽',
-      description: 'профессиональное оборудование для крупных строек, включая штукатурную станцию PFT Ritmo. Идеально подходит для частного ремонта и небольших бригад. Компактные размеры обеспечивают удобство транспортировки.'
-    },
-    {
-      name: 'Станция "Мастер-500"',
-      badge: { type: 'new', text: 'Новинка 2024' },
-      productivity: '50 м²/час',
-      power: '220 / 380 В',
-      weight: '162 кг',
-      warranty: '3 года',
-      pressure: '30 бар',
-      price: '289 000 ₽',
-      description: 'Профессиональная модель для крупных объектов с регулируемой скоростью подачи раствора.'
-    },
-    {
-      name: 'Станция "Компакт-150"',
-      badge: { type: '', text: 'Эконом-класс' },
-      productivity: '15 м²/час',
-      power: '220 В',
-      weight: '45 кг',
-      warranty: '1 год',
-      price: '89 000 ₽',
-      description: 'Самая легкая модель для работ в труднодоступных местах.'
-    },
-    {
-      name: 'Станция "Универсал-350"',
-      productivity: '35 м²/час при использовании оборудования master.',
-      power: '220/380 В, подходит для оборудования maltech.',
-      weight: '120 кг',
-      warranty: '2 года',
-      price: '199 000 ₽',
-      description: 'Универсальная модель для гипсовых и цементных смесей.'
-    },
-    {
-      name: 'Станция "Турбо-600"',
-      productivity: '60 м²/час',
-      power: '380 В',
-      weight: '180 кг',
-      warranty: '3 года',
-      price: '350 000 ₽',
-      description: 'Мощная станция для промышленных объемов.'
-    },
-    {
-      name: 'Станция "Мини-100"',
-      productivity: '10 м²/час',
-      power: '220 В',
-      weight: '35 кг, идеально подходит для малых ремонтов и оштукатуривания.',
-      warranty: '1 год',
-      price: '75 000 ₽',
-      description: 'Миниатюрная модель для небольших ремонтов.'
-    },
-    {
-      name: 'Станция "Фасад-400"',
-      productivity: '40 м²/час',
-      power: '380 В',
-      weight: '150 кг',
-      warranty: '2 года',
-      price: '250 000 ₽',
-      description: 'Специализированная модель для фасадных работ.'
-    },
-    {
-      name: 'Станция "Экспресс-250"',
-      productivity: '25 м²/час',
-      power: '220 В',
-      weight: '85 кг',
-      warranty: '2 года',
-      price: '165 000 ₽',
-      description: 'Оптимальный выбор для средних объемов работ.'
-    },
-    {
-      name: 'Станция "Монолит-700"',
-      productivity: '70 м²/час',
-      power: '380 В',
-      weight: '200 кг',
-      warranty: '3 года',
-      price: '420 000 ₽',
-      description: 'Профессиональное оборудование для крупных строек, включая компрессоры и штукатурные станции купить.'
-    },
-    {
-      name: 'Станция "Стандарт-300"',
-      productivity: '30 м²/час',
-      power: '220 В',
-      weight: '95 кг',
-      warranty: '2 года',
-      price: '175 000 ₽',
-      description: 'Надежная модель для ежедневного использования.'
-    },
-    {
-      name: 'Станция "Премиум-450"',
-      productivity: '45 м²/час',
-      power: '220/380 В',
-      weight: '140 кг',
-      warranty: '3 года',
-      price: '310 000 ₽',
-      description: 'Премиальная модель с расширенным функционалом.'
-    },
-    {
-      name: 'Станция "Экстра-200"',
-      productivity: '20 м²/час',
-      power: '220 В',
-      weight: '65 кг',
-      warranty: '2 года',
-      price: '135 000 ₽',
-      description: 'Бюджетная модель с хорошей производительностью.'
-    }
-  ]
+
 
   return (
     <>
@@ -205,13 +96,10 @@ export default function Home() {
         <Header />
         
         {/* Hero секция */}
-        <Hero />
+        <Hero onQuizOpen={() => setIsQuizOpen(true)} />
         
         {/* Счетчики */}
         <Counter />
-        
-        {/* Квиз */}
-        <Quiz />
         
         {/* Основной контент */}
         <main>
@@ -682,6 +570,12 @@ export default function Home() {
         
         {/* Кнопка прокрутки вверх */}
         <ScrollToTop />
+        
+        {/* Модальное окно квиза */}
+        <QuizModal 
+          isOpen={isQuizOpen} 
+          onClose={() => setIsQuizOpen(false)} 
+        />
       </div>
     </>
   )
