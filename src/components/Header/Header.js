@@ -9,7 +9,7 @@ export default function Header() {
 
   const navItems = [
     { name: 'Каталог', href: '#catalog' },
-    { name: 'Подобрать', href: '#select' },
+    { name: 'Подобрать', onClick: () => window.dispatchEvent(new CustomEvent('openQuiz')) },
     { name: 'Преимущества', href: '#advantages' },
     { name: 'Контакты', href: '#contacts' },
     { name: 'Консультация', onClick: () => setIsConsultationOpen(true), isConsultation: true }
@@ -31,12 +31,22 @@ export default function Header() {
                 {navItems.map((item) => (
                   <li key={item.name}>
                     {item.onClick ? (
-                      <button 
-                        onClick={item.onClick}
-                        className={`nav-link ${item.isConsultation ? 'contact' : ''}`}
-                      >
-                        {item.name}
-                      </button>
+                      item.name === 'Подобрать' ? (
+                        <a 
+                          href="#"
+                          onClick={(e) => { e.preventDefault(); item.onClick(); }}
+                          className="nav-link"
+                        >
+                          {item.name}
+                        </a>
+                      ) : (
+                        <button 
+                          onClick={item.onClick}
+                          className={`nav-link ${item.isConsultation ? 'contact' : ''}`}
+                        >
+                          {item.name}
+                        </button>
+                      )
                     ) : (
                       <a 
                         href={item.href}
