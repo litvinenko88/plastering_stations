@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://mixon-plastering.ru/sitemap.xml
+Sitemap: https://nova-plastering.ru/sitemap.xml
 
 # Основные страницы
 Allow: /#catalog

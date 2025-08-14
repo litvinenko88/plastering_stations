@@ -80,10 +80,10 @@ export default function Home() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Organization",
-            "name": "MIXON",
+            "name": "NOVA",
             "description": "Производитель штукатурных станций и оборудования для механизированной штукатурки",
-            "url": "https://mixon-plastering.ru",
-            "logo": "https://mixon-plastering.ru/logo.png",
+            "url": "https://nova-plastering.ru",
+            "logo": "https://nova-plastering.ru/logo.png",
             "contactPoint": {
               "@type": "ContactPoint",
               "telephone": "+7-800-000-00-00",

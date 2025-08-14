@@ -22,7 +22,7 @@ export default function Header() {
           <div className="header-content">
             {/* Логотип */}
             <a href="#" className="logo">
-              MIXON
+              NOVA
             </a>
 
             {/* Десктопная навигация */}
