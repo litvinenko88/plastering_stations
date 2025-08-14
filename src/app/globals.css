@@ -197,3 +197,23 @@ body {
   box-shadow: 0 4px 0 white, 0 8px 0 white;
 }
 
+/* Сетка продуктов с переносом парами */
+.products-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 1400px) {
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+

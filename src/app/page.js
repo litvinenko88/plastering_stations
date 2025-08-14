@@ -174,11 +174,7 @@ export default function Home() {
                 Модели штукатурных станций
               </h2>
               
-              <div style={{ 
-                display: 'grid', 
-                gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-                gap: '2rem'
-              }}>
+              <div className="products-grid">
                 {products.map((product, index) => (
                   <ProductCard key={index} product={product} />
                 ))}
