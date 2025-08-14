@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://litvinenko88.github.io/plastering_stations/</loc>
+    <image:image>
+      <image:loc>https://litvinenko88.github.io/plastering_stations/images/products/Persona%20220_380_1%20(1).webp</image:loc>
+      <image:title>Штукатурная станция PERSONIYA 220/380</image:title>
+      <image:caption>Универсальная штукатурная станция с высокой производительностью</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://litvinenko88.github.io/plastering_stations/images/products/Persona%20V380_2.jpg</image:loc>
+      <image:title>Штукатурная станция PERSONIYA V380</image:title>
+      <image:caption>Промышленная станция для больших объемов работ</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://litvinenko88.github.io/plastering_stations/images/products/Persona%20V1_1.png</image:loc>
+      <image:title>Штукатурная станция PERSONIYA V-1</image:title>
+      <image:caption>Компактная модель с оптимальным соотношением цены и качества</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://litvinenko88.github.io/plastering_stations/images/products/Persona%20V1_plus_1.png</image:loc>
+      <image:title>Штукатурная станция PERSONIYA V-1 PLUS</image:title>
+      <image:caption>Улучшенная модель с повышенной производительностью</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://litvinenko88.github.io/plastering_stations/images/operator.webp</image:loc>
+      <image:title>Консультант NOVA</image:title>
+      <image:caption>Получите консультацию по выбору штукатурной станции</image:caption>
+    </image:image>
+  </url>
+</urlset>

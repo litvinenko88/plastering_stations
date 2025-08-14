@@ -2,15 +2,24 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://nova-plastering.ru/sitemap.xml
+Sitemap: https://litvinenko88.github.io/plastering_stations/sitemap.xml
+Sitemap: https://litvinenko88.github.io/plastering_stations/sitemap-images.xml
 
 # Основные страницы
-Allow: /#catalog
-Allow: /#full-catalog
-Allow: /#about
-Allow: /#contacts
+Allow: /
+Allow: /privacy/
 
 # Запрещаем индексацию служебных файлов
 Disallow: /_next/
 Disallow: /api/
 Disallow: /*.json$
+Disallow: /serve-static.js
+Disallow: /DEPLOY.md
+
+# Кэш и служебные файлы
+Disallow: /.git/
+Disallow: /node_modules/
+Disallow: /out/
+
+# Crawl-delay
+Crawl-delay: 1

@@ -1,0 +1,4 @@
+Contact: mailto:mix-trades@mail.ru
+Expires: 2025-12-31T23:59:59.000Z
+Preferred-Languages: ru, en
+Canonical: https://litvinenko88.github.io/plastering_stations/.well-known/security.txt

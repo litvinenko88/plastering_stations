@@ -87,7 +87,7 @@
 .hero-cta {
   display: flex;
   gap: 1rem;
-  /* flex-wrap: wrap; */
+  flex-wrap: wrap;
 }
 
 .hero-btn {
@@ -214,8 +214,9 @@
   }
   
   .hero-features {
-    /* grid-template-columns: 1fr; */
+    grid-template-columns: 1fr;
     gap: 0.75rem;
+    max-width: 400px;
   }
   
   .hero-image {
@@ -225,6 +226,7 @@
   .hero-cta {
     justify-content: center;
     align-items: center;
+    flex-direction: column;
   }
   
   .hero-btn {
@@ -239,17 +241,36 @@
     padding: 2rem 0;
   }
   
+  .hero-container {
+    padding: 0 0.75rem;
+  }
+  
   .hero-text h1 {
     font-size: var(--font-2xl);
     line-height: 1.2;
+    margin-bottom: 1rem;
   }
   
   .hero-text h2 {
     font-size: var(--font-base);
   }
   
+  .hero-features {
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .hero-feature {
+    font-size: var(--font-xs);
+  }
+  
   .hero-image {
     height: 200px;
+  }
+  
+  .hero-btn {
+    padding: 0.75rem 1.5rem;
+    font-size: var(--font-sm);
   }
   
   .certificates {

@@ -12,8 +12,8 @@ export default function AboutVideo() {
         src="https://rutube.ru/play/embed/47e9c5a9ee217119f65346f3990918a9/?autoStart=true&skinColor=red"
         frameBorder="0"
         allow="clipboard-write; autoplay"
-        webkitAllowFullScreen
-        mozallowfullscreen
+        webkitallowfullscreen="true"
+        mozallowfullscreen="true"
         allowFullScreen
         style={{
           position: 'absolute',

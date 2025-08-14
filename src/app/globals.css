@@ -223,6 +223,16 @@ body {
   }
 }
 
+@media (max-width: 480px) {
+  .products-grid {
+    gap: 1rem;
+  }
+  
+  .container {
+    padding: 0 0.75rem;
+  }
+}
+
 /* Адаптивность для блока о компании */
 @media (max-width: 1024px) {
   .about-section .company-intro {
@@ -232,6 +242,16 @@ body {
   
   .about-section .company-features {
     grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-section .company-intro {
+    gap: 1.5rem !important;
+  }
+  
+  .about-section .company-cards-grid {
+    gap: 1.5rem !important;
   }
 }
 
@@ -288,10 +308,22 @@ body {
   
   .contacts-form input {
     padding: 0.75rem !important;
+    font-size: var(--font-sm) !important;
   }
   
   .contacts-form button {
     padding: 0.75rem 1.5rem !important;
+    font-size: var(--font-base) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .contacts-form {
+    padding: 1rem !important;
+  }
+  
+  .contacts-form input {
+    padding: 0.625rem !important;
   }
 }
 

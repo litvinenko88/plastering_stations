@@ -81,45 +81,56 @@ export default function Home() {
             "@context": "https://schema.org",
             "@type": "Organization",
             "name": "NOVA",
-            "description": "Производитель штукатурных станций и оборудования для механизированной штукатурки",
-            "url": "https://nova-plastering.ru",
-            "logo": "https://nova-plastering.ru/logo.png",
+            "legalName": "ООО НОВО",
+            "description": "Производитель профессиональных штукатурных станций PERSONIYA",
+            "url": "https://litvinenko88.github.io/plastering_stations/",
+            "logo": "https://litvinenko88.github.io/plastering_stations/icon.svg",
             "contactPoint": {
               "@type": "ContactPoint",
-              "telephone": "+7-800-000-00-00",
+              "telephone": "+7-996-417-90-01",
               "contactType": "customer service",
-              "availableLanguage": "Russian"
+              "availableLanguage": "Russian",
+              "areaServed": "RU"
             },
             "address": {
               "@type": "PostalAddress",
+              "streetAddress": "пр-кт Кулакова, д. 18, офис 116",
               "addressLocality": "Ставрополь",
+              "postalCode": "355035",
+              "addressRegion": "Ставропольский край",
               "addressCountry": "RU"
             },
-            "foundingDate": "2014",
-            "numberOfEmployees": "50-100",
+            "foundingDate": "2021",
+            "email": "mix-trades@mail.ru",
             "hasOfferCatalog": {
               "@type": "OfferCatalog",
-              "name": "Каталог штукатурных станций",
+              "name": "Каталог штукатурных станций PERSONIYA",
               "itemListElement": [
                 {
                   "@type": "Offer",
                   "itemOffered": {
                     "@type": "Product",
                     "name": "PERSONIYA 220/380",
-                    "description": "Универсальная штукатурная станция"
+                    "description": "Универсальная штукатурная станция 220/380В",
+                    "brand": "PERSONIYA",
+                    "manufacturer": "NOVA"
                   },
                   "price": "650000",
-                  "priceCurrency": "RUB"
+                  "priceCurrency": "RUB",
+                  "availability": "https://schema.org/InStock"
                 },
                 {
                   "@type": "Offer",
                   "itemOffered": {
                     "@type": "Product",
                     "name": "PERSONIYA V380",
-                    "description": "Промышленная штукатурная станция"
+                    "description": "Промышленная штукатурная станция 380В",
+                    "brand": "PERSONIYA",
+                    "manufacturer": "NOVA"
                   },
                   "price": "535000",
-                  "priceCurrency": "RUB"
+                  "priceCurrency": "RUB",
+                  "availability": "https://schema.org/InStock"
                 }
               ]
             }
