@@ -14,6 +14,7 @@ import FAQReviews from '../components/FAQReviews/FAQReviews'
 import QuizModal from '../components/QuizModal/QuizModal'
 import ComparisonModal from '../components/ComparisonModal/ComparisonModal'
 import ProductModal from '../components/ProductModal/ProductModal'
+import AboutVideo from '../components/AboutVideo/AboutVideo'
 import { products } from '../data/products'
 
 export default function Home() {
@@ -247,7 +248,7 @@ export default function Home() {
           <FAQReviews />
 
           {/* О компании */}
-          <section id="about" style={{ 
+          <section id="about" className="about-section" style={{ 
             padding: '4rem 0',
             backgroundColor: 'var(--color-secondary)'
           }}>
@@ -262,18 +263,32 @@ export default function Home() {
                 О компании
               </h2>
               
-              <div style={{ marginBottom: '3rem' }}>
-                <p style={{ 
-                  fontSize: 'var(--font-lg)', 
-                  color: 'var(--color-gray-dark)',
-                  lineHeight: '1.6',
-                  textAlign: 'center',
-                  maxWidth: '800px',
-                  margin: '0 auto'
-                }}>
-                  Мы — производитель профессиональных штукатурных станций m-tec. с 10-летним опытом на рынке строительного оборудования, включая бу. 
-                  Наша миссия — сделать нанесения штукатурки стен доступной для мастеров, бригад и крупных строительных компаний, обеспечивая высокую производительность и качество работ.
-                </p>
+              <div className="company-intro" style={{ 
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr',
+                gap: '3rem',
+                alignItems: 'center',
+                marginBottom: '3rem'
+              }}>
+                <div>
+                  <p style={{ 
+                    fontSize: 'var(--font-lg)', 
+                    color: 'var(--color-gray-dark)',
+                    lineHeight: '1.6'
+                  }}>
+                    Мы — производитель профессиональных штукатурных станций PERSONIYA с 10-летним опытом на рынке строительного оборудования. 
+                    Наша миссия — сделать механизированную штукатурку доступной для мастеров, бригад и крупных строительных компаний, обеспечивая высокую производительность и качество работ.
+                  </p>
+                  <p style={{ 
+                    fontSize: 'var(--font-base)', 
+                    color: 'var(--color-gray)',
+                    lineHeight: '1.6',
+                    marginTop: '1rem'
+                  }}>
+                    Собственное производство в Ставрополе позволяет нам контролировать качество на всех этапах и предлагать конкурентные цены.
+                  </p>
+                </div>
+                <AboutVideo />
               </div>
               
               <h3 style={{ 

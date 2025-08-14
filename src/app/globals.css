@@ -217,3 +217,15 @@ body {
   }
 }
 
+/* Адаптивность для блока о компании */
+@media (max-width: 1024px) {
+  .about-section .company-intro {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+  
+  .about-section .company-features {
+    grid-template-columns: 1fr !important;
+  }
+}
+
