@@ -6,10 +6,10 @@ export default function FloatingContacts() {
   const [showOperatorMessage, setShowOperatorMessage] = useState(false)
 
   useEffect(() => {
-    // Показываем сообщение оператора через 10 секунд
+    // Показываем сообщение оператора через 15 секунд
     const timer = setTimeout(() => {
       setShowOperatorMessage(true)
-    }, 10000)
+    }, 15000)
 
     return () => clearTimeout(timer)
   }, [])
@@ -25,7 +25,9 @@ export default function FloatingContacts() {
           <button className="operator-close" onClick={closeOperatorMessage}>
             ×
           </button>
-          <div className="operator-avatar">М</div>
+          <div className="operator-avatar">
+            <img src="/images/operator.webp" alt="Оператор" />
+          </div>
           <div className="operator-text">
             Здравствуйте! Помочь подобрать штукатурную станцию под ваши задачи?
           </div>
@@ -33,6 +35,14 @@ export default function FloatingContacts() {
       )}
       
       <div className="floating-contacts">
+        <button 
+          className="contact-btn operator"
+          onClick={() => setShowOperatorMessage(true)}
+          aria-label="Оператор"
+        >
+          <img src="/images/operator.webp" alt="Оператор" />
+        </button>
+        
         <a 
           href="https://wa.me/79000000000" 
           className="contact-btn whatsapp"
