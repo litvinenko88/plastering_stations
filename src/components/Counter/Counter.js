@@ -7,6 +7,7 @@ export default function Counter() {
   const [actionDays, setActionDays] = useState(5)
   const [actionHours, setActionHours] = useState(14)
   const [actionMinutes, setActionMinutes] = useState(32)
+  const [actionSeconds, setActionSeconds] = useState(45)
 
   useEffect(() => {
     // Счетчик продаж (увеличивается каждые 30 секунд)
@@ -14,23 +15,28 @@ export default function Counter() {
       setSalesCount(prev => prev + 1)
     }, 30000)
 
-    // Обратный отсчет акции
+    // Обратный отсчет акции (каждую секунду)
     const actionInterval = setInterval(() => {
-      setActionMinutes(prev => {
+      setActionSeconds(prev => {
         if (prev > 0) return prev - 1
         
-        setActionHours(prevHours => {
-          if (prevHours > 0) return prevHours - 1
+        setActionMinutes(prevMinutes => {
+          if (prevMinutes > 0) return prevMinutes - 1
           
-          setActionDays(prevDays => {
-            if (prevDays > 0) return prevDays - 1
-            return 0
+          setActionHours(prevHours => {
+            if (prevHours > 0) return prevHours - 1
+            
+            setActionDays(prevDays => {
+              if (prevDays > 0) return prevDays - 1
+              return 7 // Перезапуск на 7 дней
+            })
+            return 23
           })
-          return 23
+          return 59
         })
         return 59
       })
-    }, 60000)
+    }, 1000)
 
     return () => {
       clearInterval(salesInterval)
@@ -78,7 +84,7 @@ export default function Counter() {
           
           <div className="counter-item">
             <span className="counter-number">
-              {actionDays}д {actionHours}ч {actionMinutes}м
+              {actionDays}д {actionHours.toString().padStart(2, '0')}:{actionMinutes.toString().padStart(2, '0')}:{actionSeconds.toString().padStart(2, '0')}
             </span>
             <div className="counter-label">
               До окончания <br />
