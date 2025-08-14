@@ -10,6 +10,20 @@
   padding: 0 1rem;
 }
 
+.counters-text {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.counters-text p {
+  font-size: var(--font-lg);
+  color: var(--color-secondary);
+  line-height: 1.6;
+  max-width: 900px;
+  margin: 0 auto;
+  opacity: 0.9;
+}
+
 @media (min-width: 640px) {
   .counters-container {
     padding: 0 1.5rem;
@@ -19,6 +33,12 @@
 @media (min-width: 1024px) {
   .counters-container {
     padding: 0 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .counters-text p {
+    font-size: var(--font-base);
   }
 }
 

@@ -41,6 +41,16 @@ export default function Counter() {
   return (
     <section className="counters">
       <div className="counters-container">
+        <div className="counters-text">
+          <p>
+            Производим профессиональные штукатурные станции для машинного нанесения растворов. 
+            Наши аппараты обеспечивают механизированную штукатурку стен с высокой производительностью, 
+            увеличивая скорость работы в 3-5 раз без потери качества. Мы предлагаем шнековые машины 
+            и агрегаты для отделочных работ, которые идеально подходят для строительных объектов 
+            любого масштаба — от частного ремонта до промышленных фасадов.
+          </p>
+        </div>
+        
         <div className="counters-grid">
           <div className="counter-item">
             <span className="counter-number">{salesCount}</span>
