@@ -73,11 +73,11 @@
   font-size: var(--font-base);
   opacity: 0.9;
 }
-
+/* 
 .counter-accent {
   color: var(--color-primary);
   font-weight: 600;
-}
+} */
 
 @media (max-width: 640px) {
   .counters-grid {
