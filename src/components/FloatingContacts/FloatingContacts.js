@@ -29,7 +29,7 @@ export default function FloatingContacts() {
             <img src="/images/operator.webp" alt="Оператор" />
           </div>
           <div className="operator-text">
-            Здравствуйте я менеджер Алексей! Помогу подобрать вам штукатурную
+            Здравствуйте я менеджер Алексей! Помочь вам подобрать штукатурную
             станцию под ваши задачи?
           </div>
         </div>
