@@ -7,16 +7,18 @@ import FloatingContacts from '../components/FloatingContacts/FloatingContacts'
 import ScrollToTop from '../components/ScrollToTop/ScrollToTop'
 import AdvantageCard from '../components/AdvantageCard/AdvantageCard'
 import CatalogCard from '../components/CatalogCard/CatalogCard'
-import CatalogButton from '../components/CatalogButton/CatalogButton'
+
 import ProductCard from '../components/ProductCard/ProductCard'
 import Comparison from '../components/Comparison/Comparison'
 import Reviews from '../components/Reviews/Reviews'
 import FAQ from '../components/FAQ/FAQ'
 import QuizModal from '../components/QuizModal/QuizModal'
+import ComparisonModal from '../components/ComparisonModal/ComparisonModal'
 import { products } from '../data/products'
 
 export default function Home() {
   const [isQuizOpen, setIsQuizOpen] = useState(false)
+  const [isComparisonOpen, setIsComparisonOpen] = useState(false)
 
   const advantages = [
     {
@@ -45,7 +47,7 @@ export default function Home() {
     {
       icon: 'power',
       title: 'Штукатурные станции 220 вольт',
-      description: 'компактные модели для небольших объектов, включая бу.'
+      description: 'компактные модели для небольших объектов.'
     },
     {
       icon: 'industrial',
@@ -155,9 +157,7 @@ export default function Home() {
                 ))}
               </div>
               
-              <div style={{ textAlign: 'center' }}>
-                <CatalogButton />
-              </div>
+
             </div>
           </section>
 
@@ -182,6 +182,27 @@ export default function Home() {
                 {products.map((product, index) => (
                   <ProductCard key={index} product={product} />
                 ))}
+              </div>
+              
+              <div style={{ textAlign: 'center', marginTop: '3rem' }}>
+                <button 
+                  onClick={() => setIsComparisonOpen(true)}
+                  style={{
+                    padding: '1rem 2rem',
+                    background: 'var(--color-primary)',
+                    color: 'var(--color-white)',
+                    border: 'none',
+                    borderRadius: '0.5rem',
+                    fontSize: 'var(--font-lg)',
+                    fontWeight: '600',
+                    cursor: 'pointer',
+                    transition: 'all 0.3s ease'
+                  }}
+                  onMouseEnter={(e) => e.target.style.transform = 'translateY(-2px)'}
+                  onMouseLeave={(e) => e.target.style.transform = 'translateY(0)'}
+                >
+                  Сравнить модели
+                </button>
               </div>
             </div>
           </section>
@@ -572,6 +593,12 @@ export default function Home() {
         <QuizModal 
           isOpen={isQuizOpen} 
           onClose={() => setIsQuizOpen(false)} 
+        />
+        
+        {/* Модальное окно сравнения */}
+        <ComparisonModal 
+          isOpen={isComparisonOpen} 
+          onClose={() => setIsComparisonOpen(false)} 
         />
       </div>
     </>

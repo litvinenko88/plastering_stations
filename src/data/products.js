@@ -1,21 +1,19 @@
 export const products = [
   {
     id: 1,
-    name: "PERSON 220/380",
+    name: "PERSONIYA 220/380",
     image: "/images/products/Persona380.JPG",
     badge: { type: "hit", text: "Хит продаж" },
     productivity: "20 л/мин",
     power: "220/380 V",
     motorPower: "4 кВт",
     efficiency: "до 500 м²/смена",
-    kit: "шнековая пара, рукав 10 м, компрессор 1.5 кВт",
     price: "от 650 000 ₽",
-    description:
-      "Профессиональная штукатурная станция с высокой производительностью. Комплектуется всем необходимым оборудованием для работы.",
+    description: "Универсальный раствор насос с высокой производительностью. Работа от 220V и 380V. Комплектуется всем необходимым оборудованием."
   },
   {
     id: 2,
-    name: "PERSON V380",
+    name: "PERSONIYA V380",
     image: "/images/products/Persona380.JPG",
     badge: { type: "new", text: "Новинка 2024" },
     productivity: "15-35 л/мин",
@@ -23,21 +21,31 @@ export const products = [
     motorPower: "5.5 кВт",
     weight: "260 кг",
     distance: "до 30 м",
-    price: "от 535 000 ₽",
-    description:
-      "Мощная промышленная станция для больших объемов работ. Высокая производительность и надежность.",
+    price: "535 000 ₽",
+    description: "Мощная промышленная станция для больших объемов работ. Высокая производительность и надежность."
   },
   {
     id: 3,
-    name: "PERSON V-1 / V-1 PLUS",
+    name: "PERSONIYA V-1",
     image: "/images/products/Persona380.JPG",
     badge: { type: "", text: "Базовая модель" },
-    productivity: "4-20 л/мин",
+    productivity: "4-14 л/мин",
     power: "230 V",
     motorPower: "2.2 кВт",
-    weight: "141-149 кг",
-    price: "от 408 000 ₽",
-    description:
-      "Компактная и универсальная модель для различных видов штукатурных работ. Оптимальное соотношение цены и качества.",
+    weight: "141,5 кг",
+    price: "408 000 ₽",
+    description: "Компактная модель с шнековой парой PFT B4-2L. Оптимальное соотношение цены и качества."
   },
-];
+  {
+    id: 4,
+    name: "PERSONIYA V-1 PLUS",
+    image: "/images/products/Persona380.JPG",
+    badge: { type: "premium", text: "Премиум" },
+    productivity: "10-20 л/мин",
+    power: "230 V",
+    motorPower: "2.2 кВт",
+    weight: "149 кг",
+    price: "428 000 ₽",
+    description: "Улучшенная модель с шнековой парой PFT SD6-3 Slim. Повышенная производительность и надежность."
+  }
+]

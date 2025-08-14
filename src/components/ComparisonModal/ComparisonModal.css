@@ -1,0 +1,167 @@
+.comparison-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.comparison-modal {
+  background: var(--color-white);
+  border-radius: 1rem;
+  max-width: 90vw;
+  max-height: 90vh;
+  width: 100%;
+  position: relative;
+  animation: slideUp 0.4s ease-out;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.comparison-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--color-gray-100);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: var(--color-gray-600);
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.comparison-close:hover {
+  background: var(--color-primary);
+  color: var(--color-white);
+  transform: scale(1.1);
+}
+
+.comparison-title {
+  font-size: var(--font-2xl);
+  font-weight: 700;
+  color: var(--color-primary);
+  text-align: center;
+  padding: 2rem 2rem 1rem;
+  margin: 0;
+}
+
+.comparison-table-container {
+  overflow: auto;
+  max-height: calc(90vh - 120px);
+  padding: 0 2rem 2rem;
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-sm);
+  background: var(--color-white);
+}
+
+.comparison-table th {
+  background: linear-gradient(135deg, var(--color-primary), #a00109);
+  color: var(--color-white);
+  padding: 1rem 0.75rem;
+  text-align: left;
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.comparison-table th:first-child {
+  border-radius: 0.5rem 0 0 0;
+  min-width: 200px;
+}
+
+.comparison-table th:last-child {
+  border-radius: 0 0.5rem 0 0;
+}
+
+.comparison-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--color-gray-200);
+  vertical-align: top;
+}
+
+.comparison-table tr:hover {
+  background: var(--color-gray-50);
+}
+
+.comparison-label {
+  font-weight: 600;
+  color: var(--color-gray-900);
+  background: var(--color-gray-50);
+  min-width: 200px;
+}
+
+.comparison-table tbody tr:nth-child(even) {
+  background: rgba(125, 1, 11, 0.02);
+}
+
+.comparison-table tbody tr:nth-child(even):hover {
+  background: var(--color-gray-50);
+}
+
+@media (max-width: 768px) {
+  .comparison-modal-overlay {
+    padding: 1rem;
+  }
+  
+  .comparison-title {
+    font-size: var(--font-xl);
+    padding: 1.5rem 1rem 1rem;
+  }
+  
+  .comparison-table-container {
+    padding: 0 1rem 1rem;
+  }
+  
+  .comparison-table {
+    font-size: var(--font-xs);
+  }
+  
+  .comparison-table th,
+  .comparison-table td {
+    padding: 0.5rem 0.25rem;
+  }
+  
+  .comparison-label {
+    min-width: 150px;
+  }
+}
