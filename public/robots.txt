@@ -1,4 +1,16 @@
 User-agent: *
 Allow: /
 
+# Sitemap
 Sitemap: https://mixon-plastering.ru/sitemap.xml
+
+# Основные страницы
+Allow: /#catalog
+Allow: /#full-catalog
+Allow: /#about
+Allow: /#contacts
+
+# Запрещаем индексацию служебных файлов
+Disallow: /_next/
+Disallow: /api/
+Disallow: /*.json$

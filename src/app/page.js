@@ -87,7 +87,33 @@ export default function Home() {
               "addressCountry": "RU"
             },
             "foundingDate": "2014",
-            "numberOfEmployees": "50-100"
+            "numberOfEmployees": "50-100",
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "Каталог штукатурных станций",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Product",
+                    "name": "PERSONIYA 220/380",
+                    "description": "Универсальная штукатурная станция"
+                  },
+                  "price": "650000",
+                  "priceCurrency": "RUB"
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Product",
+                    "name": "PERSONIYA V380",
+                    "description": "Промышленная штукатурная станция"
+                  },
+                  "price": "535000",
+                  "priceCurrency": "RUB"
+                }
+              ]
+            }
           })
         }}
       />
