@@ -229,3 +229,37 @@ body {
   }
 }
 
+/* Растягивание последней карточки в блоке о компании */
+.company-cards-grid {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 2rem !important;
+  margin-bottom: 3rem !important;
+}
+
+.company-cards-grid > div {
+  flex: 1 1 calc(33.333% - 1.333rem);
+  min-width: 300px;
+}
+
+.company-cards-grid > div:nth-child(4) {
+  flex: 1 1 100% !important;
+}
+
+@media (max-width: 1024px) {
+  .company-cards-grid > div {
+    flex: 1 1 calc(50% - 1rem);
+  }
+  
+  .company-cards-grid > div:nth-child(4) {
+    flex: 1 1 calc(50% - 1rem) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .company-cards-grid > div {
+    flex: 1 1 100%;
+    min-width: auto;
+  }
+}
+

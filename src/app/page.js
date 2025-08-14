@@ -301,7 +301,7 @@ export default function Home() {
                 Нас выбирают потому что:
               </h3>
               
-              <div style={{ 
+              <div className="company-cards-grid" style={{ 
                 display: 'grid', 
                 gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
                 gap: '2rem',
