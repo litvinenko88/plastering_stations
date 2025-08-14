@@ -130,6 +130,18 @@
   transform: none;
 }
 
+.form-input.error {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.error-text {
+  color: #ef4444;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  display: block;
+}
+
 @keyframes fadeIn {
   to {
     opacity: 1;

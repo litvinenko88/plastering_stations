@@ -93,6 +93,7 @@
   height: 100%;
   object-fit: cover;
   transition: transform var(--transition-normal);
+  aspect-ratio: 3/2;
 }
 
 .product-card:hover .product-image img {

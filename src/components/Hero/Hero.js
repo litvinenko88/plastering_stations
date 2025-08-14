@@ -26,9 +26,16 @@ export default function Hero() {
           </div>
 
           <div className="hero-image">
-            <video className="hero-video" autoPlay muted loop playsInline>
+            <video 
+              className="hero-video" 
+              autoPlay 
+              muted 
+              loop 
+              playsInline
+              preload="metadata"
+              poster="/images/video-poster.jpg"
+            >
               <source src="/videos/fon_video.mp4" type="video/mp4" />
-              <source src="/videos/fon_video.webm" type="video/webm" />
             </video>
             <div className="hero-video-overlay"></div>
             <div className="certificates">

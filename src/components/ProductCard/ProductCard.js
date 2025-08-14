@@ -1,5 +1,6 @@
 'use client'
 import './ProductCard.css'
+import LazyImage from '../LazyImage/LazyImage'
 
 export default function ProductCard({ product, onDetailsClick }) {
   return (
@@ -11,9 +12,11 @@ export default function ProductCard({ product, onDetailsClick }) {
       )}
       
       <div className="product-image">
-        <img 
+        <LazyImage 
           src={product.image || '/images/products/placeholder.jpg'} 
           alt={product.name}
+          width="300"
+          height="200"
           onError={(e) => {
             e.target.src = '/images/products/placeholder.jpg'
           }}
@@ -63,7 +66,27 @@ export default function ProductCard({ product, onDetailsClick }) {
         <p className="product-description">{product.description}</p>
         
         <div className="product-actions">
-          <button className="product-btn primary">
+          <button 
+            className="product-btn primary"
+            onClick={async () => {
+              const name = prompt('Введите ваше имя:')
+              const phone = prompt('Введите ваш телефон:')
+              
+              if (name && phone) {
+                const { sendToTelegram } = await import('../LazyImage/../../utils/telegram')
+                const result = await sendToTelegram(
+                  { name, phone, message: `Интерес к модели: ${product.name}` }, 
+                  'Кнопка Заказать'
+                )
+                
+                if (result.success) {
+                  alert('Спасибо! Мы свяжемся с вами.')
+                } else {
+                  alert('Ошибка отправки. Попробуйте позже.')
+                }
+              }
+            }}
+          >
             Заказать
           </button>
           <button 

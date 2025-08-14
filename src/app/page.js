@@ -536,11 +536,30 @@ export default function Home() {
                     Свяжитесь с нами
                   </h3>
                   
-                  <form style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                  <form onSubmit={async (e) => {
+                    e.preventDefault()
+                    const formData = new FormData(e.target)
+                    const data = {
+                      name: formData.get('name'),
+                      phone: formData.get('phone')
+                    }
+                    
+                    const { sendToTelegram } = await import('../utils/telegram')
+                    const result = await sendToTelegram(data, 'Форма контактов')
+                    
+                    if (result.success) {
+                      alert('Спасибо! Ваша заявка отправлена.')
+                      e.target.reset()
+                    } else {
+                      alert('Ошибка отправки. Попробуйте позже.')
+                    }
+                  }} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                     <div>
                       <input 
                         type="text" 
+                        name="name"
                         placeholder="Ваше имя"
+                        required
                         style={{
                           width: '100%',
                           padding: '1rem',
@@ -557,7 +576,9 @@ export default function Home() {
                     <div>
                       <input 
                         type="tel" 
+                        name="phone"
                         placeholder="Ваш телефон"
+                        required
                         style={{
                           width: '100%',
                           padding: '1rem',

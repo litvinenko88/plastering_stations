@@ -102,11 +102,25 @@ export default function QuizModal({ isOpen, onClose }) {
     onClose()
   }
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault()
     if (!formData.agreed) return
-    setIsSubmitted(true)
-    setTimeout(() => handleClose(), 2000)
+    
+    const { sendToTelegram } = await import('../../utils/telegram')
+    const quizData = {
+      name: formData.name,
+      phone: formData.phone,
+      message: `Результаты квиза: ${JSON.stringify(answers, null, 2)}`
+    }
+    
+    const result = await sendToTelegram(quizData, 'Квиз подбора станции')
+    
+    if (result.success) {
+      setIsSubmitted(true)
+      setTimeout(() => handleClose(), 2000)
+    } else {
+      alert('Ошибка отправки. Попробуйте позже.')
+    }
   }
 
   const handleFormChange = (e) => {
