@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Header from '../components/Header/Header'
 import Hero from '../components/Hero/Hero'
 import Counter from '../components/Counter/Counter'
@@ -22,6 +22,12 @@ export default function Home() {
   const [isComparisonOpen, setIsComparisonOpen] = useState(false)
   const [selectedProduct, setSelectedProduct] = useState(null)
   const [isProductModalOpen, setIsProductModalOpen] = useState(false)
+  
+  useEffect(() => {
+    const handleOpenQuiz = () => setIsQuizOpen(true)
+    window.addEventListener('openQuiz', handleOpenQuiz)
+    return () => window.removeEventListener('openQuiz', handleOpenQuiz)
+  }, [])
 
   const handleProductDetails = (product) => {
     setSelectedProduct(product)

@@ -1,67 +1,61 @@
 'use client'
 import { useState, useEffect } from 'react'
 import './QuizModal.css'
+import Notification from '../Notification/Notification'
 
 export default function QuizModal({ isOpen, onClose }) {
   const [currentStep, setCurrentStep] = useState(0)
   const [answers, setAnswers] = useState({})
   const [showForm, setShowForm] = useState(false)
   const [formData, setFormData] = useState({ name: '', phone: '', agreed: false })
+  const [errors, setErrors] = useState({ name: '', phone: '' })
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [notification, setNotification] = useState({ show: false, message: '', type: 'success' })
 
   const questions = [
     {
-      id: 'usage',
-      title: 'Для каких работ нужна станция?',
+      id: 'workType',
+      title: 'Какой тип работ планируете?',
       options: [
-        { value: 'interior', label: 'Внутренние работы' },
-        { value: 'exterior', label: 'Наружные работы' },
-        { value: 'both', label: 'Внутренние и наружные' }
+        { value: 'interior', label: 'Внутренняя отделка квартир, офисов' },
+        { value: 'construction', label: 'Строительные объекты, фасады' },
+        { value: 'mixed', label: 'Разные виды работ' }
       ]
     },
     {
-      id: 'area',
-      title: 'Какая площадь работ?',
+      id: 'volume',
+      title: 'Какой объем работ в месяц?',
       options: [
-        { value: 'small', label: 'До 100 м²' },
-        { value: 'medium', label: '100-500 м²' },
-        { value: 'large', label: 'Более 500 м²' }
+        { value: 'small', label: 'До 500 м² (небольшие объекты)' },
+        { value: 'medium', label: '500-2000 м² (средние объекты)' },
+        { value: 'large', label: 'Более 2000 м² (крупные объекты)' }
       ]
     },
     {
       id: 'power',
-      title: 'Какое питание доступно?',
+      title: 'Какое электропитание доступно?',
       options: [
-        { value: '220v', label: '220В (бытовая сеть)' },
-        { value: '380v', label: '380В (промышленная сеть)' },
-        { value: 'any', label: 'Любое' }
+        { value: '220v', label: '220В (обычная розетка)' },
+        { value: '380v', label: '380В (трехфазная сеть)' },
+        { value: 'both', label: 'Могу подключить любое' }
       ]
     },
     {
       id: 'budget',
-      title: 'Какой бюджет?',
+      title: 'Какой бюджет на оборудование?',
       options: [
-        { value: 'low', label: 'До 150 000 ₽' },
-        { value: 'medium', label: '150 000 - 300 000 ₽' },
-        { value: 'high', label: 'Более 300 000 ₽' }
-      ]
-    },
-    {
-      id: 'experience',
-      title: 'Опыт работы с оборудованием?',
-      options: [
-        { value: 'beginner', label: 'Новичок' },
-        { value: 'experienced', label: 'Есть опыт' },
-        { value: 'professional', label: 'Профессионал' }
+        { value: 'budget', label: 'До 450 000 ₽' },
+        { value: 'medium', label: '450 000 - 600 000 ₽' },
+        { value: 'premium', label: 'Более 600 000 ₽' }
       ]
     }
   ]
 
   const products = [
-    { name: 'MIXON Компакт-150', price: '89 000 ₽', power: '220В', productivity: '15 м²/час' },
-    { name: 'MIXON Профи-220', price: '145 000 ₽', power: '220В', productivity: '30 м²/час' },
-    { name: 'MIXON Мастер-500', price: '289 000 ₽', power: '380В', productivity: '50 м²/час' },
-    { name: 'MIXON Универсал-350', price: '199 000 ₽', power: '220/380В', productivity: '35 м²/час' }
+    { name: 'PERSONIYA V-1', price: '408 000 ₽', power: '230В', productivity: '4-14 л/мин', description: 'Компактная модель для небольших объемов' },
+    { name: 'PERSONIYA V-1 PLUS', price: '428 000 ₽', power: '230В', productivity: '10-20 л/мин', description: 'Улучшенная модель с повышенной производительностью' },
+    { name: 'PERSONIYA V380', price: '535 000 ₽', power: '380В', productivity: '15-35 л/мин', description: 'Промышленная станция для больших объемов' },
+    { name: 'PERSONIYA 220/380', price: 'от 650 000 ₽', power: '220/380В', productivity: '20 л/мин', description: 'Универсальная станция с высокой производительностью' }
   ]
 
   useEffect(() => {
@@ -87,7 +81,37 @@ export default function QuizModal({ isOpen, onClose }) {
   }
 
   const getRecommendations = () => {
-    return products.slice(0, 2) // Возвращаем 2 рекомендации
+    const { workType, volume, power, budget } = answers
+    let recommendations = []
+    
+    // Логика подбора на основе ответов
+    if (volume === 'small' && budget === 'budget') {
+      recommendations.push(products[0]) // PERSONIYA V-1
+    }
+    
+    if (volume === 'small' && (budget === 'medium' || budget === 'premium')) {
+      recommendations.push(products[1]) // PERSONIYA V-1 PLUS
+    }
+    
+    if (volume === 'medium' && power === '380v') {
+      recommendations.push(products[2]) // PERSONIYA V380
+    }
+    
+    if (volume === 'large' || (workType === 'construction' && budget === 'premium')) {
+      recommendations.push(products[3]) // PERSONIYA 220/380
+    }
+    
+    if (power === 'both' && budget !== 'budget') {
+      recommendations.push(products[3]) // PERSONIYA 220/380
+    }
+    
+    // Если нет специфичных рекомендаций, показываем популярные
+    if (recommendations.length === 0) {
+      recommendations = [products[1], products[2]] // V-1 PLUS и V380
+    }
+    
+    // Убираем дубликаты и ограничиваем до 2
+    return [...new Set(recommendations)].slice(0, 2)
   }
 
   const resetQuiz = () => {
@@ -102,40 +126,118 @@ export default function QuizModal({ isOpen, onClose }) {
     onClose()
   }
 
+  const formatQuizResults = () => {
+    const questionMap = {
+      workType: 'Какой тип работ планируете?',
+      volume: 'Какой объем работ в месяц?',
+      power: 'Какое электропитание доступно?',
+      budget: 'Какой бюджет на оборудование?'
+    }
+    
+    const answerMap = {
+      interior: 'Внутренняя отделка квартир, офисов',
+      construction: 'Строительные объекты, фасады',
+      mixed: 'Разные виды работ',
+      small: 'До 500 м² (небольшие объекты)',
+      medium: '500-2000 м² (средние объекты)',
+      large: 'Более 2000 м² (крупные объекты)',
+      '220v': '220В (обычная розетка)',
+      '380v': '380В (трехфазная сеть)',
+      both: 'Могу подключить любое',
+      budget: 'До 450 000 ₽',
+      medium: '450 000 - 600 000 ₽',
+      premium: 'Более 600 000 ₽'
+    }
+    
+    let result = 'Ответы на вопросы:\n'
+    Object.entries(answers).forEach(([key, value]) => {
+      result += `${questionMap[key]}: ${answerMap[value]}\n`
+    })
+    
+    const recommendations = getRecommendations()
+    result += '\nРекомендации:\n'
+    recommendations.forEach((product, index) => {
+      result += `${index + 1}. ${product.name} - ${product.price}\n`
+    })
+    
+    return result
+  }
+
   const handleFormSubmit = async (e) => {
     e.preventDefault()
-    if (!formData.agreed) return
+    
+    if (errors.name || errors.phone || !formData.name || !formData.phone || !formData.agreed) {
+      return
+    }
     
     const { sendToTelegram } = await import('../../utils/telegram')
     const quizData = {
       name: formData.name,
       phone: formData.phone,
-      message: `Результаты квиза: ${JSON.stringify(answers, null, 2)}`
+      message: formatQuizResults()
     }
     
     const result = await sendToTelegram(quizData, 'Квиз подбора станции')
     
     if (result.success) {
-      setIsSubmitted(true)
+      setNotification({ 
+        show: true, 
+        message: 'Спасибо! Ваша заявка отправлена. Мы свяжемся с вами!', 
+        type: 'success' 
+      })
+      setFormData({ name: '', phone: '', agreed: false })
       setTimeout(() => handleClose(), 2000)
     } else {
-      alert('Ошибка отправки. Попробуйте позже.')
+      setNotification({ 
+        show: true, 
+        message: 'Ошибка отправки. Попробуйте позже.', 
+        type: 'error' 
+      })
     }
   }
 
   const handleFormChange = (e) => {
     const { name, value, type, checked } = e.target
-    setFormData(prev => ({
-      ...prev,
-      [name]: type === 'checkbox' ? checked : value
-    }))
+    
+    if (type === 'checkbox') {
+      setFormData(prev => ({ ...prev, [name]: checked }))
+      return
+    }
+    
+    let newValue = value
+    let error = ''
+    
+    if (name === 'name') {
+      newValue = value.slice(0, 10)
+      if (newValue.length < 2) {
+        error = 'Имя должно содержать минимум 2 символа'
+      }
+    }
+    
+    if (name === 'phone') {
+      newValue = value.replace(/[^+\d]/g, '').slice(0, 13)
+      const phoneRegex = /^\+?[1-9]\d{10,11}$/
+      if (newValue && !phoneRegex.test(newValue)) {
+        error = 'Введите номер в формате +7XXXXXXXXXX'
+      }
+    }
+    
+    setFormData(prev => ({ ...prev, [name]: newValue }))
+    setErrors(prev => ({ ...prev, [name]: error }))
   }
 
   if (!isOpen) return null
 
   return (
-    <div className="quiz-modal-overlay" onClick={handleClose}>
-      <div className="quiz-modal" onClick={(e) => e.stopPropagation()}>
+    <>
+      <Notification 
+        message={notification.message}
+        type={notification.type}
+        isVisible={notification.show}
+        onClose={() => setNotification({ ...notification, show: false })}
+      />
+      <div className="quiz-modal-overlay" onClick={handleClose}>
+        <div className="quiz-modal" onClick={(e) => e.stopPropagation()}>
         <button className="quiz-close" onClick={handleClose}>✕</button>
 
         <div className="quiz-content">
@@ -150,34 +252,56 @@ export default function QuizModal({ isOpen, onClose }) {
               <div className="quiz-form">
                 <h2>Получить консультацию</h2>
                 <form onSubmit={handleFormSubmit}>
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="Ваше имя"
-                    value={formData.name}
-                    onChange={handleFormChange}
-                    required
-                  />
-                  <input
-                    type="tel"
-                    name="phone"
-                    placeholder="+7 (___) ___-__-__"
-                    value={formData.phone}
-                    onChange={handleFormChange}
-                    required
-                  />
-                  <label className="checkbox-label">
+                  <div className="form-group">
+                    <label className="form-label">Ваше имя *</label>
+                    <input
+                      type="text"
+                      name="name"
+                      className={errors.name ? 'error' : ''}
+                      placeholder="Введите ваше имя"
+                      value={formData.name}
+                      onChange={handleFormChange}
+                      maxLength="10"
+                      required
+                    />
+                    {errors.name && <span className="error-text">{errors.name}</span>}
+                  </div>
+                  
+                  <div className="form-group">
+                    <label className="form-label">Телефон *</label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      className={errors.phone ? 'error' : ''}
+                      placeholder="+7 (999) 123-45-67"
+                      value={formData.phone}
+                      onChange={handleFormChange}
+                      maxLength="13"
+                      required
+                    />
+                    {errors.phone && <span className="error-text">{errors.phone}</span>}
+                  </div>
+                  
+                  <div className="checkbox-group">
                     <input
                       type="checkbox"
+                      id="agreed"
                       name="agreed"
+                      className="checkbox-input"
                       checked={formData.agreed}
                       onChange={handleFormChange}
                       required
                     />
-                    Согласен на обработку персональных данных
-                  </label>
-                  <button type="submit" disabled={!formData.agreed}>
-                    Отправить
+                    <label htmlFor="agreed" className="checkbox-label">
+                      Согласен на обработку персональных данных
+                    </label>
+                  </div>
+                  
+                  <button 
+                    type="submit" 
+                    disabled={!formData.name || !formData.phone || !formData.agreed || errors.name || errors.phone}
+                  >
+                    Отправить заявку
                   </button>
                 </form>
               </div>
@@ -212,6 +336,7 @@ export default function QuizModal({ isOpen, onClose }) {
                 {getRecommendations().map((product, index) => (
                   <div key={index} className="recommendation-card">
                     <h3>{product.name}</h3>
+                    <p className="product-description">{product.description}</p>
                     <div className="product-specs">
                       <span>Питание: {product.power}</span>
                       <span>Производительность: {product.productivity}</span>
@@ -225,13 +350,14 @@ export default function QuizModal({ isOpen, onClose }) {
                   Пройти заново
                 </button>
                 <button className="quiz-consultation" onClick={() => setShowForm(true)}>
-                  Получить консультацию
+                  Узнать подробнее
                 </button>
               </div>
             </div>
           )}
         </div>
+        </div>
       </div>
-    </div>
+    </>
   )
 }

@@ -19,9 +19,12 @@ export default function Hero() {
               <a href="#catalog" className="hero-btn primary">
                 Смотреть каталог
               </a>
-              <a href="#quiz" className="hero-btn secondary">
+              <button 
+                onClick={() => window.dispatchEvent(new CustomEvent('openQuiz'))}
+                className="hero-btn secondary"
+              >
                 Подобрать станцию
-              </a>
+              </button>
             </div>
           </div>
 
