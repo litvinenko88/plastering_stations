@@ -1,7 +1,7 @@
 'use client'
 import './ProductCard.css'
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, onDetailsClick }) {
   return (
     <div className="product-card">
       {product.badge && (
@@ -66,7 +66,10 @@ export default function ProductCard({ product }) {
           <button className="product-btn primary">
             Заказать
           </button>
-          <button className="product-btn secondary">
+          <button 
+            className="product-btn secondary"
+            onClick={() => onDetailsClick && onDetailsClick(product)}
+          >
             Подробнее
           </button>
         </div>

@@ -13,11 +13,19 @@ import Comparison from '../components/Comparison/Comparison'
 import FAQReviews from '../components/FAQReviews/FAQReviews'
 import QuizModal from '../components/QuizModal/QuizModal'
 import ComparisonModal from '../components/ComparisonModal/ComparisonModal'
+import ProductModal from '../components/ProductModal/ProductModal'
 import { products } from '../data/products'
 
 export default function Home() {
   const [isQuizOpen, setIsQuizOpen] = useState(false)
   const [isComparisonOpen, setIsComparisonOpen] = useState(false)
+  const [selectedProduct, setSelectedProduct] = useState(null)
+  const [isProductModalOpen, setIsProductModalOpen] = useState(false)
+
+  const handleProductDetails = (product) => {
+    setSelectedProduct(product)
+    setIsProductModalOpen(true)
+  }
 
   const advantages = [
     {
@@ -201,7 +209,11 @@ export default function Home() {
               
               <div className="products-grid">
                 {products.map((product, index) => (
-                  <ProductCard key={index} product={product} />
+                  <ProductCard 
+                    key={index} 
+                    product={product} 
+                    onDetailsClick={handleProductDetails}
+                  />
                 ))}
               </div>
               
@@ -617,6 +629,13 @@ export default function Home() {
         <ComparisonModal 
           isOpen={isComparisonOpen} 
           onClose={() => setIsComparisonOpen(false)} 
+        />
+        
+        {/* Модальное окно товара */}
+        <ProductModal 
+          product={selectedProduct}
+          isOpen={isProductModalOpen} 
+          onClose={() => setIsProductModalOpen(false)} 
         />
       </div>
     </>
