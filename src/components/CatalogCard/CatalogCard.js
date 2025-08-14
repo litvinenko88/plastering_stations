@@ -16,8 +16,7 @@ export default function CatalogCard({ item, index }) {
       onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-5px)'}
       onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
     >
-      <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>
-        {item.icon}
+      <div className={`catalog-icon ${item.icon}`} style={{ marginBottom: '1rem' }}>
       </div>
       <h3 style={{ 
         fontSize: 'var(--font-xl)', 

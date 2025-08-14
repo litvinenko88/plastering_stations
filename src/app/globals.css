@@ -71,3 +71,128 @@ body {
     padding: 0 2rem;
   }
 }
+
+/* CSS иконки */
+.check-icon {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.check-icon::after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.feature-icon {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--color-primary), #a00109);
+  border-radius: 8px;
+  position: relative;
+}
+
+.feature-icon::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 4px;
+}
+
+.catalog-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto;
+  border-radius: 12px;
+  position: relative;
+  background: linear-gradient(135deg, var(--color-primary), #a00109);
+}
+
+.catalog-icon.power::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 24px;
+  height: 24px;
+  border: 3px solid white;
+  border-radius: 50%;
+}
+
+.catalog-icon.power::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.catalog-icon.industrial::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 20px;
+  background: white;
+  border-radius: 4px;
+}
+
+.catalog-icon.industrial::before {
+  content: '';
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 8px;
+  background: white;
+  border-radius: 2px;
+}
+
+.catalog-icon.automation::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 24px;
+  height: 16px;
+  border: 2px solid white;
+  border-radius: 4px;
+}
+
+.catalog-icon.automation::before {
+  content: '';
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 2px;
+  background: white;
+  border-radius: 1px;
+  box-shadow: 0 4px 0 white, 0 8px 0 white;
+}

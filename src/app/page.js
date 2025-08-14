@@ -43,17 +43,17 @@ export default function Home() {
 
   const catalogItems = [
     {
-      icon: '🔹',
+      icon: 'power',
       title: 'Штукатурные станции 220 вольт',
       description: 'компактные модели для небольших объектов, включая бу.'
     },
     {
-      icon: '🔹',
+      icon: 'industrial',
       title: 'Профессиональные машины 380 вольт',
       description: 'для торкретирования и крупных фасадов.'
     },
     {
-      icon: '🔹',
+      icon: 'automation',
       title: 'Автоматические штукатурный агрегат',
       description: 'с регулировкой скорости подачи и высоким давлением для идеального нанесения.'
     }
@@ -265,12 +265,9 @@ export default function Home() {
                     borderRadius: '1rem',
                     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
                   }}>
-                    <div style={{ 
-                      fontSize: '2rem',
-                      marginBottom: '1rem',
-                      color: 'var(--color-primary)'
+                    <div className="feature-icon" style={{ 
+                      marginBottom: '1rem'
                     }}>
-                      🔹
                     </div>
                     <h4 style={{ 
                       fontSize: 'var(--font-lg)', 
@@ -325,7 +322,7 @@ export default function Home() {
                         fontSize: 'var(--font-base)',
                         color: 'var(--color-dark)'
                       }}>
-                        <span style={{ color: 'var(--color-primary)' }}>✅</span>
+                        <div className="check-icon"></div>
                         {client}
                       </li>
                     ))}
@@ -360,7 +357,7 @@ export default function Home() {
                         color: 'var(--color-dark)',
                         lineHeight: '1.6'
                       }}>
-                        <span style={{ color: 'var(--color-primary)', marginTop: '0.25rem' }}>✔</span>
+                        <div className="check-icon" style={{ marginTop: '0.25rem' }}></div>
                         {value}
                       </li>
                     ))}

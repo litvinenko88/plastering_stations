@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
+import { globalTimer } from '../../utils/timer'
 import './Counter.css'
 
 export default function Counter() {
@@ -15,32 +16,19 @@ export default function Counter() {
       setSalesCount(prev => prev + 1)
     }, 30000)
 
-    // Обратный отсчет акции (каждую секунду)
-    const actionInterval = setInterval(() => {
-      setActionSeconds(prev => {
-        if (prev > 0) return prev - 1
-        
-        setActionMinutes(prevMinutes => {
-          if (prevMinutes > 0) return prevMinutes - 1
-          
-          setActionHours(prevHours => {
-            if (prevHours > 0) return prevHours - 1
-            
-            setActionDays(prevDays => {
-              if (prevDays > 0) return prevDays - 1
-              return 7 // Перезапуск на 7 дней
-            })
-            return 23
-          })
-          return 59
-        })
-        return 59
-      })
-    }, 1000)
+    // Подписка на глобальный таймер
+    const handleTimerUpdate = (time) => {
+      setActionDays(time.days)
+      setActionHours(time.hours)
+      setActionMinutes(time.minutes)
+      setActionSeconds(time.seconds)
+    }
+
+    globalTimer.subscribe(handleTimerUpdate)
 
     return () => {
       clearInterval(salesInterval)
-      clearInterval(actionInterval)
+      globalTimer.unsubscribe(handleTimerUpdate)
     }
   }, [])
 

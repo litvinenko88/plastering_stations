@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
+import { globalTimer } from '../../utils/timer'
 import './FloatingContacts.css'
 
 export default function FloatingContacts() {
@@ -11,30 +12,20 @@ export default function FloatingContacts() {
   const [actionMinutes, setActionMinutes] = useState(32)
   const [actionHours, setActionHours] = useState(14)
   const [actionDays, setActionDays] = useState(5)
+  const [userInteracted, setUserInteracted] = useState(false)
+  const [showSuccessNotification, setShowSuccessNotification] = useState(false)
+  const [offerShownManually, setOfferShownManually] = useState(false)
 
   useEffect(() => {
-    // Обратный отсчет акции
-    const actionInterval = setInterval(() => {
-      setActionSeconds(prev => {
-        if (prev > 0) return prev - 1
-        
-        setActionMinutes(prevMinutes => {
-          if (prevMinutes > 0) return prevMinutes - 1
-          
-          setActionHours(prevHours => {
-            if (prevHours > 0) return prevHours - 1
-            
-            setActionDays(prevDays => {
-              if (prevDays > 0) return prevDays - 1
-              return 7
-            })
-            return 23
-          })
-          return 59
-        })
-        return 59
-      })
-    }, 1000)
+    // Подписка на глобальный таймер
+    const handleTimerUpdate = (time) => {
+      setActionDays(time.days)
+      setActionHours(time.hours)
+      setActionMinutes(time.minutes)
+      setActionSeconds(time.seconds)
+    }
+
+    globalTimer.subscribe(handleTimerUpdate)
 
     // Первое сообщение через 15 секунд
     const firstTimer = setTimeout(() => {
@@ -50,27 +41,31 @@ export default function FloatingContacts() {
       setTimeout(() => {
         setShowOperatorMessage(false)
         
-        // Второе сообщение через 20 секунд
+        // Второе сообщение через 20 секунд (только если не показано вручную)
         setTimeout(() => {
-          const secondMessage = {
-            id: 2,
-            text: 'У нас сейчас действует специальное предложение на покупку станции. Оставьте свои контакты и я расскажу вам более подробно',
-            timestamp: Date.now()
+          if (!offerShownManually) {
+            const secondMessage = {
+              id: 2,
+              text: 'У нас сейчас действует специальное предложение на покупку станции. Оставьте свои контакты и я расскажу вам более подробно',
+              timestamp: Date.now()
+            }
+            setMessages(prev => [...prev, secondMessage])
+            setShowSpecialOffer(true)
+            
+            // Скрыть через 10 секунд только если пользователь не взаимодействовал
+            setTimeout(() => {
+              if (!userInteracted) {
+                setShowSpecialOffer(false)
+              }
+            }, 10000)
           }
-          setMessages(prev => [...prev, secondMessage])
-          setShowSpecialOffer(true)
-          
-          // Скрыть через 10 секунд
-          setTimeout(() => {
-            setShowSpecialOffer(false)
-          }, 10000)
         }, 20000)
       }, 8000)
     }, 15000)
 
     return () => {
       clearTimeout(firstTimer)
-      clearInterval(actionInterval)
+      globalTimer.unsubscribe(handleTimerUpdate)
     }
   }, [])
 
@@ -95,7 +90,36 @@ export default function FloatingContacts() {
   const handleFormSubmit = (e) => {
     e.preventDefault()
     setShowSpecialOffer(false)
-    alert('Спасибо! Мы свяжемся с вами в ближайшее время.')
+    setShowSuccessNotification(true)
+    
+    // Скрыть уведомление через 3 секунды
+    setTimeout(() => {
+      setShowSuccessNotification(false)
+    }, 3000)
+  }
+
+  const handleFormInteraction = () => {
+    setUserInteracted(true)
+  }
+
+  const showOfferManually = () => {
+    setOfferShownManually(true)
+    setShowOperatorMessage(false)
+    
+    // Добавляем сообщение только если его еще нет
+    setMessages(prev => {
+      const hasSecondMessage = prev.some(msg => msg.id === 2)
+      if (!hasSecondMessage) {
+        const secondMessage = {
+          id: 2,
+          text: 'У нас сейчас действует специальное предложение на покупку станции. Оставьте свои контакты и я расскажу вам более подробно',
+          timestamp: Date.now()
+        }
+        return [...prev, secondMessage]
+      }
+      return prev
+    })
+    setShowSpecialOffer(true)
   }
 
   return (
@@ -110,6 +134,18 @@ export default function FloatingContacts() {
           </div>
           <div className="operator-text">
             {messages[0]?.text}
+          </div>
+          <button className="help-button" onClick={showOfferManually}>
+            Помощь
+          </button>
+        </div>
+      )}
+
+      {showSuccessNotification && (
+        <div className="success-notification">
+          <div className="success-icon"></div>
+          <div className="success-text">
+            Данные успешно отправлены!
           </div>
         </div>
       )}
@@ -128,8 +164,18 @@ export default function FloatingContacts() {
           <div className="offer-form">
             <h4>Спец предложение действует {actionDays}д {actionHours.toString().padStart(2, '0')}:{actionMinutes.toString().padStart(2, '0')}:{actionSeconds.toString().padStart(2, '0')}</h4>
             <form onSubmit={handleFormSubmit}>
-              <input type="text" placeholder="Ваше имя" required />
-              <input type="tel" placeholder="Ваш телефон" required />
+              <input 
+                type="text" 
+                placeholder="Ваше имя" 
+                required 
+                onFocus={handleFormInteraction}
+              />
+              <input 
+                type="tel" 
+                placeholder="Ваш телефон" 
+                required 
+                onFocus={handleFormInteraction}
+              />
               <button type="submit">Получить предложение</button>
             </form>
           </div>
@@ -157,8 +203,18 @@ export default function FloatingContacts() {
             <div className="offer-form">
               <h4>Спец предложение действует {actionDays}д {actionHours.toString().padStart(2, '0')}:{actionMinutes.toString().padStart(2, '0')}:{actionSeconds.toString().padStart(2, '0')}</h4>
               <form onSubmit={handleFormSubmit}>
-                <input type="text" placeholder="Ваше имя" required />
-                <input type="tel" placeholder="Ваш телефон" required />
+                <input 
+                  type="text" 
+                  placeholder="Ваше имя" 
+                  required 
+                  onFocus={handleFormInteraction}
+                />
+                <input 
+                  type="tel" 
+                  placeholder="Ваш телефон" 
+                  required 
+                  onFocus={handleFormInteraction}
+                />
                 <button type="submit">Получить предложение</button>
               </form>
             </div>
