@@ -447,82 +447,157 @@ export default function Home() {
               </h2>
               
               <div style={{ 
-                display: 'grid', 
-                gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-                gap: '2rem',
-                textAlign: 'center'
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr',
+                gap: '3rem',
+                alignItems: 'start'
               }}>
-                <div style={{ 
-                  padding: '2rem',
-                  backgroundColor: 'var(--color-white)',
-                  borderRadius: '1rem',
-                  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
-                }}>
-                  <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>📞</div>
+                {/* Контактная информация */}
+                <div>
                   <h3 style={{ 
-                    fontSize: 'var(--font-xl)', 
-                    color: 'var(--color-dark)',
-                    marginBottom: '1rem',
-                    fontWeight: '600'
-                  }}>
-                    Телефон
-                  </h3>
-                  <p style={{ 
-                    fontSize: 'var(--font-lg)', 
+                    fontSize: 'var(--font-2xl)', 
                     color: 'var(--color-primary)',
+                    marginBottom: '2rem',
                     fontWeight: '600'
                   }}>
-                    +7 (800) 000-00-00
-                  </p>
+                    Контактная информация
+                  </h3>
+                  
+                  <div style={{ marginBottom: '2rem' }}>
+                    <h4 style={{ 
+                      fontSize: 'var(--font-lg)', 
+                      color: 'var(--color-dark)',
+                      marginBottom: '1rem',
+                      fontWeight: '600'
+                    }}>
+                      ООО «НОВО»
+                    </h4>
+                    
+                    <div style={{ 
+                      fontSize: 'var(--font-base)', 
+                      color: 'var(--color-gray)',
+                      lineHeight: '1.8'
+                    }}>
+                      <p><strong>Адрес:</strong> 355035, Ставропольский край, г. Ставрополь, пр-кт Кулакова, д. 18, офис 116</p>
+                      <p><strong>Телефон:</strong> <a href="tel:+79964179001" style={{ color: 'var(--color-primary)' }}>+7 (996) 417-90-01</a></p>
+                      <p><strong>Email:</strong> <a href="mailto:mix-trades@mail.ru" style={{ color: 'var(--color-primary)' }}>mix-trades@mail.ru</a></p>
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <h4 style={{ 
+                      fontSize: 'var(--font-lg)', 
+                      color: 'var(--color-dark)',
+                      marginBottom: '1rem',
+                      fontWeight: '600'
+                    }}>
+                      Реквизиты
+                    </h4>
+                    
+                    <div style={{ 
+                      fontSize: 'var(--font-sm)', 
+                      color: 'var(--color-gray)',
+                      lineHeight: '1.6'
+                    }}>
+                      <p>ИНН/КПП: 2635249770 / 263501001</p>
+                      <p>ОГРН: 1212600007311</p>
+                      <p>Расчетный счет: 40702810056010000233</p>
+                      <p>Корреспондентский счет: 30101810000000000752</p>
+                      <p>БИК банка: 040702752</p>
+                      <p>Банк: Филиал «Ставропольский» АО «Альфа-банк»</p>
+                    </div>
+                  </div>
                 </div>
-
+                
+                {/* Форма обратной связи */}
                 <div style={{ 
                   padding: '2rem',
                   backgroundColor: 'var(--color-white)',
                   borderRadius: '1rem',
-                  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
+                  boxShadow: '0 8px 25px rgba(0, 0, 0, 0.1)'
                 }}>
-                  <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>📧</div>
                   <h3 style={{ 
                     fontSize: 'var(--font-xl)', 
-                    color: 'var(--color-dark)',
-                    marginBottom: '1rem',
-                    fontWeight: '600'
-                  }}>
-                    Email
-                  </h3>
-                  <p style={{ 
-                    fontSize: 'var(--font-lg)', 
                     color: 'var(--color-primary)',
+                    marginBottom: '1.5rem',
                     fontWeight: '600'
                   }}>
-                    info@mixon-plastering.ru
-                  </p>
-                </div>
-
-                <div style={{ 
-                  padding: '2rem',
-                  backgroundColor: 'var(--color-white)',
-                  borderRadius: '1rem',
-                  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
-                }}>
-                  <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>📍</div>
-                  <h3 style={{ 
-                    fontSize: 'var(--font-xl)', 
-                    color: 'var(--color-dark)',
-                    marginBottom: '1rem',
-                    fontWeight: '600'
-                  }}>
-                    Адрес
+                    Свяжитесь с нами
                   </h3>
-                  <p style={{ 
-                    fontSize: 'var(--font-base)', 
-                    color: 'var(--color-gray)',
-                    lineHeight: '1.6'
-                  }}>
-                    г. Ставрополь<br />
-                    Производственная база
-                  </p>
+                  
+                  <form style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                    <div>
+                      <input 
+                        type="text" 
+                        placeholder="Ваше имя"
+                        style={{
+                          width: '100%',
+                          padding: '1rem',
+                          border: '2px solid var(--color-gray-200)',
+                          borderRadius: '0.5rem',
+                          fontSize: 'var(--font-base)',
+                          transition: 'border-color 0.3s ease'
+                        }}
+                        onFocus={(e) => e.target.style.borderColor = 'var(--color-primary)'}
+                        onBlur={(e) => e.target.style.borderColor = 'var(--color-gray-200)'}
+                      />
+                    </div>
+                    
+                    <div>
+                      <input 
+                        type="tel" 
+                        placeholder="Ваш телефон"
+                        style={{
+                          width: '100%',
+                          padding: '1rem',
+                          border: '2px solid var(--color-gray-200)',
+                          borderRadius: '0.5rem',
+                          fontSize: 'var(--font-base)',
+                          transition: 'border-color 0.3s ease'
+                        }}
+                        onFocus={(e) => e.target.style.borderColor = 'var(--color-primary)'}
+                        onBlur={(e) => e.target.style.borderColor = 'var(--color-gray-200)'}
+                      />
+                    </div>
+                    
+                    <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
+                      <input 
+                        type="checkbox" 
+                        id="privacy" 
+                        style={{ marginTop: '0.25rem' }}
+                      />
+                      <label 
+                        htmlFor="privacy" 
+                        style={{ 
+                          fontSize: 'var(--font-sm)', 
+                          color: 'var(--color-gray)',
+                          lineHeight: '1.4',
+                          cursor: 'pointer'
+                        }}
+                      >
+                        Согласен на обработку персональных данных
+                      </label>
+                    </div>
+                    
+                    <button 
+                      type="submit"
+                      style={{
+                        padding: '1rem 2rem',
+                        background: 'linear-gradient(135deg, var(--color-primary), #a00109)',
+                        color: 'var(--color-white)',
+                        border: 'none',
+                        borderRadius: '0.5rem',
+                        fontSize: 'var(--font-lg)',
+                        fontWeight: '600',
+                        cursor: 'pointer',
+                        transition: 'all 0.3s ease'
+                      }}
+                      onMouseEnter={(e) => e.target.style.transform = 'translateY(-2px)'}
+                      onMouseLeave={(e) => e.target.style.transform = 'translateY(0)'}
+                    >
+                      Отправить
+                    </button>
+                  </form>
                 </div>
               </div>
             </div>
@@ -549,7 +624,7 @@ export default function Home() {
                   marginBottom: '1rem',
                   color: 'var(--color-secondary)'
                 }}>
-                  MIXON
+                  NOVA
                 </h3>
                 <p style={{ 
                   fontSize: 'var(--font-sm)',
@@ -568,24 +643,29 @@ export default function Home() {
                   marginBottom: '1rem',
                   color: 'var(--color-secondary)'
                 }}>
-                  Продукция
+                  Навигация
                 </h4>
                 <ul style={{ 
                   listStyle: 'none',
                   padding: 0,
                   margin: 0
                 }}>
-                  {['Станции 220В', 'Станции 380В', 'Запчасти', 'Аксессуары'].map((item, index) => (
+                  {[
+                    { name: 'Каталог', href: '#catalog' },
+                    { name: 'Преимущества', href: '#advantages' },
+                    { name: 'О компании', href: '#about' },
+                    { name: 'Контакты', href: '#contacts' }
+                  ].map((item, index) => (
                     <li key={index} style={{ 
                       marginBottom: '0.5rem'
                     }}>
-                      <a href="#" style={{ 
+                      <a href={item.href} style={{ 
                         color: 'var(--color-gray)',
                         textDecoration: 'none',
                         fontSize: 'var(--font-sm)',
                         transition: 'color 0.3s ease'
                       }}>
-                        {item}
+                        {item.name}
                       </a>
                     </li>
                   ))}
@@ -606,8 +686,8 @@ export default function Home() {
                   color: 'var(--color-gray)',
                   lineHeight: '1.8'
                 }}>
-                  <div>📞 +7 (800) 000-00-00</div>
-                  <div>📧 info@mixon-plastering.ru</div>
+                  <div>📞 +7 (996) 417-90-01</div>
+                  <div>📧 mix-trades@mail.ru</div>
                   <div>📍 г. Ставрополь</div>
                 </div>
               </div>
@@ -622,7 +702,7 @@ export default function Home() {
                 fontSize: 'var(--font-sm)',
                 color: 'var(--color-gray)'
               }}>
-                © 2024 MIXON. Все права защищены. Штукатурные станции и оборудование для механизированной штукатурки.
+                © 2024 NOVA. Все права защищены. Штукатурные станции и оборудование для механизированной штукатурки.
               </p>
             </div>
           </div>
