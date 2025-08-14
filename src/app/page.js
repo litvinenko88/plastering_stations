@@ -10,8 +10,7 @@ import CatalogCard from '../components/CatalogCard/CatalogCard'
 
 import ProductCard from '../components/ProductCard/ProductCard'
 import Comparison from '../components/Comparison/Comparison'
-import Reviews from '../components/Reviews/Reviews'
-import FAQ from '../components/FAQ/FAQ'
+import FAQReviews from '../components/FAQReviews/FAQReviews'
 import QuizModal from '../components/QuizModal/QuizModal'
 import ComparisonModal from '../components/ComparisonModal/ComparisonModal'
 import { products } from '../data/products'
@@ -206,11 +205,8 @@ export default function Home() {
           {/* Сравнение с конкурентами */}
           <Comparison />
 
-          {/* Отзывы клиентов */}
-          <Reviews />
-
-          {/* FAQ */}
-          <FAQ />
+          {/* FAQ и Отзывы */}
+          <FAQReviews />
 
           {/* О компании */}
           <section id="about" style={{ 
