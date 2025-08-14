@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import './ProductModal.css'
+import OrderModal from '../OrderModal/OrderModal'
 
 const productDetails = {
   1: {
@@ -118,6 +119,7 @@ const productDetails = {
 export default function ProductModal({ product, isOpen, onClose }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [isFullscreen, setIsFullscreen] = useState(false)
+  const [isOrderModalOpen, setIsOrderModalOpen] = useState(false)
 
   useEffect(() => {
     if (isOpen) {
@@ -131,13 +133,16 @@ export default function ProductModal({ product, isOpen, onClose }) {
     }
   }, [isOpen])
 
+
+
   if (!isOpen || !product) return null
 
   const details = productDetails[product.id] || {}
 
   return (
-    <div className="product-modal-overlay" onClick={onClose}>
-      <div className="product-modal" onClick={(e) => e.stopPropagation()}>
+    <>
+      <div className="product-modal-overlay" onClick={onClose}>
+        <div className="product-modal" onClick={(e) => e.stopPropagation()}>
         <button className="modal-close" onClick={onClose}>×</button>
         
         <div className="modal-content">
@@ -218,7 +223,7 @@ export default function ProductModal({ product, isOpen, onClose }) {
           </div>
 
           <div className="modal-footer">
-            <button className="order-btn">
+            <button className="order-btn" onClick={() => setIsOrderModalOpen(true)}>
               Заказать {product.name}
             </button>
           </div>
@@ -234,7 +239,14 @@ export default function ProductModal({ product, isOpen, onClose }) {
             <button className="fullscreen-close" onClick={() => setIsFullscreen(false)}>×</button>
           </div>
         )}
+        </div>
       </div>
-    </div>
+      
+      <OrderModal 
+        product={product}
+        isOpen={isOrderModalOpen}
+        onClose={() => setIsOrderModalOpen(false)}
+      />
+    </>
   )
 }

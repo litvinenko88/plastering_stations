@@ -264,6 +264,144 @@
   box-shadow: 0 8px 25px rgba(125, 1, 11, 0.4);
 }
 
+.order-form {
+  width: 100%;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #ffffff, #f8fafc);
+  border-radius: 16px;
+  border: 2px solid #e2e8f0;
+  margin-top: 1rem;
+}
+
+.order-form h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #374151;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.order-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.order-form .form-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.order-form input {
+  padding: 0.75rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.order-form input:focus {
+  outline: none;
+  border-color: #7d010b;
+  box-shadow: 0 0 0 3px rgba(125, 1, 11, 0.1);
+}
+
+.order-form input.error {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.order-form .error-text {
+  color: #ef4444;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.order-form .checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  padding: 0.75rem;
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.order-form .checkbox-group:hover {
+  border-color: #7d010b;
+  background: #fef2f2;
+}
+
+.order-form .checkbox-input {
+  width: 16px;
+  height: 16px;
+  accent-color: #7d010b;
+  cursor: pointer;
+}
+
+.order-form .checkbox-label {
+  font-size: 0.875rem;
+  color: #374151;
+  line-height: 1.4;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.cancel-btn {
+  flex: 1;
+  padding: 0.75rem 1.5rem;
+  background: #f3f4f6;
+  color: #374151;
+  border: 2px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cancel-btn:hover {
+  background: #e5e7eb;
+  border-color: #9ca3af;
+}
+
+.submit-btn {
+  flex: 2;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #7d010b, #a00109);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(125, 1, 11, 0.3);
+}
+
+.submit-btn:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.submit-btn:not(:disabled):hover {
+  background: linear-gradient(135deg, #6a0109, #8a0110);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(125, 1, 11, 0.4);
+}
+
 @media (max-width: 768px) {
   .product-modal-overlay {
     padding: 1rem;
@@ -294,5 +432,9 @@
   
   .modal-section {
     padding: 1rem;
+  }
+  
+  .form-actions {
+    flex-direction: column;
   }
 }
