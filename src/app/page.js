@@ -152,7 +152,7 @@ export default function Home() {
                 Почему строители выбирают наши штукатурные станции?
               </h2>
               
-              <div style={{ 
+              <div className="five-cards-grid" style={{ 
                 display: 'grid', 
                 gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
                 gap: '2rem'
@@ -180,7 +180,7 @@ export default function Home() {
                 Какое оборудование вы можете заказать?
               </h2>
               
-              <div style={{ 
+              <div className="three-cards-grid" style={{ 
                 display: 'grid', 
                 gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
                 gap: '2rem',
@@ -354,7 +354,7 @@ export default function Home() {
                 ))}
               </div>
               
-              <div style={{ 
+              <div className="two-column-grid" style={{ 
                 display: 'grid', 
                 gridTemplateColumns: '1fr 1fr',
                 gap: '3rem',
@@ -446,7 +446,7 @@ export default function Home() {
                 Контакты
               </h2>
               
-              <div style={{ 
+              <div className="contacts-grid" style={{ 
                 display: 'grid',
                 gridTemplateColumns: '1fr 1fr',
                 gap: '3rem',
@@ -510,7 +510,7 @@ export default function Home() {
                 </div>
                 
                 {/* Форма обратной связи */}
-                <div style={{ 
+                <div className="contacts-form" style={{ 
                   padding: '2rem',
                   backgroundColor: 'var(--color-white)',
                   borderRadius: '1rem',

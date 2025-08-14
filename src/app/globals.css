@@ -267,3 +267,113 @@ body {
   }
 }
 
+/* Адаптивность для блока контактов */
+@media (max-width: 1024px) {
+  .contacts-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .contacts-grid {
+    gap: 1.5rem !important;
+  }
+  
+  .contacts-form {
+    padding: 1.5rem !important;
+  }
+  
+  .contacts-form input {
+    padding: 0.75rem !important;
+  }
+  
+  .contacts-form button {
+    padding: 0.75rem 1.5rem !important;
+  }
+}
+
+/* Адаптивность для блока с двумя колонками */
+.two-column-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+@media (max-width: 1024px) {
+  .two-column-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .two-column-grid {
+    gap: 1.5rem !important;
+  }
+}
+
+/* Блок с 5 карточками - растягивание последней */
+.five-cards-grid {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 2rem !important;
+}
+
+.five-cards-grid > div {
+  flex: 1 1 calc(33.333% - 1.333rem);
+  min-width: 300px;
+}
+
+.five-cards-grid > div:nth-child(5) {
+  flex: 1 1 100% !important;
+}
+
+@media (max-width: 1024px) {
+  .five-cards-grid > div {
+    flex: 1 1 calc(50% - 1rem);
+  }
+  
+  .five-cards-grid > div:nth-child(5) {
+    flex: 1 1 calc(50% - 1rem) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .five-cards-grid > div {
+    flex: 1 1 100%;
+    min-width: auto;
+  }
+}
+
+/* Блок с 3 карточками - равномерное размещение */
+.three-cards-grid {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 2rem !important;
+  margin-bottom: 3rem !important;
+}
+
+.three-cards-grid > div {
+  flex: 1 1 calc(33.333% - 1.333rem);
+  min-width: 300px;
+}
+
+@media (max-width: 1024px) {
+  .three-cards-grid > div {
+    flex: 1 1 calc(50% - 1rem);
+  }
+  
+  .three-cards-grid > div:nth-child(3) {
+    flex: 1 1 100% !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .three-cards-grid > div {
+    flex: 1 1 100%;
+    min-width: auto;
+  }
+}
+
