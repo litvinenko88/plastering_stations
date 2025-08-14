@@ -7,7 +7,9 @@
     "build": "next build",
     "export": "next build && next export",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "deploy": "npm run build && gh-pages -d out",
+    "serve": "node serve-static.js"
   },
   "dependencies": {
     "react": "19.1.0",

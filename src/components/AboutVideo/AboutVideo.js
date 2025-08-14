@@ -1,76 +1,28 @@
-'use client'
-import { useEffect, useRef, useState } from 'react'
-
 export default function AboutVideo() {
-  const videoRef = useRef(null)
-  const [userInteracted, setUserInteracted] = useState(false)
-
-  useEffect(() => {
-    const video = videoRef.current
-    if (!video) return
-
-    // Обработчик для первого взаимодействия пользователя
-    const handleUserInteraction = () => {
-      setUserInteracted(true)
-      document.removeEventListener('click', handleUserInteraction)
-      document.removeEventListener('scroll', handleUserInteraction)
-      document.removeEventListener('keydown', handleUserInteraction)
-    }
-
-    document.addEventListener('click', handleUserInteraction)
-    document.addEventListener('scroll', handleUserInteraction)
-    document.addEventListener('keydown', handleUserInteraction)
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(async (entry) => {
-          if (entry.isIntersecting) {
-            try {
-              video.volume = 1.0
-              await video.play()
-            } catch (error) {
-              // Если автозапуск заблокирован, показываем кнопку
-              console.log('Автозапуск заблокирован браузером')
-            }
-          } else {
-            video.pause()
-          }
-        })
-      },
-      { threshold: 0.3 }
-    )
-
-    observer.observe(video)
-
-    return () => {
-      observer.disconnect()
-      document.removeEventListener('click', handleUserInteraction)
-      document.removeEventListener('scroll', handleUserInteraction)
-      document.removeEventListener('keydown', handleUserInteraction)
-    }
-  }, [])
-
   return (
     <div style={{
       borderRadius: '1rem',
       overflow: 'hidden',
-      boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)'
+      boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)',
+      position: 'relative',
+      paddingBottom: '56.25%', // 16:9 aspect ratio
+      height: 0
     }}>
-      <video 
-        ref={videoRef}
-        controls 
-        preload="auto"
-        playsInline
+      <iframe 
+        src="https://rutube.ru/play/embed/47e9c5a9ee217119f65346f3990918a9/?autoStart=true&skinColor=red"
+        frameBorder="0"
+        allow="clipboard-write; autoplay"
+        webkitAllowFullScreen
+        mozallowfullscreen
+        allowFullScreen
         style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
           width: '100%',
-          height: 'auto',
-          display: 'block'
+          height: '100%'
         }}
-
-      >
-        <source src="/videos/о компании.mp4" type="video/mp4" />
-        Ваш браузер не поддерживает видео.
-      </video>
+      />
     </div>
   )
 }

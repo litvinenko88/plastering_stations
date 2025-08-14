@@ -5,8 +5,8 @@ const nextConfig = {
   images: {
     unoptimized: true
   },
-  assetPrefix: process.env.NODE_ENV === 'production' ? '' : '',
-  basePath: '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/plastering_stations' : '',
+  basePath: process.env.NODE_ENV === 'production' ? '/plastering_stations' : '',
   distDir: 'out'
 };
 
