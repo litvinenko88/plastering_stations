@@ -5,9 +5,7 @@ import './ProductModal.css'
 const productDetails = {
   1: {
     images: [
-      '/images/products/Persona 220_380_1 (1).webp',
-      '/images/products/Persona 220_380_1 (2).webp',
-      '/images/products/Persona 220_380_1 (3).webp'
+      '/images/products/Persona 220_380_1 (1).webp'
     ],
     features: [
       'Приготовление и нанесение гипсовых и цементных штукатурок',
@@ -39,9 +37,7 @@ const productDetails = {
   },
   2: {
     images: [
-      '/images/products/Persona V380_2.jpg',
-      '/images/products/Persona V380_1.jpg',
-      '/images/products/Persona V380_3.jpg'
+      '/images/products/Persona V380_2.jpg'
     ],
     features: [
       'Приготовление и нанесение гипсовых и цементных штукатурок',
@@ -71,9 +67,7 @@ const productDetails = {
   },
   3: {
     images: [
-      '/images/products/Persona V1_1.png',
-      '/images/products/Persona V1_2.png',
-      '/images/products/Persona V1_3.png'
+      '/images/products/Persona V1_1.png'
     ],
     features: [
       'Компактная модель для небольших объектов',
@@ -97,9 +91,7 @@ const productDetails = {
   },
   4: {
     images: [
-      '/images/products/Persona V1_plus_1.png',
-      '/images/products/Persona V1_plus_2.png',
-      '/images/products/Persona V1_plus_3.png'
+      '/images/products/Persona V1_plus_1.png'
     ],
     features: [
       'Улучшенная модель базовой серии',

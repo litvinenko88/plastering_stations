@@ -66,7 +66,7 @@ export default function AboutVideo() {
           height: 'auto',
           display: 'block'
         }}
-        poster="/images/video-poster.jpg"
+
       >
         <source src="/videos/о компании.mp4" type="video/mp4" />
         Ваш браузер не поддерживает видео.

@@ -700,10 +700,25 @@ export default function Home() {
             }}>
               <p style={{ 
                 fontSize: 'var(--font-sm)',
-                color: 'var(--color-gray)'
+                color: 'var(--color-gray)',
+                marginBottom: '0.5rem'
               }}>
                 © 2024 NOVA. Все права защищены. Штукатурные станции и оборудование для механизированной штукатурки.
               </p>
+              <a 
+                href="/privacy" 
+                style={{ 
+                  fontSize: 'var(--font-xs)',
+                  color: 'var(--color-gray)',
+                  textDecoration: 'none',
+                  opacity: '0.7',
+                  transition: 'opacity 0.3s ease'
+                }}
+                onMouseEnter={(e) => e.target.style.opacity = '1'}
+                onMouseLeave={(e) => e.target.style.opacity = '0.7'}
+              >
+                Политика конфиденциальности
+              </a>
             </div>
           </div>
         </footer>
