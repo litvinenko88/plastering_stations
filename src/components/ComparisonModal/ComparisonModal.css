@@ -4,14 +4,17 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(8px);
+  background: linear-gradient(135deg, 
+    rgba(0, 0, 0, 0.8) 0%, 
+    rgba(47, 43, 53, 0.9) 50%, 
+    rgba(125, 1, 11, 0.8) 100%);
+  backdrop-filter: blur(20px);
   z-index: 2000;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  animation: fadeIn 0.3s ease-out;
+  animation: overlayFadeIn 0.4s ease-out;
 }
 
 @keyframes fadeIn {
@@ -24,15 +27,21 @@
 }
 
 .comparison-modal {
-  background: var(--color-white);
-  border-radius: 1rem;
-  max-width: 90vw;
-  max-height: 90vh;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.95) 0%, 
+    rgba(248, 250, 252, 0.9) 100%);
+  border-radius: 2rem;
+  max-width: 95vw;
+  max-height: 95vh;
   width: 100%;
   position: relative;
-  animation: slideUp 0.4s ease-out;
+  animation: modalSlideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 30px 100px rgba(125, 1, 11, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
 @keyframes slideUp {
@@ -48,36 +57,56 @@
 
 .comparison-close {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: var(--color-gray-100);
-  border: none;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   font-size: 1.5rem;
-  color: var(--color-gray-600);
-  transition: all 0.3s ease;
+  color: var(--color-dark);
+  backdrop-filter: blur(10px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 10;
 }
 
 .comparison-close:hover {
-  background: var(--color-primary);
+  background: linear-gradient(135deg, var(--color-primary), #ff6b6b);
   color: var(--color-white);
-  transform: scale(1.1);
+  transform: scale(1.1) rotate(90deg);
+  box-shadow: 0 8px 25px rgba(125, 1, 11, 0.4);
 }
 
 .comparison-title {
   font-size: var(--font-2xl);
   font-weight: 700;
-  color: var(--color-primary);
+  background: linear-gradient(135deg, var(--color-primary), #ff6b6b, var(--color-primary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   text-align: center;
-  padding: 2rem 2rem 1rem;
+  padding: 2.5rem 2rem 1.5rem;
   margin: 0;
+  position: relative;
+  animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+.comparison-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+  border-radius: 2px;
+  animation: titleUnderline 2s ease-out 0.5s both;
 }
 
 .comparison-table-container {
@@ -94,14 +123,16 @@
 }
 
 .comparison-table th {
-  background: linear-gradient(135deg, var(--color-primary), #a00109);
+  background: linear-gradient(135deg, var(--color-primary), #ff6b6b, #a00109);
   color: var(--color-white);
-  padding: 1rem 0.75rem;
+  padding: 1.25rem 1rem;
   text-align: left;
-  font-weight: 600;
+  font-weight: 700;
   position: sticky;
   top: 0;
   z-index: 5;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 10px rgba(125, 1, 11, 0.3);
 }
 
 .comparison-table th:first-child {
@@ -114,20 +145,31 @@
 }
 
 .comparison-table td {
-  padding: 0.75rem;
-  border-bottom: 1px solid var(--color-gray-200);
+  padding: 1rem 0.75rem;
+  border-bottom: 1px solid rgba(125, 1, 11, 0.1);
   vertical-align: top;
+  transition: all 0.3s ease;
+  position: relative;
+  color: var(--color-dark);
+  font-weight: 500;
 }
 
 .comparison-table tr:hover {
-  background: var(--color-gray-50);
+  background: linear-gradient(90deg, 
+    rgba(125, 1, 11, 0.05), 
+    rgba(255, 107, 107, 0.03), 
+    rgba(125, 1, 11, 0.05));
+  transform: scale(1.01);
 }
 
 .comparison-label {
-  font-weight: 600;
-  color: var(--color-gray-900);
-  background: var(--color-gray-50);
+  font-weight: 700;
+  color: var(--color-dark);
+  background: linear-gradient(135deg, 
+    rgba(125, 1, 11, 0.08), 
+    rgba(255, 107, 107, 0.05));
   min-width: 200px;
+  border-radius: 0.5rem 0 0 0.5rem;
 }
 
 .comparison-table tbody tr:nth-child(even) {
@@ -170,20 +212,31 @@
   }
   
   .mobile-model {
-    background: var(--color-white);
-    border: 1px solid var(--color-gray-200);
-    border-radius: 0.5rem;
-    margin-bottom: 1rem;
+    background: linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.9), 
+      rgba(248, 250, 252, 0.8));
+    border: 1px solid rgba(125, 1, 11, 0.1);
+    border-radius: 1rem;
+    margin-bottom: 1.5rem;
     overflow: hidden;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 25px rgba(125, 1, 11, 0.1);
+    animation: mobileCardSlide 0.6s ease-out both;
   }
   
+  .mobile-model:nth-child(1) { animation-delay: 0.1s; }
+  .mobile-model:nth-child(2) { animation-delay: 0.2s; }
+  .mobile-model:nth-child(3) { animation-delay: 0.3s; }
+  .mobile-model:nth-child(4) { animation-delay: 0.4s; }
+  
   .mobile-model-header {
-    background: linear-gradient(135deg, var(--color-primary), #a00109);
+    background: linear-gradient(135deg, var(--color-primary), #ff6b6b, #a00109);
     color: var(--color-white);
-    padding: 0.75rem;
-    font-weight: 600;
+    padding: 1rem;
+    font-weight: 700;
     text-align: center;
     font-size: var(--font-base);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   }
   
   .mobile-spec {
@@ -209,6 +262,50 @@
     color: var(--color-dark);
     text-align: right;
     flex: 1;
+  }
+}
+
+/* Анимации */
+@keyframes overlayFadeIn {
+  0% {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  100% {
+    opacity: 1;
+    backdrop-filter: blur(20px);
+  }
+}
+
+@keyframes modalSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(100px) scale(0.8) rotateX(10deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotateX(0deg);
+  }
+}
+
+@keyframes titleGlow {
+  0% { text-shadow: 0 0 20px rgba(125, 1, 11, 0.3); }
+  100% { text-shadow: 0 0 30px rgba(125, 1, 11, 0.6), 0 0 40px rgba(255, 107, 107, 0.4); }
+}
+
+@keyframes titleUnderline {
+  0% { width: 0; opacity: 0; }
+  100% { width: 100px; opacity: 1; }
+}
+
+@keyframes mobileCardSlide {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
   }
 }
 
