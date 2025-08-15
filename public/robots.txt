@@ -2,8 +2,8 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://litvinenko88.github.io/plastering_stations/sitemap.xml
-Sitemap: https://litvinenko88.github.io/plastering_stations/sitemap-images.xml
+Sitemap: https://stations-nova.ru/sitemap.xml
+Sitemap: https://stations-nova.ru/sitemap-images.xml
 
 # Основные страницы
 Allow: /

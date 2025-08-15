@@ -93,8 +93,8 @@ export default function Home() {
             "name": "NOVA",
             "legalName": "ООО НОВО",
             "description": "Производитель профессиональных штукатурных станций PERSONIYA",
-            "url": "https://litvinenko88.github.io/plastering_stations/",
-            "logo": "https://litvinenko88.github.io/plastering_stations/icon.svg",
+            "url": "https://stations-nova.ru/",
+            "logo": "https://stations-nova.ru/icon.svg",
             "contactPoint": {
               "@type": "ContactPoint",
               "telephone": "+7-996-417-90-01",

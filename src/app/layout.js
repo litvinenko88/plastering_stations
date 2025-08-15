@@ -38,13 +38,13 @@ export const metadata = {
   openGraph: {
     type: "website",
     locale: "ru_RU",
-    url: "https://litvinenko88.github.io/plastering_stations/",
+    url: "https://stations-nova.ru/",
     siteName: "NOVA - Штукатурные станции",
     title: "Штукатурные станции PERSONIYA - Профессиональное оборудование",
     description: "Профессиональные штукатурные станции PERSONIYA от производителя. 12 моделей, гарантия 3 года, доставка по РФ",
     images: [
       {
-        url: "https://litvinenko88.github.io/plastering_stations/images/og-image.jpg",
+        url: "https://stations-nova.ru/images/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Штукатурные станции PERSONIYA"
@@ -55,10 +55,10 @@ export const metadata = {
     card: "summary_large_image",
     title: "Штукатурные станции PERSONIYA",
     description: "Профессиональное оборудование для механизированной штукатурки",
-    images: ["https://litvinenko88.github.io/plastering_stations/images/og-image.jpg"]
+    images: ["https://stations-nova.ru/images/og-image.jpg"]
   },
   alternates: {
-    canonical: "https://litvinenko88.github.io/plastering_stations/"
+    canonical: "https://stations-nova.ru/"
   }
 };
 

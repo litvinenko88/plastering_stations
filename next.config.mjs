@@ -5,9 +5,11 @@ const nextConfig = {
   images: {
     unoptimized: true
   },
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/plastering_stations' : '',
-  basePath: process.env.NODE_ENV === 'production' ? '/plastering_stations' : '',
-  distDir: 'out'
+  distDir: 'out',
+  // Removed assetPrefix and basePath for custom domain
+  experimental: {
+    optimizeCss: true
+  }
 };
 
 export default nextConfig;
