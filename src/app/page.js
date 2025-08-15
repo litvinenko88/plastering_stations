@@ -8,6 +8,7 @@ import ScrollToTop from '../components/ScrollToTop/ScrollToTop'
 import AdvantageCard from '../components/AdvantageCard/AdvantageCard'
 import CatalogCard from '../components/CatalogCard/CatalogCard'
 import Notification from '../components/Notification/Notification'
+import { validateForm, formatPhone, formatName, getSuccessMessage } from '../utils/validation'
 import './about-styles.css'
 import './contacts-styles.css'
 
@@ -26,8 +27,10 @@ export default function Home() {
   const [selectedProduct, setSelectedProduct] = useState(null)
   const [isProductModalOpen, setIsProductModalOpen] = useState(false)
   const [contactFormData, setContactFormData] = useState({ name: '', phone: '', agreement: false })
+  const [contactErrors, setContactErrors] = useState({ name: '', phone: '', agreement: '' })
   const [contactNotification, setContactNotification] = useState({ show: false, message: '', type: 'success' })
   const [isContactSubmitting, setIsContactSubmitting] = useState(false)
+  const [isContactSuccess, setIsContactSuccess] = useState(false)
   
   useEffect(() => {
     const handleOpenQuiz = () => setIsQuizOpen(true)
@@ -551,29 +554,6 @@ export default function Home() {
                   boxShadow: '0 8px 25px rgba(0, 0, 0, 0.1)',
                   position: 'relative'
                 }}>
-                  {/* Уведомление формы */}
-                  {contactNotification.show && (
-                    <div style={{
-                      position: 'absolute',
-                      top: '-60px',
-                      left: '0',
-                      right: '0',
-                      zIndex: 1000,
-                      padding: '1rem',
-                      borderRadius: '0.75rem',
-                      background: contactNotification.type === 'success' 
-                        ? 'linear-gradient(135deg, #10b981, #059669)' 
-                        : 'linear-gradient(135deg, #ef4444, #dc2626)',
-                      color: 'white',
-                      fontSize: '0.9rem',
-                      fontWeight: '500',
-                      textAlign: 'center',
-                      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
-                      animation: 'slideDown 0.3s ease-out'
-                    }}>
-                      {contactNotification.message}
-                    </div>
-                  )}
                   
                   <h3 style={{ 
                     fontSize: 'var(--font-xl)', 
@@ -581,16 +561,38 @@ export default function Home() {
                     marginBottom: '1.5rem',
                     fontWeight: '600'
                   }}>
-                    Свяжитесь с нами
+                    {isContactSuccess ? '✅ Заявка отправлена!' : 'Свяжитесь с нами'}
                   </h3>
+                  
+                  {isContactSuccess && (
+                    <div style={{
+                      textAlign: 'center',
+                      padding: '1rem',
+                      background: 'linear-gradient(135deg, #10b981, #059669)',
+                      color: 'white',
+                      borderRadius: '0.75rem',
+                      marginBottom: '1.5rem',
+                      boxShadow: '0 4px 12px rgba(16, 185, 129, 0.3)'
+                    }}>
+                      <p style={{ margin: 0, fontSize: '1.1rem', fontWeight: '600' }}>
+                        Спасибо за обращение! 🚀
+                      </p>
+                      <p style={{ margin: '0.5rem 0 0 0', fontSize: '0.9rem', opacity: '0.9' }}>
+                        Мы уже получили вашу заявку и скоро с вами свяжемся
+                      </p>
+                    </div>
+                  )}
                   
                   <form onSubmit={async (e) => {
                     e.preventDefault()
                     
-                    if (!contactFormData.name.trim() || !contactFormData.phone.trim() || !contactFormData.agreement) {
+                    const validation = validateForm(contactFormData)
+                    
+                    if (!validation.isValid) {
+                      setContactErrors(validation.errors)
                       setContactNotification({
                         show: true,
-                        message: 'Пожалуйста, заполните все поля и дайте согласие на обработку данных',
+                        message: 'Пожалуйста, исправьте ошибки в форме',
                         type: 'error'
                       })
                       return
@@ -603,16 +605,18 @@ export default function Home() {
                       const result = await sendToTelegram(contactFormData, 'Форма контактов (Основная страница)')
                       
                       if (result.success) {
+                        setIsContactSuccess(true)
                         setContactNotification({
                           show: true,
-                          message: '🎉 Отлично! Ваша заявка успешно отправлена. Мы свяжемся с вами в течение 15 минут!',
+                          message: getSuccessMessage('contacts'),
                           type: 'success'
                         })
                         setContactFormData({ name: '', phone: '', agreement: false })
-                        // Автоматическое скрытие уведомления
+                        setContactErrors({})
+                        
                         setTimeout(() => {
-                          setContactNotification(prev => ({ ...prev, show: false }))
-                        }, 5000)
+                          setIsContactSuccess(false)
+                        }, 3000)
                       } else {
                         setContactNotification({
                           show: true,
@@ -636,14 +640,20 @@ export default function Home() {
                         name="name"
                         placeholder="Ваше имя *"
                         value={contactFormData.name}
-                        onChange={(e) => setContactFormData(prev => ({ ...prev, name: e.target.value.slice(0, 20) }))}
+                        onChange={(e) => {
+                          const formattedName = formatName(e.target.value)
+                          setContactFormData(prev => ({ ...prev, name: formattedName }))
+                          if (contactErrors.name) {
+                            setContactErrors(prev => ({ ...prev, name: '' }))
+                          }
+                        }}
                         maxLength="20"
                         required
                         disabled={isContactSubmitting}
                         style={{
                           width: '100%',
                           padding: '1rem 1.25rem',
-                          border: '2px solid #e2e8f0',
+                          border: `2px solid ${contactErrors.name ? '#ef4444' : '#e2e8f0'}`,
                           borderRadius: '0.75rem',
                           fontSize: 'var(--font-base)',
                           background: 'linear-gradient(145deg, #ffffff, #f8f9fa)',
@@ -651,18 +661,33 @@ export default function Home() {
                           boxShadow: 'inset 0 1px 3px rgba(0, 0, 0, 0.1)'
                         }}
                         onFocus={(e) => {
-                          e.target.style.borderColor = 'var(--color-primary)'
-                          e.target.style.boxShadow = 'inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 0 3px rgba(125, 1, 11, 0.1), 0 4px 12px rgba(125, 1, 11, 0.15)'
+                          e.target.style.borderColor = contactErrors.name ? '#ef4444' : 'var(--color-primary)'
+                          e.target.style.boxShadow = contactErrors.name 
+                            ? 'inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 0 3px rgba(239, 68, 68, 0.1)'
+                            : 'inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 0 3px rgba(125, 1, 11, 0.1), 0 4px 12px rgba(125, 1, 11, 0.15)'
                           e.target.style.transform = 'translateY(-1px)'
                           e.target.style.background = '#ffffff'
                         }}
                         onBlur={(e) => {
-                          e.target.style.borderColor = '#e2e8f0'
+                          e.target.style.borderColor = contactErrors.name ? '#ef4444' : '#e2e8f0'
                           e.target.style.boxShadow = 'inset 0 1px 3px rgba(0, 0, 0, 0.1)'
                           e.target.style.transform = 'translateY(0)'
                           e.target.style.background = 'linear-gradient(145deg, #ffffff, #f8f9fa)'
                         }}
                       />
+                      {contactErrors.name && (
+                        <div style={{
+                          color: '#ef4444',
+                          fontSize: '0.875rem',
+                          marginTop: '0.5rem',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '0.25rem'
+                        }}>
+                          <span>⚠️</span>
+                          {contactErrors.name}
+                        </div>
+                      )}
                     </div>
                     
                     <div>
@@ -671,14 +696,20 @@ export default function Home() {
                         name="phone"
                         placeholder="+7 (999) 123-45-67 *"
                         value={contactFormData.phone}
-                        onChange={(e) => setContactFormData(prev => ({ ...prev, phone: e.target.value.replace(/[^+0-9]/g, '').slice(0, 13) }))}
+                        onChange={(e) => {
+                          const formattedPhone = formatPhone(e.target.value)
+                          setContactFormData(prev => ({ ...prev, phone: formattedPhone }))
+                          if (contactErrors.phone) {
+                            setContactErrors(prev => ({ ...prev, phone: '' }))
+                          }
+                        }}
                         maxLength="13"
                         required
                         disabled={isContactSubmitting}
                         style={{
                           width: '100%',
                           padding: '1rem 1.25rem',
-                          border: '2px solid #e2e8f0',
+                          border: `2px solid ${contactErrors.phone ? '#ef4444' : '#e2e8f0'}`,
                           borderRadius: '0.75rem',
                           fontSize: 'var(--font-base)',
                           background: 'linear-gradient(145deg, #ffffff, #f8f9fa)',
@@ -686,18 +717,33 @@ export default function Home() {
                           boxShadow: 'inset 0 1px 3px rgba(0, 0, 0, 0.1)'
                         }}
                         onFocus={(e) => {
-                          e.target.style.borderColor = 'var(--color-primary)'
-                          e.target.style.boxShadow = 'inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 0 3px rgba(125, 1, 11, 0.1), 0 4px 12px rgba(125, 1, 11, 0.15)'
+                          e.target.style.borderColor = contactErrors.phone ? '#ef4444' : 'var(--color-primary)'
+                          e.target.style.boxShadow = contactErrors.phone 
+                            ? 'inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 0 3px rgba(239, 68, 68, 0.1)'
+                            : 'inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 0 3px rgba(125, 1, 11, 0.1), 0 4px 12px rgba(125, 1, 11, 0.15)'
                           e.target.style.transform = 'translateY(-1px)'
                           e.target.style.background = '#ffffff'
                         }}
                         onBlur={(e) => {
-                          e.target.style.borderColor = '#e2e8f0'
+                          e.target.style.borderColor = contactErrors.phone ? '#ef4444' : '#e2e8f0'
                           e.target.style.boxShadow = 'inset 0 1px 3px rgba(0, 0, 0, 0.1)'
                           e.target.style.transform = 'translateY(0)'
                           e.target.style.background = 'linear-gradient(145deg, #ffffff, #f8f9fa)'
                         }}
                       />
+                      {contactErrors.phone && (
+                        <div style={{
+                          color: '#ef4444',
+                          fontSize: '0.875rem',
+                          marginTop: '0.5rem',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '0.25rem'
+                        }}>
+                          <span>⚠️</span>
+                          {contactErrors.phone}
+                        </div>
+                      )}
                     </div>
                     
                     <div className="enhanced-checkbox-wrapper" style={{ 
@@ -709,7 +755,12 @@ export default function Home() {
                         type="checkbox" 
                         id="privacy" 
                         checked={contactFormData.agreement}
-                        onChange={(e) => setContactFormData(prev => ({ ...prev, agreement: e.target.checked }))}
+                        onChange={(e) => {
+                          setContactFormData(prev => ({ ...prev, agreement: e.target.checked }))
+                          if (contactErrors.agreement) {
+                            setContactErrors(prev => ({ ...prev, agreement: '' }))
+                          }
+                        }}
                         disabled={isContactSubmitting}
                         style={{ 
                           width: '1.25rem',
@@ -719,28 +770,48 @@ export default function Home() {
                         }}
                         required
                       />
-                      <label 
-                        htmlFor="privacy" 
-                        style={{ 
-                          fontSize: 'var(--font-sm)', 
-                          color: 'var(--color-gray)',
-                          lineHeight: '1.4',
-                          cursor: 'pointer'
-                        }}
-                      >
-                        Я соглашаюсь на обработку персональных данных в соответствии с <a href="/privacy" style={{ color: 'var(--color-primary)' }}>политикой конфиденциальности</a> *
-                      </label>
+                      <div>
+                        <label 
+                          htmlFor="privacy" 
+                          style={{ 
+                            fontSize: 'var(--font-sm)', 
+                            color: contactErrors.agreement ? '#ef4444' : 'var(--color-gray)',
+                            lineHeight: '1.4',
+                            cursor: 'pointer'
+                          }}
+                        >
+                          Я соглашаюсь на обработку персональных данных в соответствии с <a href="/privacy" style={{ color: 'var(--color-primary)' }}>политикой конфиденциальности</a> *
+                        </label>
+                        {contactErrors.agreement && (
+                          <div style={{
+                            color: '#ef4444',
+                            fontSize: '0.875rem',
+                            marginTop: '0.25rem',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '0.25rem'
+                          }}>
+                            <span>⚠️</span>
+                            {contactErrors.agreement}
+                          </div>
+                        )}
+                      </div>
                     </div>
                     
                     <button 
                       type="submit"
-                      disabled={isContactSubmitting || !contactFormData.name.trim() || !contactFormData.phone.trim() || !contactFormData.agreement}
+                      disabled={isContactSubmitting || !contactFormData.name.trim() || !contactFormData.phone.trim() || !contactFormData.agreement || Object.keys(contactErrors).some(key => contactErrors[key]) || isContactSuccess}
                       className="enhanced-submit-btn"
                     >
                       {isContactSubmitting ? (
                         <>
                           <span style={{ display: 'inline-block', marginRight: '0.5rem' }}>⏳</span>
                           Отправляем...
+                        </>
+                      ) : isContactSuccess ? (
+                        <>
+                          <span style={{ display: 'inline-block', marginRight: '0.5rem' }}>✅</span>
+                          Отправлено!
                         </>
                       ) : (
                         <>
@@ -876,6 +947,14 @@ export default function Home() {
         </footer>
 
 
+        
+        {/* Уведомления */}
+        <Notification 
+          message={contactNotification.message}
+          type={contactNotification.type}
+          isVisible={contactNotification.show}
+          onClose={() => setContactNotification({ ...contactNotification, show: false })}
+        />
         
         {/* Плавающие контакты */}
         <FloatingContacts />
