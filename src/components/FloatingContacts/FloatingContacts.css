@@ -353,3 +353,9 @@
     height: 350px;
   }
 }
+
+@media (min-width: 641px) {
+  .floating-contacts {
+    display: flex;
+  }
+}

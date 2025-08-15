@@ -161,7 +161,7 @@ export default function Home() {
         {/* Основной контент */}
         <main>
           {/* Преимущества */}
-          <section id="advantages" style={{ padding: '4rem 0' }}>
+          <section id="advantages" style={{ padding: 'clamp(2rem, 5vw, 4rem) 0' }}>
             <div className="container">
               <h2 style={{ 
                 fontSize: 'var(--font-3xl)', 
@@ -188,7 +188,7 @@ export default function Home() {
           {/* Каталог превью */}
           <section id="catalog" style={{ 
             backgroundColor: 'var(--color-gray-light)', 
-            padding: '4rem 0' 
+            padding: 'clamp(2rem, 5vw, 4rem) 0' 
           }}>
             <div className="container">
               <h2 style={{ 
@@ -217,7 +217,7 @@ export default function Home() {
           </section>
 
           {/* Полный каталог товаров */}
-          <section id="full-catalog" style={{ padding: '4rem 0' }}>
+          <section id="full-catalog" style={{ padding: 'clamp(2rem, 5vw, 4rem) 0' }}>
             <div className="container">
               <h2 style={{ 
                 fontSize: 'var(--font-3xl)', 
@@ -239,11 +239,11 @@ export default function Home() {
                 ))}
               </div>
               
-              <div style={{ textAlign: 'center', marginTop: '3rem' }}>
+              <div style={{ textAlign: 'center', marginTop: 'clamp(2rem, 4vw, 3rem)' }}>
                 <button 
                   onClick={() => setIsComparisonOpen(true)}
                   style={{
-                    padding: '1rem 2rem',
+                    padding: 'clamp(0.75rem, 2vw, 1rem) clamp(1.5rem, 4vw, 2rem)',
                     background: 'var(--color-primary)',
                     color: 'var(--color-white)',
                     border: 'none',
@@ -251,7 +251,9 @@ export default function Home() {
                     fontSize: 'var(--font-lg)',
                     fontWeight: '600',
                     cursor: 'pointer',
-                    transition: 'all 0.3s ease'
+                    transition: 'all 0.3s ease',
+                    width: window.innerWidth <= 480 ? '100%' : 'auto',
+                    maxWidth: '300px'
                   }}
                   onMouseEnter={(e) => e.target.style.transform = 'translateY(-2px)'}
                   onMouseLeave={(e) => e.target.style.transform = 'translateY(0)'}
@@ -270,7 +272,7 @@ export default function Home() {
 
           {/* О компании */}
           <section id="about" className="about-section" style={{ 
-            padding: '4rem 0',
+            padding: 'clamp(2rem, 5vw, 4rem) 0',
             backgroundColor: 'var(--color-secondary)'
           }}>
             <div className="container">
@@ -455,7 +457,7 @@ export default function Home() {
           </section>
 
           {/* Контакты */}
-          <section id="contacts" style={{ padding: '4rem 0' }}>
+          <section id="contacts" style={{ padding: 'clamp(2rem, 5vw, 4rem) 0' }}>
             <div className="container">
               <h2 style={{ 
                 fontSize: 'var(--font-3xl)', 
@@ -781,7 +783,7 @@ export default function Home() {
         <footer style={{ 
           backgroundColor: 'var(--color-dark)', 
           color: 'var(--color-secondary)',
-          padding: '3rem 0 2rem',
+          padding: 'clamp(2rem, 4vw, 3rem) 0 clamp(1rem, 2vw, 2rem)',
         }}>
           <div className="container">
             <div style={{ 

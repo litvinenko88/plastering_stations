@@ -276,6 +276,22 @@ h6 {
   .container {
     padding: 0 0.75rem;
   }
+  
+  /* Адаптация секций для мобильных */
+  section {
+    padding: 2rem 0 !important;
+  }
+  
+  /* Адаптация заголовков */
+  h2 {
+    font-size: var(--font-3xl) !important;
+    margin-bottom: 2rem !important;
+  }
+  
+  h3 {
+    font-size: var(--font-2xl) !important;
+    margin-bottom: 1.5rem !important;
+  }
 }
 
 /* Адаптивность для блока о компании */
@@ -453,6 +469,38 @@ video {
 iframe {
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
+}
+
+/* Дополнительная адаптивность */
+@media (max-width: 768px) {
+  .two-column-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+  
+  .company-intro {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+  
+  .contacts-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .five-cards-grid,
+  .three-cards-grid,
+  .company-cards-grid {
+    gap: 1.5rem !important;
+  }
+  
+  .five-cards-grid > div,
+  .three-cards-grid > div,
+  .company-cards-grid > div {
+    min-width: auto !important;
+  }
 }
 
 /* Блок с 3 карточками - равномерное размещение */

@@ -69,6 +69,48 @@ export default function ComparisonModal({ isOpen, onClose }) {
               ))}
             </tbody>
           </table>
+          
+          <div className="mobile-comparison">
+            <div className="mobile-model">
+              <div className="mobile-model-header">PERSONIYA 220/380</div>
+              {comparisonData.map((row, index) => (
+                <div key={index} className="mobile-spec">
+                  <div className="mobile-spec-label">{row.label}</div>
+                  <div className="mobile-spec-value">{row.p220}</div>
+                </div>
+              ))}
+            </div>
+            
+            <div className="mobile-model">
+              <div className="mobile-model-header">PERSONIYA V380</div>
+              {comparisonData.map((row, index) => (
+                <div key={index} className="mobile-spec">
+                  <div className="mobile-spec-label">{row.label}</div>
+                  <div className="mobile-spec-value">{row.v380}</div>
+                </div>
+              ))}
+            </div>
+            
+            <div className="mobile-model">
+              <div className="mobile-model-header">PERSONIYA V-1</div>
+              {comparisonData.map((row, index) => (
+                <div key={index} className="mobile-spec">
+                  <div className="mobile-spec-label">{row.label}</div>
+                  <div className="mobile-spec-value">{row.v1}</div>
+                </div>
+              ))}
+            </div>
+            
+            <div className="mobile-model">
+              <div className="mobile-model-header">PERSONIYA V-1 PLUS</div>
+              {comparisonData.map((row, index) => (
+                <div key={index} className="mobile-spec">
+                  <div className="mobile-spec-label">{row.label}</div>
+                  <div className="mobile-spec-value">{row.v1plus}</div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>

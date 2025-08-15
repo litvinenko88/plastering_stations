@@ -140,28 +140,80 @@
 
 @media (max-width: 768px) {
   .comparison-modal-overlay {
-    padding: 1rem;
+    padding: 0.5rem;
+    align-items: flex-start;
+    padding-top: 2rem;
+  }
+  
+  .comparison-modal {
+    max-width: 100vw;
+    max-height: 95vh;
+    margin: 0;
   }
   
   .comparison-title {
     font-size: var(--font-xl);
-    padding: 1.5rem 1rem 1rem;
+    padding: 1rem;
   }
   
   .comparison-table-container {
-    padding: 0 1rem 1rem;
+    padding: 0 0.5rem 1rem;
+    max-height: calc(95vh - 80px);
   }
   
   .comparison-table {
+    display: none;
+  }
+  
+  .mobile-comparison {
+    display: block;
+  }
+  
+  .mobile-model {
+    background: var(--color-white);
+    border: 1px solid var(--color-gray-200);
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    overflow: hidden;
+  }
+  
+  .mobile-model-header {
+    background: linear-gradient(135deg, var(--color-primary), #a00109);
+    color: var(--color-white);
+    padding: 0.75rem;
+    font-weight: 600;
+    text-align: center;
+    font-size: var(--font-base);
+  }
+  
+  .mobile-spec {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--color-gray-100);
     font-size: var(--font-xs);
   }
   
-  .comparison-table th,
-  .comparison-table td {
-    padding: 0.5rem 0.25rem;
+  .mobile-spec:last-child {
+    border-bottom: none;
   }
   
-  .comparison-label {
-    min-width: 150px;
+  .mobile-spec-label {
+    font-weight: 500;
+    color: var(--color-gray-700);
+    flex: 1;
+  }
+  
+  .mobile-spec-value {
+    font-weight: 600;
+    color: var(--color-dark);
+    text-align: right;
+    flex: 1;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-comparison {
+    display: none;
   }
 }
