@@ -31,12 +31,35 @@ export default function Home() {
   const [contactNotification, setContactNotification] = useState({ show: false, message: '', type: 'success' })
   const [isContactSubmitting, setIsContactSubmitting] = useState(false)
   const [isContactSuccess, setIsContactSuccess] = useState(false)
+  const [hasQuizTriggered, setHasQuizTriggered] = useState(false)
   
   useEffect(() => {
     const handleOpenQuiz = () => setIsQuizOpen(true)
     window.addEventListener('openQuiz', handleOpenQuiz)
     return () => window.removeEventListener('openQuiz', handleOpenQuiz)
   }, [])
+
+  // Автоматическое открытие квиза при прокрутке до блока comparison
+  useEffect(() => {
+    const handleScroll = () => {
+      if (hasQuizTriggered || isQuizOpen) return
+      
+      const comparisonSection = document.getElementById('comparison')
+      if (!comparisonSection) return
+      
+      const rect = comparisonSection.getBoundingClientRect()
+      const windowHeight = window.innerHeight
+      
+      // Если блок comparison виден на 30% или больше
+      if (rect.top <= windowHeight * 0.7 && rect.bottom >= 0) {
+        setHasQuizTriggered(true)
+        setIsQuizOpen(true)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [hasQuizTriggered, isQuizOpen])
 
   const handleProductDetails = (product) => {
     setSelectedProduct(product)
@@ -965,7 +988,10 @@ export default function Home() {
         {/* Модальное окно квиза */}
         <QuizModal 
           isOpen={isQuizOpen} 
-          onClose={() => setIsQuizOpen(false)} 
+          onClose={() => {
+            setIsQuizOpen(false)
+            // Не сбрасываем hasQuizTriggered, чтобы квиз не открывался повторно
+          }} 
         />
         
         {/* Модальное окно сравнения */}

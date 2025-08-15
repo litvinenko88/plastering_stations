@@ -2,7 +2,7 @@ import './Comparison.css'
 
 export default function Comparison() {
   return (
-    <section className="comparison">
+    <section id="comparison" className="comparison">
       <div className="comparison-container">
         <h2 className="comparison-title">
           Сравнение с немецкими аналогами

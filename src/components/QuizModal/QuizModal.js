@@ -61,12 +61,21 @@ export default function QuizModal({ isOpen, onClose }) {
 
   useEffect(() => {
     if (isOpen) {
+      // Блокируем скролл страницы
       document.body.style.overflow = 'hidden'
+      document.body.style.paddingRight = '0px' // Предотвращаем сдвиг контента
+      document.documentElement.style.overflow = 'hidden'
     } else {
-      document.body.style.overflow = 'unset'
+      // Восстанавливаем скролл
+      document.body.style.overflow = ''
+      document.body.style.paddingRight = ''
+      document.documentElement.style.overflow = ''
     }
+    
     return () => {
-      document.body.style.overflow = 'unset'
+      document.body.style.overflow = ''
+      document.body.style.paddingRight = ''
+      document.documentElement.style.overflow = ''
     }
   }, [isOpen])
 
@@ -247,9 +256,30 @@ export default function QuizModal({ isOpen, onClose }) {
 
   return (
     <>
-      <div className="quiz-modal-overlay" onClick={handleClose}>
-        <div className="quiz-modal" onClick={(e) => e.stopPropagation()}>
-        <button className="quiz-close" onClick={handleClose}>✕</button>
+      <div 
+        className="quiz-modal-overlay" 
+        onClick={handleClose}
+        style={{
+          cursor: 'pointer'
+        }}
+      >
+        <div 
+          className="quiz-modal" 
+          onClick={(e) => {
+            e.stopPropagation()
+          }}
+          style={{
+            cursor: 'default'
+          }}
+        >
+        <button 
+          className="quiz-close" 
+          onClick={handleClose}
+          aria-label="Закрыть квиз"
+          title="Закрыть квиз"
+        >
+          ✕
+        </button>
 
         <div className="quiz-content" style={{ position: 'relative' }}>
           {showForm ? (
