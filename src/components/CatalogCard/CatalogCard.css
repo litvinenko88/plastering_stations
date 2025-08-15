@@ -1,0 +1,280 @@
+.catalog-card {
+  padding: 2.5rem 2rem;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.95) 0%, 
+    rgba(248, 250, 252, 0.9) 100%);
+  border-radius: 1.5rem;
+  text-align: center;
+  border: 1px solid rgba(125, 1, 11, 0.08);
+  backdrop-filter: blur(20px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  animation: catalogSlideUp 0.8s ease-out both;
+}
+
+.catalog-card:nth-child(1) { animation-delay: 0.1s; }
+.catalog-card:nth-child(2) { animation-delay: 0.2s; }
+.catalog-card:nth-child(3) { animation-delay: 0.3s; }
+
+.catalog-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, 
+    var(--color-primary), 
+    #ff6b6b, 
+    #4ecdc4, 
+    var(--color-primary));
+  background-size: 200% 100%;
+  animation: gradientMove 3s ease-in-out infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.catalog-card:hover::before {
+  opacity: 1;
+}
+
+.catalog-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(125, 1, 11, 0.03), 
+    transparent);
+  transition: left 0.8s;
+}
+
+.catalog-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 25px 80px rgba(125, 1, 11, 0.12);
+  border-color: rgba(125, 1, 11, 0.15);
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 1) 0%, 
+    rgba(248, 250, 252, 0.95) 100%);
+}
+
+.catalog-card:hover::after {
+  left: 100%;
+}
+
+.catalog-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 2rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* CSS иконки для каталога */
+.catalog-icon.power::before {
+  content: '';
+  width: 50px;
+  height: 35px;
+  background: linear-gradient(135deg, var(--color-primary), #ff6b6b);
+  border-radius: 8px;
+  position: relative;
+  box-shadow: 0 0 30px rgba(125, 1, 11, 0.4);
+  animation: iconPulse 2s ease-in-out infinite;
+}
+
+.catalog-icon.power::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  border: 4px solid white;
+  border-top: 4px solid transparent;
+  border-radius: 50%;
+  animation: iconSpin 2s linear infinite;
+}
+
+.catalog-icon.industrial::before {
+  content: '';
+  width: 60px;
+  height: 40px;
+  background: linear-gradient(135deg, #4ecdc4, #44a08d);
+  border-radius: 12px;
+  position: relative;
+  box-shadow: 0 0 30px rgba(78, 205, 196, 0.4);
+  animation: iconPulse 2s ease-in-out infinite;
+}
+
+.catalog-icon.industrial::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 6px;
+  background: white;
+  border-radius: 3px;
+  box-shadow: 
+    0 -10px 0 white,
+    0 10px 0 white;
+}
+
+.catalog-icon.automation::before {
+  content: '';
+  width: 55px;
+  height: 55px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 50%;
+  position: relative;
+  box-shadow: 0 0 30px rgba(102, 126, 234, 0.4);
+  animation: iconPulse 2s ease-in-out infinite;
+}
+
+.catalog-icon.automation::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 25px;
+  height: 25px;
+  border: 3px solid white;
+  border-radius: 50%;
+  background: transparent;
+}
+
+.catalog-icon.automation .inner-dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  animation: dotPulse 1.5s ease-in-out infinite;
+}
+
+.catalog-title {
+  font-size: var(--font-xl);
+  background: linear-gradient(135deg, var(--color-dark), var(--color-primary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.catalog-description {
+  font-size: var(--font-base);
+  color: var(--color-gray);
+  line-height: 1.7;
+  font-weight: 400;
+  position: relative;
+}
+
+.catalog-description::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.catalog-card:hover .catalog-description::before {
+  opacity: 1;
+}
+
+/* Анимации */
+@keyframes catalogSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(50px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes gradientMove {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes iconPulse {
+  0%, 100% { 
+    transform: scale(1);
+    box-shadow: 0 0 30px rgba(125, 1, 11, 0.4);
+  }
+  50% { 
+    transform: scale(1.05);
+    box-shadow: 0 0 40px rgba(125, 1, 11, 0.6);
+  }
+}
+
+@keyframes iconSpin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes dotPulse {
+  0%, 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 0.5; transform: translate(-50%, -50%) scale(1.2); }
+}
+
+@media (max-width: 768px) {
+  .catalog-card {
+    padding: 2rem 1.5rem;
+  }
+  
+  .catalog-icon {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 1.5rem;
+  }
+  
+  .catalog-title {
+    font-size: var(--font-lg);
+  }
+  
+  .catalog-description {
+    font-size: var(--font-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .catalog-card {
+    padding: 1.5rem 1rem;
+  }
+  
+  .catalog-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 1rem;
+  }
+  
+  .catalog-title {
+    font-size: var(--font-base);
+    margin-bottom: 1rem;
+  }
+  
+  .catalog-description {
+    font-size: var(--font-xs);
+  }
+}
