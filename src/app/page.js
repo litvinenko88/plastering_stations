@@ -535,8 +535,33 @@ export default function Home() {
                   padding: '2rem',
                   backgroundColor: 'var(--color-white)',
                   borderRadius: '1rem',
-                  boxShadow: '0 8px 25px rgba(0, 0, 0, 0.1)'
+                  boxShadow: '0 8px 25px rgba(0, 0, 0, 0.1)',
+                  position: 'relative'
                 }}>
+                  {/* Уведомление формы */}
+                  {contactNotification.show && (
+                    <div style={{
+                      position: 'absolute',
+                      top: '-60px',
+                      left: '0',
+                      right: '0',
+                      zIndex: 1000,
+                      padding: '1rem',
+                      borderRadius: '0.75rem',
+                      background: contactNotification.type === 'success' 
+                        ? 'linear-gradient(135deg, #10b981, #059669)' 
+                        : 'linear-gradient(135deg, #ef4444, #dc2626)',
+                      color: 'white',
+                      fontSize: '0.9rem',
+                      fontWeight: '500',
+                      textAlign: 'center',
+                      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+                      animation: 'slideDown 0.3s ease-out'
+                    }}>
+                      {contactNotification.message}
+                    </div>
+                  )}
+                  
                   <h3 style={{ 
                     fontSize: 'var(--font-xl)', 
                     color: 'var(--color-primary)',
@@ -571,6 +596,10 @@ export default function Home() {
                           type: 'success'
                         })
                         setContactFormData({ name: '', phone: '', agreement: false })
+                        // Автоматическое скрытие уведомления
+                        setTimeout(() => {
+                          setContactNotification(prev => ({ ...prev, show: false }))
+                        }, 5000)
                       } else {
                         setContactNotification({
                           show: true,
@@ -867,13 +896,7 @@ export default function Home() {
           </div>
         </footer>
 
-        {/* Уведомления */}
-        <Notification 
-          message={contactNotification.message}
-          type={contactNotification.type}
-          isVisible={contactNotification.show}
-          onClose={() => setContactNotification({ ...contactNotification, show: false })}
-        />
+
         
         {/* Плавающие контакты */}
         <FloatingContacts />
