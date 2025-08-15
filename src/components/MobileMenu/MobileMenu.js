@@ -5,7 +5,6 @@ import './MobileMenu.css'
 export default function MobileMenu({ navItems }) {
   const [isOpen, setIsOpen] = useState(false)
   const [isClosing, setIsClosing] = useState(false)
-  const [timeoutIds, setTimeoutIds] = useState([])
   
   // Валидация URL для предотвращения open redirect
   const isValidUrl = (url) => {
@@ -14,12 +13,7 @@ export default function MobileMenu({ navItems }) {
     return url.startsWith('#') || url.startsWith('/') || url.startsWith('./')
   }
   
-  // Очистка таймеров при размонтировании
-  useEffect(() => {
-    return () => {
-      timeoutIds.forEach(id => clearTimeout(id))
-    }
-  }, [timeoutIds])
+
 
   const toggleMenu = () => {
     if (isOpen) {
@@ -32,27 +26,18 @@ export default function MobileMenu({ navItems }) {
 
   const closeMenu = () => {
     setIsClosing(true)
-    const timeoutId = setTimeout(() => {
+    setTimeout(() => {
       setIsOpen(false)
       setIsClosing(false)
-      // Удаляем выполненный таймер
-      setTimeoutIds(prev => prev.filter(id => id !== timeoutId))
-    }, 250)
-    setTimeoutIds(prev => [...prev, timeoutId])
+    }, 300)
   }
 
   const handleItemClick = (item) => {
+    closeMenu()
     if (item.onClick && typeof item.onClick === 'function') {
-      closeMenu()
-      const timeoutId = setTimeout(() => {
-        // Безопасный вызов функции без eval
+      setTimeout(() => {
         item.onClick()
-        // Удаляем выполненный таймер
-        setTimeoutIds(prev => prev.filter(id => id !== timeoutId))
-      }, 250)
-      setTimeoutIds(prev => [...prev, timeoutId])
-    } else {
-      closeMenu()
+      }, 300)
     }
   }
 
