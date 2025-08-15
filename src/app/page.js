@@ -9,6 +9,7 @@ import AdvantageCard from '../components/AdvantageCard/AdvantageCard'
 import CatalogCard from '../components/CatalogCard/CatalogCard'
 import Notification from '../components/Notification/Notification'
 import './about-styles.css'
+import './contacts-styles.css'
 
 import ProductCard from '../components/ProductCard/ProductCard'
 import Comparison from '../components/Comparison/Comparison'
@@ -492,14 +493,28 @@ export default function Home() {
                       ООО «НОВО»
                     </h4>
                     
-                    <div style={{ 
-                      fontSize: 'var(--font-base)', 
-                      color: 'var(--color-gray)',
-                      lineHeight: '1.8'
-                    }}>
-                      <p><strong>Адрес:</strong> 355035, Ставропольский край, г. Ставрополь, пр-кт Кулакова, д. 18, офис 116</p>
-                      <p><strong>Телефон:</strong> <a href="tel:+79964179001" style={{ color: 'var(--color-primary)' }}>+7 (996) 417-90-01</a></p>
-                      <p><strong>Email:</strong> <a href="mailto:mix-trades@mail.ru" style={{ color: 'var(--color-primary)' }}>mix-trades@mail.ru</a></p>
+                    <div>
+                      <div className="contacts-info-item">
+                        <div className="contact-icon location"></div>
+                        <div>
+                          <strong>Адрес:</strong><br/>
+                          355035, Ставропольский край, г. Ставрополь, пр-кт Кулакова, д. 18, офис 116
+                        </div>
+                      </div>
+                      <div className="contacts-info-item">
+                        <div className="contact-icon phone"></div>
+                        <div>
+                          <strong>Телефон:</strong><br/>
+                          <a href="tel:+79964179001" style={{ color: 'var(--color-primary)', textDecoration: 'none' }}>+7 (996) 417-90-01</a>
+                        </div>
+                      </div>
+                      <div className="contacts-info-item">
+                        <div className="contact-icon email"></div>
+                        <div>
+                          <strong>Email:</strong><br/>
+                          <a href="mailto:mix-trades@mail.ru" style={{ color: 'var(--color-primary)', textDecoration: 'none' }}>mix-trades@mail.ru</a>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   
@@ -685,14 +700,10 @@ export default function Home() {
                       />
                     </div>
                     
-                    <div style={{ 
+                    <div className="enhanced-checkbox-wrapper" style={{ 
                       display: 'flex', 
                       alignItems: 'flex-start', 
-                      gap: '1rem',
-                      background: 'linear-gradient(145deg, #f8f9fa, #e9ecef)',
-                      padding: '1rem',
-                      borderRadius: '0.75rem',
-                      border: '1px solid rgba(125, 1, 11, 0.1)'
+                      gap: '1rem'
                     }}>
                       <input 
                         type="checkbox" 
@@ -724,37 +735,7 @@ export default function Home() {
                     <button 
                       type="submit"
                       disabled={isContactSubmitting || !contactFormData.name.trim() || !contactFormData.phone.trim() || !contactFormData.agreement}
-                      style={{
-                        padding: '1rem 2.5rem',
-                        background: isContactSubmitting || !contactFormData.name.trim() || !contactFormData.phone.trim() || !contactFormData.agreement 
-                          ? 'linear-gradient(135deg, #9ca3af, #6b7280)' 
-                          : 'linear-gradient(135deg, var(--color-primary), #8b0000)',
-                        color: 'var(--color-white)',
-                        border: 'none',
-                        borderRadius: '0.75rem',
-                        fontSize: 'var(--font-lg)',
-                        fontWeight: '600',
-                        cursor: isContactSubmitting || !contactFormData.name.trim() || !contactFormData.phone.trim() || !contactFormData.agreement ? 'not-allowed' : 'pointer',
-                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                        position: 'relative',
-                        overflow: 'hidden',
-                        boxShadow: isContactSubmitting || !contactFormData.name.trim() || !contactFormData.phone.trim() || !contactFormData.agreement 
-                          ? 'none' 
-                          : '0 4px 15px rgba(125, 1, 11, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
-                        opacity: isContactSubmitting || !contactFormData.name.trim() || !contactFormData.phone.trim() || !contactFormData.agreement ? 0.6 : 1
-                      }}
-                      onMouseEnter={(e) => {
-                        if (!isContactSubmitting && contactFormData.name.trim() && contactFormData.phone.trim() && contactFormData.agreement) {
-                          e.target.style.transform = 'translateY(-2px) scale(1.02)'
-                          e.target.style.boxShadow = '0 8px 25px rgba(125, 1, 11, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3)'
-                        }
-                      }}
-                      onMouseLeave={(e) => {
-                        if (!isContactSubmitting && contactFormData.name.trim() && contactFormData.phone.trim() && contactFormData.agreement) {
-                          e.target.style.transform = 'translateY(0) scale(1)'
-                          e.target.style.boxShadow = '0 4px 15px rgba(125, 1, 11, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
-                        }
-                      }}
+                      className="enhanced-submit-btn"
                     >
                       {isContactSubmitting ? (
                         <>
