@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import './ConsultationForm.css'
 import Notification from '../Notification/Notification'
+import { validateForm, formatPhone, formatName, getSuccessMessage } from '../../utils/validation'
 
 export default function ConsultationForm({ isOpen, onClose }) {
   const [formData, setFormData] = useState({
@@ -11,63 +12,82 @@ export default function ConsultationForm({ isOpen, onClose }) {
   })
   const [errors, setErrors] = useState({ name: '', phone: '' })
   const [notification, setNotification] = useState({ show: false, message: '', type: 'success' })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target
     
     if (type === 'checkbox') {
       setFormData(prev => ({ ...prev, [name]: checked }))
+      setErrors(prev => ({ ...prev, [name]: '' }))
       return
     }
     
     let newValue = value
-    let error = ''
-    
     if (name === 'name') {
-      newValue = value.slice(0, 10)
-      if (newValue.length < 2) {
-        error = 'Имя должно содержать минимум 2 символа'
-      }
-    }
-    
-    if (name === 'phone') {
-      newValue = value.replace(/[^+\d]/g, '').slice(0, 13)
-      const phoneRegex = /^\+?[1-9]\d{10,11}$/
-      if (newValue && !phoneRegex.test(newValue)) {
-        error = 'Введите номер в формате +7XXXXXXXXXX'
-      }
+      newValue = formatName(value)
+    } else if (name === 'phone') {
+      newValue = formatPhone(value)
     }
     
     setFormData(prev => ({ ...prev, [name]: newValue }))
-    setErrors(prev => ({ ...prev, [name]: error }))
+    
+    if (errors[name]) {
+      setErrors(prev => ({ ...prev, [name]: '' }))
+    }
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     
-    if (errors.name || errors.phone || !formData.name || !formData.phone || !formData.agreement) {
+    const validation = validateForm(formData)
+    
+    if (!validation.isValid) {
+      setErrors(validation.errors)
+      setNotification({ 
+        show: true, 
+        message: 'Пожалуйста, исправьте ошибки в форме', 
+        type: 'error' 
+      })
       return
     }
     
-    if (formData.name && formData.phone && formData.agreement) {
+    setIsSubmitting(true)
+    
+    try {
       const { sendToTelegram } = await import('../../utils/telegram')
-      const result = await sendToTelegram(formData, 'Кнопка Консультация в хедере')
+      const result = await sendToTelegram(formData, 'Форма консультации')
       
       if (result.success) {
+        setIsSuccess(true)
         setNotification({ 
           show: true, 
-          message: 'Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время!', 
+          message: getSuccessMessage('consultation'), 
           type: 'success' 
         })
         setFormData({ name: '', phone: '', agreement: false })
-        setTimeout(() => onClose(), 1000)
+        setErrors({})
+        
+        setTimeout(() => {
+          onClose()
+          setIsSuccess(false)
+        }, 3000)
       } else {
         setNotification({ 
           show: true, 
-          message: 'Ошибка отправки. Попробуйте позже.', 
+          message: '❌ Произошла ошибка при отправке. Попробуйте еще раз или свяжитесь с нами по телефону.', 
           type: 'error' 
         })
       }
+    } catch (error) {
+      setNotification({ 
+        show: true, 
+        message: '❌ Произошла ошибка при отправке. Проверьте подключение к интернету.', 
+        type: 'error' 
+      })
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -82,7 +102,7 @@ export default function ConsultationForm({ isOpen, onClose }) {
         onClose={() => setNotification({ ...notification, show: false })}
       />
       <div className="consultation-overlay" onClick={onClose}>
-        <div className="consultation-modal" onClick={(e) => e.stopPropagation()}>
+        <div className={`consultation-modal ${isSuccess ? 'success-animation' : ''}`} onClick={(e) => e.stopPropagation()}>
         <button 
           className="consultation-close"
           onClick={onClose}
@@ -92,8 +112,27 @@ export default function ConsultationForm({ isOpen, onClose }) {
         </button>
         
         <h2 className="consultation-title">
-          Получить консультацию
+          {isSuccess ? '✅ Заявка отправлена!' : '📞 Получить консультацию'}
         </h2>
+        
+        {isSuccess && (
+          <div style={{
+            textAlign: 'center',
+            padding: '1rem',
+            background: 'linear-gradient(135deg, #10b981, #059669)',
+            color: 'white',
+            borderRadius: '0.75rem',
+            marginBottom: '1rem',
+            boxShadow: '0 4px 12px rgba(16, 185, 129, 0.3)'
+          }}>
+            <p style={{ margin: 0, fontSize: '1.1rem', fontWeight: '600' }}>
+              Спасибо за обращение! 🚀
+            </p>
+            <p style={{ margin: '0.5rem 0 0 0', fontSize: '0.9rem', opacity: '0.9' }}>
+              Мы уже получили вашу заявку и скоро с вами свяжемся
+            </p>
+          </div>
+        )}
         
         <form className="consultation-form" onSubmit={handleSubmit}>
           <div className="form-group">
@@ -108,7 +147,7 @@ export default function ConsultationForm({ isOpen, onClose }) {
               value={formData.name}
               onChange={handleChange}
               placeholder="Введите ваше имя"
-              maxLength="10"
+              maxLength="20"
               required
             />
             {errors.name && <span className="error-text">{errors.name}</span>}
@@ -150,9 +189,24 @@ export default function ConsultationForm({ isOpen, onClose }) {
           <button 
             type="submit" 
             className="submit-btn"
-            disabled={!formData.name || !formData.phone || !formData.agreement || errors.name || errors.phone}
+            disabled={!formData.name || !formData.phone || !formData.agreement || errors.name || errors.phone || isSubmitting || isSuccess}
           >
-            Отправить заявку
+            {isSubmitting ? (
+              <>
+                <span style={{ display: 'inline-block', marginRight: '0.5rem' }}>⏳</span>
+                Отправляем...
+              </>
+            ) : isSuccess ? (
+              <>
+                <span style={{ display: 'inline-block', marginRight: '0.5rem' }}>✅</span>
+                Отправлено!
+              </>
+            ) : (
+              <>
+                <span style={{ display: 'inline-block', marginRight: '0.5rem' }}>📤</span>
+                Отправить заявку
+              </>
+            )}
           </button>
         </form>
         </div>

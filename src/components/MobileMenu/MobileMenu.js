@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'
 import './MobileMenu.css'
 
-export default function MobileMenu({ navItems, onConsultationClick }) {
+export default function MobileMenu({ navItems }) {
   const [isOpen, setIsOpen] = useState(false)
   const [isClosing, setIsClosing] = useState(false)
   const [timeoutIds, setTimeoutIds] = useState([])
@@ -35,6 +35,8 @@ export default function MobileMenu({ navItems, onConsultationClick }) {
     const timeoutId = setTimeout(() => {
       setIsOpen(false)
       setIsClosing(false)
+      // Удаляем выполненный таймер
+      setTimeoutIds(prev => prev.filter(id => id !== timeoutId))
     }, 250)
     setTimeoutIds(prev => [...prev, timeoutId])
   }
@@ -45,6 +47,8 @@ export default function MobileMenu({ navItems, onConsultationClick }) {
       const timeoutId = setTimeout(() => {
         // Безопасный вызов функции без eval
         item.onClick()
+        // Удаляем выполненный таймер
+        setTimeoutIds(prev => prev.filter(id => id !== timeoutId))
       }, 250)
       setTimeoutIds(prev => [...prev, timeoutId])
     } else {

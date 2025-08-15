@@ -7,6 +7,8 @@ export const products = [
     productivity: "20 л/мин",
     power: "220/380 V",
     motorPower: "4 кВт",
+    weight: "280 кг",
+    distance: "до 25 м",
     efficiency: "до 500 м²/смена",
     price: "от 650 000 ₽",
     description:
@@ -35,6 +37,8 @@ export const products = [
     power: "230 V",
     motorPower: "2.2 кВт",
     weight: "141,5 кг",
+    distance: "до 20 м",
+    efficiency: "до 300 м²/смена",
     price: "408 000 ₽",
     description:
       "Компактная модель с шнековой парой PFT B4-2L. Оптимальное соотношение цены и качества.",
@@ -48,6 +52,8 @@ export const products = [
     power: "230 V",
     motorPower: "2.2 кВт",
     weight: "149 кг",
+    distance: "до 22 м",
+    efficiency: "до 350 м²/смена",
     price: "428 000 ₽",
     description:
       "Улучшенная модель с шнековой парой PFT SD6-3 Slim. Повышенная производительность и надежность.",

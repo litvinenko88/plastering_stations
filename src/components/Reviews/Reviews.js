@@ -67,7 +67,7 @@ export default function Reviews() {
         
         <div className="reviews-grid">
           {reviews.map((review, index) => (
-            <div key={index} className="review-card">
+            <div key={`${review.name}-${review.product}`} className="review-card">
               <div className="review-header">
                 <div className="review-avatar">{review.avatar}</div>
                 <div className="review-info">
@@ -78,7 +78,7 @@ export default function Reviews() {
               
               <div className="review-stars">
                 {[...Array(5)].map((_, i) => (
-                  <span key={i} style={{ color: '#ffc107' }}>⭐</span>
+                  <span key={`star-${i}`} className="review-star">⭐</span>
                 ))}
               </div>
               

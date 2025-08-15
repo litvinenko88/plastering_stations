@@ -3,68 +3,173 @@
   top: 20px;
   right: 20px;
   z-index: 10000;
-  max-width: 400px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  animation: slideIn 0.3s ease-out;
+  max-width: 420px;
+  border-radius: 1rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  animation: notificationIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  overflow: hidden;
+  position: relative;
+}
+
+.notification::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.4));
+  animation: progressBar 3s linear;
 }
 
 .notification.success {
-  background: linear-gradient(135deg, #10b981, #059669);
+  background: linear-gradient(135deg, #10b981, #059669, #047857);
   color: white;
+  box-shadow: 
+    0 20px 25px -5px rgba(16, 185, 129, 0.3),
+    0 10px 10px -5px rgba(16, 185, 129, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.notification.success::before {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.5));
 }
 
 .notification.error {
-  background: linear-gradient(135deg, #ef4444, #dc2626);
+  background: linear-gradient(135deg, #ef4444, #dc2626, #b91c1c);
   color: white;
+  box-shadow: 
+    0 20px 25px -5px rgba(239, 68, 68, 0.3),
+    0 10px 10px -5px rgba(239, 68, 68, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.notification.error::before {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.5));
 }
 
 .notification-content {
   display: flex;
-  align-items: center;
-  padding: 16px;
-  gap: 12px;
+  align-items: flex-start;
+  padding: 1.25rem;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
 }
 
 .notification-icon {
-  font-size: 20px;
+  font-size: 1.5rem;
   flex-shrink: 0;
+  animation: iconBounce 0.6s ease-out 0.2s;
+  transform: scale(0);
+  animation-fill-mode: forwards;
 }
 
 .notification-message {
   flex: 1;
-  font-size: 14px;
+  font-size: 0.95rem;
   font-weight: 500;
+  line-height: 1.5;
+  animation: textSlide 0.4s ease-out 0.3s;
+  opacity: 0;
+  transform: translateY(10px);
+  animation-fill-mode: forwards;
 }
 
 .notification-close {
-  background: none;
-  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   color: inherit;
-  font-size: 20px;
+  font-size: 1.25rem;
   cursor: pointer;
   padding: 0;
-  width: 24px;
-  height: 24px;
+  width: 2rem;
+  height: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  transition: background-color 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+  backdrop-filter: blur(10px);
 }
 
 .notification-close:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.1) rotate(90deg);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-@keyframes slideIn {
-  from {
-    transform: translateX(100%);
+@keyframes notificationIn {
+  0% {
+    transform: translateX(100%) scale(0.8);
     opacity: 0;
   }
-  to {
-    transform: translateX(0);
+  60% {
+    transform: translateX(-10px) scale(1.02);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateX(0) scale(1);
     opacity: 1;
+  }
+}
+
+@keyframes iconBounce {
+  0% {
+    transform: scale(0) rotate(-180deg);
+  }
+  60% {
+    transform: scale(1.2) rotate(10deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes textSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes progressBar {
+  0% {
+    width: 100%;
+    opacity: 1;
+  }
+  90% {
+    width: 10%;
+    opacity: 1;
+  }
+  100% {
+    width: 0%;
+    opacity: 0;
+  }
+}
+
+.notification.closing {
+  animation: notificationOut 0.3s ease-in forwards;
+}
+
+@keyframes notificationOut {
+  0% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%) scale(0.8);
+    opacity: 0;
   }
 }
 

@@ -7,6 +7,7 @@ export default function OrderModal({ product, isOpen, onClose }) {
   const [formData, setFormData] = useState({ name: '', phone: '', agreed: false })
   const [errors, setErrors] = useState({ name: '', phone: '' })
   const [notification, setNotification] = useState({ show: false, message: '', type: 'success' })
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   useEffect(() => {
     if (isOpen) {
@@ -56,29 +57,41 @@ export default function OrderModal({ product, isOpen, onClose }) {
       return
     }
     
-    const { sendToTelegram } = await import('../../utils/telegram')
-    const orderData = {
-      name: formData.name,
-      phone: formData.phone,
-      message: `Интерес к модели: ${product.name} - ${product.price}`
-    }
+    setIsSubmitting(true)
     
-    const result = await sendToTelegram(orderData, `Заказ из карточки товара: ${product.name}`)
-    
-    if (result.success) {
+    try {
+      const { sendToTelegram } = await import('../../utils/telegram')
+      const orderData = {
+        name: formData.name,
+        phone: formData.phone,
+        message: `Интерес к модели: ${product.name} - ${product.price}`
+      }
+      
+      const result = await sendToTelegram(orderData, `Заказ из карточки товара: ${product.name}`)
+      
+      if (result.success) {
+        setNotification({ 
+          show: true, 
+          message: '🎉 Заявка отправлена! Наш специалист свяжется с вами для консультации по выбранной модели!', 
+          type: 'success' 
+        })
+        setFormData({ name: '', phone: '', agreed: false })
+        setTimeout(() => onClose(), 3000)
+      } else {
+        setNotification({ 
+          show: true, 
+          message: '❌ Произошла ошибка при отправке. Попробуйте еще раз или позвоните нам.', 
+          type: 'error' 
+        })
+      }
+    } catch (error) {
       setNotification({ 
         show: true, 
-        message: 'Спасибо! Ваша заявка отправлена. Мы свяжемся с вами!', 
-        type: 'success' 
-      })
-      setFormData({ name: '', phone: '', agreed: false })
-      setTimeout(() => onClose(), 2000)
-    } else {
-      setNotification({ 
-        show: true, 
-        message: 'Ошибка отправки. Попробуйте позже.', 
+        message: '❌ Ошибка соединения. Проверьте интернет и попробуйте снова.', 
         type: 'error' 
       })
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -168,9 +181,9 @@ export default function OrderModal({ product, isOpen, onClose }) {
                   <button 
                     type="submit" 
                     className="submit-btn"
-                    disabled={!formData.name || !formData.phone || !formData.agreed || errors.name || errors.phone}
+                    disabled={!formData.name || !formData.phone || !formData.agreed || errors.name || errors.phone || isSubmitting}
                   >
-                    Отправить заявку
+                    {isSubmitting ? '⏳ Отправляем...' : '📤 Отправить заявку'}
                   </button>
                 </div>
               </form>

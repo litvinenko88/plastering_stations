@@ -5,17 +5,21 @@ export const metadata = {
     default: "Штукатурные станции купить | Штукатурная станция 220 / 380 В с доставка по РФ и СНГ",
     template: "%s | NOVA - Штукатурные станции"
   },
-  description: "Профессиональные штукатурные станции для механизированного нанесения смесей ✅ Выгодные предложения на штукатурное оборудование ✅ Все типы и модели станций в наличии ✅ Быстрая доставка ✅Собственное производство. Закажи машинную штукатурку с гарантией качества!",
+  description: "Профессиональные штукатурные станции PERSONIYA от производителя. 12 моделей 220/380В, гарантия 3 года, доставка по РФ. Механизированная штукатурка с производительностью до 500 м²/смена.",
   keywords: [
     "штукатурные станции",
     "штукатурная станция купить",
     "PERSONIYA",
+    "NOVA",
     "машинная штукатурка",
     "штукатурное оборудование",
     "механизированная штукатурка",
     "станция 220 вольт",
     "станция 380 вольт",
-    "производство штукатурных станций"
+    "производство штукатурных станций",
+    "шнековые насосы",
+    "растворонасос",
+    "ставрополь"
   ],
   authors: [{ name: "NOVA" }],
   creator: "NOVA",
@@ -70,8 +74,11 @@ export default function RootLayout({ children }) {
         <meta charSet="utf-8" />
 
         <meta name="theme-color" content="#7d010b" />
-        <meta name="format-detection" content="telephone=no" />
-        <link rel="preload" href="/videos/fon_video.mp4" as="video" type="video/mp4" />
+        <meta name="format-detection" content="telephone=yes" />
+        <meta name="geo.region" content="RU-STA" />
+        <meta name="geo.placename" content="Ставрополь" />
+        <meta name="ICBM" content="45.0428,41.9734" />
+        <link rel="preload" href="/videos/fon_video.mp4" as="video" type="video/mp4" crossOrigin="anonymous" />
         <link rel="preload" href="/images/products/Persona 220_380_1 (1).webp" as="image" />
         <link rel="preconnect" href="https://rutube.ru" />
         <link rel="dns-prefetch" href="https://rutube.ru" />

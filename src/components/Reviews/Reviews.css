@@ -99,6 +99,10 @@
   margin-bottom: 1rem;
 }
 
+.review-star {
+  color: #ffc107;
+}
+
 .review-text {
   font-size: var(--font-base);
   color: var(--color-gray-dark);

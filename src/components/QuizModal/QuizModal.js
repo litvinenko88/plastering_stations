@@ -10,6 +10,7 @@ export default function QuizModal({ isOpen, onClose }) {
   const [formData, setFormData] = useState({ name: '', phone: '', agreed: false })
   const [errors, setErrors] = useState({ name: '', phone: '' })
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [notification, setNotification] = useState({ show: false, message: '', type: 'success' })
 
   const questions = [
@@ -170,29 +171,42 @@ export default function QuizModal({ isOpen, onClose }) {
       return
     }
     
-    const { sendToTelegram } = await import('../../utils/telegram')
-    const quizData = {
-      name: formData.name,
-      phone: formData.phone,
-      message: formatQuizResults()
-    }
+    setIsSubmitting(true)
     
-    const result = await sendToTelegram(quizData, 'Квиз подбора станции')
-    
-    if (result.success) {
+    try {
+      const { sendToTelegram } = await import('../../utils/telegram')
+      const quizData = {
+        name: formData.name,
+        phone: formData.phone,
+        message: formatQuizResults()
+      }
+      
+      const result = await sendToTelegram(quizData, 'Квиз подбора станции')
+      
+      if (result.success) {
+        setIsSubmitted(true)
+        setNotification({ 
+          show: true, 
+          message: '🎉 Спасибо! Мы получили ваши ответы и свяжемся с персональным предложением!', 
+          type: 'success' 
+        })
+        setFormData({ name: '', phone: '', agreed: false })
+        setTimeout(() => handleClose(), 3000)
+      } else {
+        setNotification({ 
+          show: true, 
+          message: '❌ Произошла ошибка при отправке. Попробуйте еще раз или позвоните нам.', 
+          type: 'error' 
+        })
+      }
+    } catch (error) {
       setNotification({ 
         show: true, 
-        message: 'Спасибо! Ваша заявка отправлена. Мы свяжемся с вами!', 
-        type: 'success' 
-      })
-      setFormData({ name: '', phone: '', agreed: false })
-      setTimeout(() => handleClose(), 2000)
-    } else {
-      setNotification({ 
-        show: true, 
-        message: 'Ошибка отправки. Попробуйте позже.', 
+        message: '❌ Ошибка соединения. Проверьте интернет и попробуйте снова.', 
         type: 'error' 
       })
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -299,9 +313,9 @@ export default function QuizModal({ isOpen, onClose }) {
                   
                   <button 
                     type="submit" 
-                    disabled={!formData.name || !formData.phone || !formData.agreed || errors.name || errors.phone}
+                    disabled={!formData.name || !formData.phone || !formData.agreed || errors.name || errors.phone || isSubmitting}
                   >
-                    Отправить заявку
+                    {isSubmitting ? '⏳ Отправляем...' : '📤 Отправить заявку'}
                   </button>
                 </form>
               </div>

@@ -5,10 +5,12 @@ import './Counter.css'
 
 export default function Counter() {
   const [salesCount, setSalesCount] = useState(147)
-  const [actionDays, setActionDays] = useState(5)
-  const [actionHours, setActionHours] = useState(14)
-  const [actionMinutes, setActionMinutes] = useState(32)
-  const [actionSeconds, setActionSeconds] = useState(45)
+  const [timer, setTimer] = useState({
+    days: 5,
+    hours: 14,
+    minutes: 32,
+    seconds: 45
+  })
 
   useEffect(() => {
     // Счетчик продаж (увеличивается каждые 30 секунд)
@@ -18,10 +20,7 @@ export default function Counter() {
 
     // Подписка на глобальный таймер
     const handleTimerUpdate = (time) => {
-      setActionDays(time.days)
-      setActionHours(time.hours)
-      setActionMinutes(time.minutes)
-      setActionSeconds(time.seconds)
+      setTimer(time)
     }
 
     globalTimer.subscribe(handleTimerUpdate)
@@ -72,7 +71,7 @@ export default function Counter() {
           
           <div className="counter-item">
             <span className="counter-number">
-              {actionDays}д {actionHours.toString().padStart(2, '0')}:{actionMinutes.toString().padStart(2, '0')}:{actionSeconds.toString().padStart(2, '0')}
+              {timer.days}д {timer.hours.toString().padStart(2, '0')}:{timer.minutes.toString().padStart(2, '0')}:{timer.seconds.toString().padStart(2, '0')}
             </span>
             <div className="counter-label">
               До окончания <br />

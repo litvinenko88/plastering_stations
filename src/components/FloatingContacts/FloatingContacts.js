@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { globalTimer } from '../../utils/timer'
+import Notification from '../Notification/Notification'
 import './FloatingContacts.css'
 
 export default function FloatingContacts() {
@@ -13,7 +14,9 @@ export default function FloatingContacts() {
   const [actionHours, setActionHours] = useState(14)
   const [actionDays, setActionDays] = useState(5)
   const [userInteracted, setUserInteracted] = useState(false)
-  const [showSuccessNotification, setShowSuccessNotification] = useState(false)
+  const [notification, setNotification] = useState({ show: false, message: '', type: 'success' })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [formData, setFormData] = useState({ name: '', phone: '' })
   const [offerShownManually, setOfferShownManually] = useState(false)
 
   useEffect(() => {
@@ -27,6 +30,9 @@ export default function FloatingContacts() {
 
     globalTimer.subscribe(handleTimerUpdate)
 
+    // Массив для хранения всех таймеров
+    const timers = []
+
     // Первое сообщение через 15 секунд
     const firstTimer = setTimeout(() => {
       const firstMessage = {
@@ -38,11 +44,11 @@ export default function FloatingContacts() {
       setShowOperatorMessage(true)
       
       // Скрыть через 8 секунд
-      setTimeout(() => {
+      const hideTimer = setTimeout(() => {
         setShowOperatorMessage(false)
         
         // Второе сообщение через 20 секунд (только если не показано вручную)
-        setTimeout(() => {
+        const secondTimer = setTimeout(() => {
           if (!offerShownManually) {
             const secondMessage = {
               id: 2,
@@ -53,21 +59,26 @@ export default function FloatingContacts() {
             setShowSpecialOffer(true)
             
             // Скрыть через 10 секунд только если пользователь не взаимодействовал
-            setTimeout(() => {
+            const autoHideTimer = setTimeout(() => {
               if (!userInteracted) {
                 setShowSpecialOffer(false)
               }
             }, 10000)
+            timers.push(autoHideTimer)
           }
         }, 20000)
+        timers.push(secondTimer)
       }, 8000)
+      timers.push(hideTimer)
     }, 15000)
+    timers.push(firstTimer)
 
     return () => {
-      clearTimeout(firstTimer)
+      // Очищаем все таймеры
+      timers.forEach(timer => clearTimeout(timer))
       globalTimer.unsubscribe(handleTimerUpdate)
     }
-  }, [])
+  }, [offerShownManually, userInteracted])
 
   const closeOperatorMessage = () => {
     setShowOperatorMessage(false)
@@ -87,15 +98,64 @@ export default function FloatingContacts() {
     setShowChat(false)
   }
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault()
-    setShowSpecialOffer(false)
-    setShowSuccessNotification(true)
     
-    // Скрыть уведомление через 3 секунды
-    setTimeout(() => {
-      setShowSuccessNotification(false)
-    }, 3000)
+    if (!formData.name.trim() || !formData.phone.trim()) {
+      setNotification({
+        show: true,
+        message: 'Пожалуйста, заполните все поля',
+        type: 'error'
+      })
+      return
+    }
+    
+    setIsSubmitting(true)
+    
+    try {
+      const { sendToTelegram } = await import('../../utils/telegram')
+      const result = await sendToTelegram(formData, 'Специальное предложение (Плавающие контакты)')
+      
+      if (result.success) {
+        setNotification({
+          show: true,
+          message: '🎉 Отлично! Ваша заявка принята. Наш менеджер свяжется с вами в течение 10 минут с выгодным предложением!',
+          type: 'success'
+        })
+        setFormData({ name: '', phone: '' })
+        setShowSpecialOffer(false)
+        setShowChat(false)
+      } else {
+        setNotification({
+          show: true,
+          message: '❌ Произошла ошибка при отправке. Попробуйте еще раз или свяжитесь с нами по телефону.',
+          type: 'error'
+        })
+      }
+    } catch (error) {
+      setNotification({
+        show: true,
+        message: '❌ Ошибка соединения. Проверьте интернет и попробуйте снова.',
+        type: 'error'
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+  
+  const handleInputChange = (e) => {
+    const { name, value } = e.target
+    let newValue = value
+    
+    if (name === 'name') {
+      newValue = value.slice(0, 20)
+    }
+    
+    if (name === 'phone') {
+      newValue = value.replace(/[^+\d]/g, '').slice(0, 13)
+    }
+    
+    setFormData(prev => ({ ...prev, [name]: newValue }))
   }
 
   const handleFormInteraction = () => {
@@ -141,14 +201,12 @@ export default function FloatingContacts() {
         </div>
       )}
 
-      {showSuccessNotification && (
-        <div className="success-notification">
-          <div className="success-icon"></div>
-          <div className="success-text">
-            Данные успешно отправлены!
-          </div>
-        </div>
-      )}
+      <Notification 
+        message={notification.message}
+        type={notification.type}
+        isVisible={notification.show}
+        onClose={() => setNotification({ ...notification, show: false })}
+      />
 
       {showSpecialOffer && (
         <div className="special-offer">
@@ -166,17 +224,29 @@ export default function FloatingContacts() {
             <form onSubmit={handleFormSubmit}>
               <input 
                 type="text" 
+                name="name"
                 placeholder="Ваше имя" 
-                required 
+                value={formData.name}
+                onChange={handleInputChange}
                 onFocus={handleFormInteraction}
+                maxLength="20"
+                required 
+                disabled={isSubmitting}
               />
               <input 
                 type="tel" 
-                placeholder="Ваш телефон" 
-                required 
+                name="phone"
+                placeholder="+7 (999) 123-45-67" 
+                value={formData.phone}
+                onChange={handleInputChange}
                 onFocus={handleFormInteraction}
+                maxLength="13"
+                required 
+                disabled={isSubmitting}
               />
-              <button type="submit">Получить предложение</button>
+              <button type="submit" disabled={isSubmitting || !formData.name.trim() || !formData.phone.trim()}>
+                {isSubmitting ? '⏳ Отправляем...' : '🎁 Получить предложение'}
+              </button>
             </form>
           </div>
         </div>
@@ -205,17 +275,29 @@ export default function FloatingContacts() {
               <form onSubmit={handleFormSubmit}>
                 <input 
                   type="text" 
+                  name="name"
                   placeholder="Ваше имя" 
-                  required 
+                  value={formData.name}
+                  onChange={handleInputChange}
                   onFocus={handleFormInteraction}
+                  maxLength="20"
+                  required 
+                  disabled={isSubmitting}
                 />
                 <input 
                   type="tel" 
-                  placeholder="Ваш телефон" 
-                  required 
+                  name="phone"
+                  placeholder="+7 (999) 123-45-67" 
+                  value={formData.phone}
+                  onChange={handleInputChange}
                   onFocus={handleFormInteraction}
+                  maxLength="13"
+                  required 
+                  disabled={isSubmitting}
                 />
-                <button type="submit">Получить предложение</button>
+                <button type="submit" disabled={isSubmitting || !formData.name.trim() || !formData.phone.trim()}>
+                  {isSubmitting ? '⏳ Отправляем...' : '🎁 Получить предложение'}
+                </button>
               </form>
             </div>
           </div>

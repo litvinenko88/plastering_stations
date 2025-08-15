@@ -7,6 +7,7 @@ import FloatingContacts from '../components/FloatingContacts/FloatingContacts'
 import ScrollToTop from '../components/ScrollToTop/ScrollToTop'
 import AdvantageCard from '../components/AdvantageCard/AdvantageCard'
 import CatalogCard from '../components/CatalogCard/CatalogCard'
+import Notification from '../components/Notification/Notification'
 
 import ProductCard from '../components/ProductCard/ProductCard'
 import Comparison from '../components/Comparison/Comparison'
@@ -22,6 +23,9 @@ export default function Home() {
   const [isComparisonOpen, setIsComparisonOpen] = useState(false)
   const [selectedProduct, setSelectedProduct] = useState(null)
   const [isProductModalOpen, setIsProductModalOpen] = useState(false)
+  const [contactFormData, setContactFormData] = useState({ name: '', phone: '', agreement: false })
+  const [contactNotification, setContactNotification] = useState({ show: false, message: '', type: 'success' })
+  const [isContactSubmitting, setIsContactSubmitting] = useState(false)
   
   useEffect(() => {
     const handleOpenQuiz = () => setIsQuizOpen(true)
@@ -544,38 +548,78 @@ export default function Home() {
                   
                   <form onSubmit={async (e) => {
                     e.preventDefault()
-                    const formData = new FormData(e.target)
-                    const data = {
-                      name: formData.get('name'),
-                      phone: formData.get('phone')
+                    
+                    if (!contactFormData.name.trim() || !contactFormData.phone.trim() || !contactFormData.agreement) {
+                      setContactNotification({
+                        show: true,
+                        message: 'Пожалуйста, заполните все поля и дайте согласие на обработку данных',
+                        type: 'error'
+                      })
+                      return
                     }
                     
-                    const { sendToTelegram } = await import('../utils/telegram')
-                    const result = await sendToTelegram(data, 'Форма контактов')
+                    setIsContactSubmitting(true)
                     
-                    if (result.success) {
-                      alert('Спасибо! Ваша заявка отправлена.')
-                      e.target.reset()
-                    } else {
-                      alert('Ошибка отправки. Попробуйте позже.')
+                    try {
+                      const { sendToTelegram } = await import('../utils/telegram')
+                      const result = await sendToTelegram(contactFormData, 'Форма контактов (Основная страница)')
+                      
+                      if (result.success) {
+                        setContactNotification({
+                          show: true,
+                          message: '🎉 Отлично! Ваша заявка успешно отправлена. Мы свяжемся с вами в течение 15 минут!',
+                          type: 'success'
+                        })
+                        setContactFormData({ name: '', phone: '', agreement: false })
+                      } else {
+                        setContactNotification({
+                          show: true,
+                          message: '❌ Произошла ошибка при отправке. Попробуйте еще раз или позвоните нам.',
+                          type: 'error'
+                        })
+                      }
+                    } catch (error) {
+                      setContactNotification({
+                        show: true,
+                        message: '❌ Ошибка соединения. Проверьте интернет и попробуйте снова.',
+                        type: 'error'
+                      })
+                    } finally {
+                      setIsContactSubmitting(false)
                     }
                   }} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                     <div>
                       <input 
                         type="text" 
                         name="name"
-                        placeholder="Ваше имя"
+                        placeholder="Ваше имя *"
+                        value={contactFormData.name}
+                        onChange={(e) => setContactFormData(prev => ({ ...prev, name: e.target.value.slice(0, 20) }))}
+                        maxLength="20"
                         required
+                        disabled={isContactSubmitting}
                         style={{
                           width: '100%',
-                          padding: '1rem',
-                          border: '2px solid var(--color-gray-200)',
-                          borderRadius: '0.5rem',
+                          padding: '1rem 1.25rem',
+                          border: '2px solid #e2e8f0',
+                          borderRadius: '0.75rem',
                           fontSize: 'var(--font-base)',
-                          transition: 'border-color 0.3s ease'
+                          background: 'linear-gradient(145deg, #ffffff, #f8f9fa)',
+                          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                          boxShadow: 'inset 0 1px 3px rgba(0, 0, 0, 0.1)'
                         }}
-                        onFocus={(e) => e.target.style.borderColor = 'var(--color-primary)'}
-                        onBlur={(e) => e.target.style.borderColor = 'var(--color-gray-200)'}
+                        onFocus={(e) => {
+                          e.target.style.borderColor = 'var(--color-primary)'
+                          e.target.style.boxShadow = 'inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 0 3px rgba(125, 1, 11, 0.1), 0 4px 12px rgba(125, 1, 11, 0.15)'
+                          e.target.style.transform = 'translateY(-1px)'
+                          e.target.style.background = '#ffffff'
+                        }}
+                        onBlur={(e) => {
+                          e.target.style.borderColor = '#e2e8f0'
+                          e.target.style.boxShadow = 'inset 0 1px 3px rgba(0, 0, 0, 0.1)'
+                          e.target.style.transform = 'translateY(0)'
+                          e.target.style.background = 'linear-gradient(145deg, #ffffff, #f8f9fa)'
+                        }}
                       />
                     </div>
                     
@@ -583,26 +627,59 @@ export default function Home() {
                       <input 
                         type="tel" 
                         name="phone"
-                        placeholder="Ваш телефон"
+                        placeholder="+7 (999) 123-45-67 *"
+                        value={contactFormData.phone}
+                        onChange={(e) => setContactFormData(prev => ({ ...prev, phone: e.target.value.replace(/[^+\d]/g, '').slice(0, 13) }))}
+                        maxLength="13"
                         required
+                        disabled={isContactSubmitting}
                         style={{
                           width: '100%',
-                          padding: '1rem',
-                          border: '2px solid var(--color-gray-200)',
-                          borderRadius: '0.5rem',
+                          padding: '1rem 1.25rem',
+                          border: '2px solid #e2e8f0',
+                          borderRadius: '0.75rem',
                           fontSize: 'var(--font-base)',
-                          transition: 'border-color 0.3s ease'
+                          background: 'linear-gradient(145deg, #ffffff, #f8f9fa)',
+                          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                          boxShadow: 'inset 0 1px 3px rgba(0, 0, 0, 0.1)'
                         }}
-                        onFocus={(e) => e.target.style.borderColor = 'var(--color-primary)'}
-                        onBlur={(e) => e.target.style.borderColor = 'var(--color-gray-200)'}
+                        onFocus={(e) => {
+                          e.target.style.borderColor = 'var(--color-primary)'
+                          e.target.style.boxShadow = 'inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 0 3px rgba(125, 1, 11, 0.1), 0 4px 12px rgba(125, 1, 11, 0.15)'
+                          e.target.style.transform = 'translateY(-1px)'
+                          e.target.style.background = '#ffffff'
+                        }}
+                        onBlur={(e) => {
+                          e.target.style.borderColor = '#e2e8f0'
+                          e.target.style.boxShadow = 'inset 0 1px 3px rgba(0, 0, 0, 0.1)'
+                          e.target.style.transform = 'translateY(0)'
+                          e.target.style.background = 'linear-gradient(145deg, #ffffff, #f8f9fa)'
+                        }}
                       />
                     </div>
                     
-                    <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
+                    <div style={{ 
+                      display: 'flex', 
+                      alignItems: 'flex-start', 
+                      gap: '1rem',
+                      background: 'linear-gradient(145deg, #f8f9fa, #e9ecef)',
+                      padding: '1rem',
+                      borderRadius: '0.75rem',
+                      border: '1px solid rgba(125, 1, 11, 0.1)'
+                    }}>
                       <input 
                         type="checkbox" 
                         id="privacy" 
-                        style={{ marginTop: '0.25rem' }}
+                        checked={contactFormData.agreement}
+                        onChange={(e) => setContactFormData(prev => ({ ...prev, agreement: e.target.checked }))}
+                        disabled={isContactSubmitting}
+                        style={{ 
+                          width: '1.25rem',
+                          height: '1.25rem',
+                          accentColor: 'var(--color-primary)',
+                          marginTop: '0'
+                        }}
+                        required
                       />
                       <label 
                         htmlFor="privacy" 
@@ -613,27 +690,56 @@ export default function Home() {
                           cursor: 'pointer'
                         }}
                       >
-                        Согласен на обработку персональных данных
+                        Я соглашаюсь на обработку персональных данных в соответствии с <a href="/privacy" style={{ color: 'var(--color-primary)' }}>политикой конфиденциальности</a> *
                       </label>
                     </div>
                     
                     <button 
                       type="submit"
+                      disabled={isContactSubmitting || !contactFormData.name.trim() || !contactFormData.phone.trim() || !contactFormData.agreement}
                       style={{
-                        padding: '1rem 2rem',
-                        background: 'linear-gradient(135deg, var(--color-primary), #a00109)',
+                        padding: '1rem 2.5rem',
+                        background: isContactSubmitting || !contactFormData.name.trim() || !contactFormData.phone.trim() || !contactFormData.agreement 
+                          ? 'linear-gradient(135deg, #9ca3af, #6b7280)' 
+                          : 'linear-gradient(135deg, var(--color-primary), #8b0000)',
                         color: 'var(--color-white)',
                         border: 'none',
-                        borderRadius: '0.5rem',
+                        borderRadius: '0.75rem',
                         fontSize: 'var(--font-lg)',
                         fontWeight: '600',
-                        cursor: 'pointer',
-                        transition: 'all 0.3s ease'
+                        cursor: isContactSubmitting || !contactFormData.name.trim() || !contactFormData.phone.trim() || !contactFormData.agreement ? 'not-allowed' : 'pointer',
+                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                        position: 'relative',
+                        overflow: 'hidden',
+                        boxShadow: isContactSubmitting || !contactFormData.name.trim() || !contactFormData.phone.trim() || !contactFormData.agreement 
+                          ? 'none' 
+                          : '0 4px 15px rgba(125, 1, 11, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
+                        opacity: isContactSubmitting || !contactFormData.name.trim() || !contactFormData.phone.trim() || !contactFormData.agreement ? 0.6 : 1
                       }}
-                      onMouseEnter={(e) => e.target.style.transform = 'translateY(-2px)'}
-                      onMouseLeave={(e) => e.target.style.transform = 'translateY(0)'}
+                      onMouseEnter={(e) => {
+                        if (!isContactSubmitting && contactFormData.name.trim() && contactFormData.phone.trim() && contactFormData.agreement) {
+                          e.target.style.transform = 'translateY(-2px) scale(1.02)'
+                          e.target.style.boxShadow = '0 8px 25px rgba(125, 1, 11, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3)'
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (!isContactSubmitting && contactFormData.name.trim() && contactFormData.phone.trim() && contactFormData.agreement) {
+                          e.target.style.transform = 'translateY(0) scale(1)'
+                          e.target.style.boxShadow = '0 4px 15px rgba(125, 1, 11, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
+                        }
+                      }}
                     >
-                      Отправить
+                      {isContactSubmitting ? (
+                        <>
+                          <span style={{ display: 'inline-block', marginRight: '0.5rem' }}>⏳</span>
+                          Отправляем...
+                        </>
+                      ) : (
+                        <>
+                          <span style={{ display: 'inline-block', marginRight: '0.5rem' }}>📤</span>
+                          Отправить заявку
+                        </>
+                      )}
                     </button>
                   </form>
                 </div>
@@ -761,6 +867,14 @@ export default function Home() {
           </div>
         </footer>
 
+        {/* Уведомления */}
+        <Notification 
+          message={contactNotification.message}
+          type={contactNotification.type}
+          isVisible={contactNotification.show}
+          onClose={() => setContactNotification({ ...contactNotification, show: false })}
+        />
+        
         {/* Плавающие контакты */}
         <FloatingContacts />
         

@@ -68,22 +68,10 @@ export default function ProductCard({ product, onDetailsClick }) {
         <div className="product-actions">
           <button 
             className="product-btn primary"
-            onClick={async () => {
-              const name = prompt('Введите ваше имя:')
-              const phone = prompt('Введите ваш телефон:')
-              
-              if (name && phone) {
-                const { sendToTelegram } = await import('../LazyImage/../../utils/telegram')
-                const result = await sendToTelegram(
-                  { name, phone, message: `Интерес к модели: ${product.name}` }, 
-                  'Кнопка Заказать'
-                )
-                
-                if (result.success) {
-                  alert('Спасибо! Мы свяжемся с вами.')
-                } else {
-                  alert('Ошибка отправки. Попробуйте позже.')
-                }
+            onClick={() => {
+              // Открываем модальное окно с деталями товара
+              if (onDetailsClick) {
+                onDetailsClick(product)
               }
             }}
           >
