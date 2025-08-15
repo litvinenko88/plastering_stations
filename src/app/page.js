@@ -991,7 +991,8 @@ export default function Home() {
           onClose={() => {
             setIsQuizOpen(false)
             // Не сбрасываем hasQuizTriggered, чтобы квиз не открывался повторно
-          }} 
+          }}
+          showAutoTitle={hasQuizTriggered}
         />
         
         {/* Модальное окно сравнения */}

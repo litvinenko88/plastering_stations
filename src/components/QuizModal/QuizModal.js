@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import './QuizModal.css'
 import Notification from '../Notification/Notification'
 
-export default function QuizModal({ isOpen, onClose }) {
+export default function QuizModal({ isOpen, onClose, showAutoTitle = false }) {
   const [currentStep, setCurrentStep] = useState(0)
   const [answers, setAnswers] = useState({})
   const [showForm, setShowForm] = useState(false)
@@ -282,6 +282,18 @@ export default function QuizModal({ isOpen, onClose }) {
         </button>
 
         <div className="quiz-content" style={{ position: 'relative' }}>
+          {showAutoTitle && !showForm && currentStep === 0 && (
+            <h1 style={{
+              fontSize: '1.5rem',
+              fontWeight: '700',
+              color: '#7d010b',
+              textAlign: 'center',
+              marginBottom: '2rem',
+              lineHeight: '1.3'
+            }}>
+              Я помогу вам подобрать штукатурную станцию
+            </h1>
+          )}
           {showForm ? (
             isSubmitted ? (
               <div className="quiz-success">
