@@ -287,10 +287,24 @@
 
 .quiz-form {
   width: 100%;
-  padding: 2rem;
-  background: linear-gradient(135deg, #ffffff, #f8fafc);
-  border-radius: 20px;
-  border: 2px solid #e2e8f0;
+  padding: 2.5rem;
+  background: linear-gradient(135deg, #ffffff, #fafafa);
+  border-radius: 24px;
+  border: 1px solid rgba(125, 1, 11, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.quiz-form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #7d010b, #a00109, #ff6b6b);
+  border-radius: 24px 24px 0 0;
 }
 
 .quiz-form h2 {
@@ -300,8 +314,22 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
   text-align: center;
+  line-height: 1.3;
+  position: relative;
+}
+
+.quiz-form h2::after {
+  content: '';
+  position: absolute;
+  bottom: -0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #7d010b, #a00109);
+  border-radius: 2px;
 }
 
 .form-group {
@@ -318,57 +346,68 @@
 }
 
 .quiz-form input {
-  padding: 1rem;
-  border: 2px solid #e2e8f0;
-  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.75rem;
   font-size: 1rem;
   background: #ffffff;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-sizing: border-box;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .quiz-form input:focus {
   outline: none;
   border-color: #7d010b;
-  box-shadow: 0 0 0 3px rgba(125, 1, 11, 0.1);
+  box-shadow: 0 0 0 3px rgba(125, 1, 11, 0.1), 0 4px 12px rgba(125, 1, 11, 0.15);
+  transform: translateY(-1px);
 }
 
 .quiz-form input.error {
   border-color: #ef4444;
   box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
-}
-
-.error-text {
-  color: #ef4444;
-  font-size: 0.75rem;
-  margin-top: 0.25rem;
-}
-
-.checkbox-group {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
-  padding: 1rem;
-  background: #f8fafc;
-  border: 2px solid #e2e8f0;
-  border-radius: 12px;
-  transition: all 0.3s ease;
-}
-
-.checkbox-group:hover {
-  border-color: #7d010b;
   background: #fef2f2;
 }
 
-.checkbox-input {
-  width: 18px;
-  height: 18px;
-  accent-color: #7d010b;
+.quiz-form .error-text {
+  color: #ef4444;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-weight: 500;
+}
+
+.quiz-form .checkbox-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 1.75rem;
+  padding: 1.25rem;
+  background: #f8fafc;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
   cursor: pointer;
 }
 
-.checkbox-label {
+.quiz-form .checkbox-group:hover {
+  border-color: #7d010b;
+  background: #fef2f2;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(125, 1, 11, 0.1);
+}
+
+.quiz-form .checkbox-input {
+  width: 1.25rem;
+  height: 1.25rem;
+  accent-color: #7d010b;
+  cursor: pointer;
+  margin-top: 0.125rem;
+}
+
+.quiz-form .checkbox-label {
   font-size: 0.875rem;
   color: #374151;
   line-height: 1.4;
@@ -381,13 +420,34 @@
   padding: 1rem 2rem;
   background: linear-gradient(135deg, #7d010b, #a00109);
   border: none;
-  border-radius: 12px;
+  border-radius: 0.75rem;
   color: white;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 4px 15px rgba(125, 1, 11, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.quiz-form button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.quiz-form button:hover::before {
+  left: 100%;
 }
 
 .quiz-form button:disabled {
@@ -399,7 +459,7 @@
 
 .quiz-form button:not(:disabled):hover {
   background: linear-gradient(135deg, #6a0109, #8a0110);
-  transform: translateY(-2px);
+  transform: translateY(-2px) scale(1.02);
   box-shadow: 0 8px 25px rgba(125, 1, 11, 0.4);
 }
 
