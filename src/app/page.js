@@ -8,6 +8,7 @@ import ScrollToTop from '../components/ScrollToTop/ScrollToTop'
 import AdvantageCard from '../components/AdvantageCard/AdvantageCard'
 import CatalogCard from '../components/CatalogCard/CatalogCard'
 import Notification from '../components/Notification/Notification'
+import './about-styles.css'
 
 import ProductCard from '../components/ProductCard/ProductCard'
 import Comparison from '../components/Comparison/Comparison'
@@ -272,8 +273,10 @@ export default function Home() {
 
           {/* О компании */}
           <section id="about" className="about-section" style={{ 
-            padding: 'clamp(2rem, 5vw, 4rem) 0',
-            backgroundColor: 'var(--color-secondary)'
+            padding: 'clamp(4rem, 8vw, 6rem) 0',
+            background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%)',
+            position: 'relative',
+            overflow: 'hidden'
           }}>
             <div className="container">
               <h2 style={{ 
@@ -348,20 +351,13 @@ export default function Home() {
                     text: 'Помогаем освоить технику механизированной штукатурки стен даже новичкам:'
                   }
                 ].map((item, index) => (
-                  <div key={index} style={{ 
-                    padding: '2rem',
-                    backgroundColor: 'var(--color-white)',
-                    borderRadius: '1rem',
-                    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
-                  }}>
-                    <div className="feature-icon" style={{ 
-                      marginBottom: '1rem'
-                    }}>
-                    </div>
+                  <div key={index}>
+                    <div className="feature-icon"></div>
                     <h4 style={{ 
                       fontSize: 'var(--font-lg)', 
                       color: 'var(--color-dark)',
                       marginBottom: '1rem',
+                      marginTop: '1rem',
                       fontWeight: '600'
                     }}>
                       {item.title}
@@ -406,7 +402,7 @@ export default function Home() {
                       <li key={index} style={{ 
                         display: 'flex',
                         alignItems: 'center',
-                        gap: '0.5rem',
+                        gap: '0.75rem',
                         marginBottom: '0.75rem',
                         fontSize: 'var(--font-base)',
                         color: 'var(--color-dark)'
@@ -440,7 +436,7 @@ export default function Home() {
                       <li key={index} style={{ 
                         display: 'flex',
                         alignItems: 'flex-start',
-                        gap: '0.5rem',
+                        gap: '0.75rem',
                         marginBottom: '1rem',
                         fontSize: 'var(--font-base)',
                         color: 'var(--color-dark)',
