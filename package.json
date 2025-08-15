@@ -12,9 +12,10 @@
     "serve": "node serve-static.js"
   },
   "dependencies": {
+    "critters": "^0.0.23",
+    "next": "15.4.6",
     "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "next": "15.4.6"
+    "react-dom": "19.1.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

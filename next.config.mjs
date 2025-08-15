@@ -1,15 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  output: "export",
   trailingSlash: true,
   images: {
-    unoptimized: true
+    unoptimized: true,
   },
-  distDir: 'out',
-  // Removed assetPrefix and basePath for custom domain
+  // distDir: '.next', // Лучше использовать стандартное значение
   experimental: {
-    optimizeCss: true
-  }
+    // optimizeCss: false // Лучше отключить, если возникают ошибки
+  },
 };
 
 export default nextConfig;
