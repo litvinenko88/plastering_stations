@@ -49,8 +49,8 @@ export default function AboutVideo() {
             </div>
           )}
           <iframe 
-            src="https://rutube.ru/play/embed/47e9c5a9ee217119f65346f3990918a9/?autoStart=true&skinColor=red"
-            allow="clipboard-write; autoplay"
+            src="https://rutube.ru/play/embed/47e9c5a9ee217119f65346f3990918a9/?skinColor=red"
+            allow="clipboard-write; autoplay; fullscreen"
             allowFullScreen
             loading="lazy"
             onLoad={handleLoad}
@@ -63,6 +63,7 @@ export default function AboutVideo() {
               height: '100%',
               border: 'none'
             }}
+            title="О компании NOVA"
           />
         </>
       )}

@@ -35,10 +35,12 @@ export default function Hero() {
               muted 
               loop 
               playsInline
-              preload="metadata"
+              webkit-playsinline="true"
+              preload="none"
               poster="/images/video-poster.jpg"
             >
               <source src="/videos/fon_video.mp4" type="video/mp4" />
+              <p>Ваш браузер не поддерживает видео.</p>
             </video>
             <div className="hero-video-overlay"></div>
             <div className="certificates">

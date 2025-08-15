@@ -69,6 +69,92 @@ export default function Comparison() {
           </div>
         </div>
         
+        <div className="mobile-comparison">
+          <div className="comparison-card our-model">
+            <h3 className="card-title">🇷🇺 Наша модель PERSONIYA V380</h3>
+            <div className="card-specs">
+              <div className="spec-row">
+                <span className="spec-label">Мотор насоса</span>
+                <span className="spec-value">5.5 кВт, 400 об/мин</span>
+              </div>
+              <div className="spec-row">
+                <span className="spec-label">Производительность</span>
+                <span className="spec-value">15-35 л/мин</span>
+              </div>
+              <div className="spec-row">
+                <span className="spec-label">Давление подачи</span>
+                <span className="spec-value">до 30 бар</span>
+              </div>
+              <div className="spec-row">
+                <span className="spec-label">Дальность подачи</span>
+                <span className="spec-value">до 30 м</span>
+              </div>
+              <div className="spec-row">
+                <span className="spec-label">Компрессор</span>
+                <span className="spec-value">1,1 кВт, до 6 бар</span>
+              </div>
+              <div className="spec-row">
+                <span className="spec-label">Объем бункера</span>
+                <span className="spec-value">150 л</span>
+              </div>
+              <div className="spec-row">
+                <span className="spec-label">Электропитание</span>
+                <span className="spec-value">380 вольт</span>
+              </div>
+              <div className="spec-row">
+                <span className="spec-label">Вес</span>
+                <span className="spec-value">260 кг</span>
+              </div>
+              <div className="spec-row">
+                <span className="spec-label">Цена</span>
+                <span className="spec-value price">535 000 ₽</span>
+              </div>
+            </div>
+          </div>
+          
+          <div className="comparison-card">
+            <h3 className="card-title">🇩🇪 Немецкая станция</h3>
+            <div className="card-specs">
+              <div className="spec-row">
+                <span className="spec-label">Мотор насоса</span>
+                <span className="spec-value">5.5 кВт</span>
+              </div>
+              <div className="spec-row">
+                <span className="spec-label">Производительность</span>
+                <span className="spec-value">15-30 л/мин</span>
+              </div>
+              <div className="spec-row">
+                <span className="spec-label">Давление подачи</span>
+                <span className="spec-value">до 25 бар</span>
+              </div>
+              <div className="spec-row">
+                <span className="spec-label">Дальность подачи</span>
+                <span className="spec-value">до 25 м</span>
+              </div>
+              <div className="spec-row">
+                <span className="spec-label">Компрессор</span>
+                <span className="spec-value">1,5 кВт, до 6 бар</span>
+              </div>
+              <div className="spec-row">
+                <span className="spec-label">Объем бункера</span>
+                <span className="spec-value">120 л</span>
+              </div>
+              <div className="spec-row">
+                <span className="spec-label">Электропитание</span>
+                <span className="spec-value">380 вольт</span>
+              </div>
+              <div className="spec-row">
+                <span className="spec-label">Вес</span>
+                <span className="spec-value">285 кг</span>
+              </div>
+              <div className="spec-row">
+                <span className="spec-label">Цена</span>
+                <span className="spec-value price">~950 000 ₽</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
         <div className="comparison-advantages">
           <h3>Почему наша станция выгоднее?</h3>
           <ul className="advantages-list">
