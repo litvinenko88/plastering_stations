@@ -47,7 +47,7 @@
 }
 
 .counters-text p {
-  font-size: var(--font-xl);
+  font-size: var(--font-lg);
   background: linear-gradient(135deg, var(--color-secondary), #ffffff, var(--color-secondary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -165,7 +165,7 @@
 }
 
 .counter-number {
-  font-size: var(--font-5xl);
+  font-size: var(--font-4xl);
   font-weight: 700;
   background: linear-gradient(135deg, var(--color-secondary), #ffffff, var(--color-secondary));
   -webkit-background-clip: text;
@@ -201,6 +201,53 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   position: relative;
+}
+
+/* Специальные стили для таймера акции */
+.special-timer {
+  background: linear-gradient(135deg, 
+    rgba(255, 107, 107, 0.2) 0%, 
+    rgba(255, 255, 255, 0.1) 50%, 
+    rgba(125, 1, 11, 0.2) 100%) !important;
+  border: 2px solid rgba(255, 107, 107, 0.3) !important;
+  animation: specialTimerPulse 2s ease-in-out infinite !important;
+  position: relative;
+  overflow: visible;
+}
+
+.special-timer::before {
+  content: '🔥';
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 1.5rem;
+  animation: fireIcon 1.5s ease-in-out infinite;
+}
+
+.timer-display {
+  position: relative;
+}
+
+.timer-part {
+  display: inline-block;
+  background: linear-gradient(135deg, #ff6b6b, #ffffff, #ff4757);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 800;
+  animation: timerGlow 1.5s ease-in-out infinite alternate;
+  text-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
+}
+
+.special-timer .counter-label {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+}
+
+.special-timer .counter-accent {
+  color: #ff6b6b;
+  font-weight: 700;
+  animation: accentPulse 2s ease-in-out infinite;
 }
 /* 
 .counter-accent {
@@ -255,6 +302,32 @@
     opacity: 0.6;
     transform: translate(-50%, -50%) scale(1.2);
   }
+}
+
+@keyframes specialTimerPulse {
+  0%, 100% {
+    box-shadow: 0 20px 60px rgba(125, 1, 11, 0.3), 0 0 30px rgba(255, 107, 107, 0.2);
+    transform: translateY(-8px) scale(1);
+  }
+  50% {
+    box-shadow: 0 25px 80px rgba(125, 1, 11, 0.5), 0 0 50px rgba(255, 107, 107, 0.4);
+    transform: translateY(-10px) scale(1.02);
+  }
+}
+
+@keyframes fireIcon {
+  0%, 100% { transform: rotate(-5deg) scale(1); }
+  50% { transform: rotate(5deg) scale(1.1); }
+}
+
+@keyframes timerGlow {
+  0% { text-shadow: 0 0 20px rgba(255, 107, 107, 0.5); }
+  100% { text-shadow: 0 0 30px rgba(255, 107, 107, 0.8), 0 0 40px rgba(255, 71, 87, 0.6); }
+}
+
+@keyframes accentPulse {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
 }
 
 @media (max-width: 640px) {

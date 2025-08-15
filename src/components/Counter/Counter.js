@@ -69,9 +69,9 @@ export default function Counter() {
             </div>
           </div>
           
-          <div className="counter-item">
-            <span className="counter-number">
-              {timer.days}д {timer.hours.toString().padStart(2, '0')}:{timer.minutes.toString().padStart(2, '0')}:{timer.seconds.toString().padStart(2, '0')}
+          <div className="counter-item special-timer">
+            <span className="counter-number timer-display">
+              <span className="timer-part">{timer.days}д</span> <span className="timer-part">{timer.hours.toString().padStart(2, '0')}:{timer.minutes.toString().padStart(2, '0')}:{timer.seconds.toString().padStart(2, '0')}</span>
             </span>
             <div className="counter-label">
               До окончания <br />

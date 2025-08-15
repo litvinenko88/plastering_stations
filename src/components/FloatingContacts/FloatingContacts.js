@@ -257,7 +257,7 @@ export default function FloatingContacts() {
               </div>
             )}
             
-            <h4>Спец предложение действует {actionDays}д {actionHours.toString().padStart(2, '0')}:{actionMinutes.toString().padStart(2, '0')}:{actionSeconds.toString().padStart(2, '0')}</h4>
+            <h4>Спец предложение действует <span className="timer-number">{actionDays}д</span> <span className="timer-number">{actionHours.toString().padStart(2, '0')}:{actionMinutes.toString().padStart(2, '0')}:{actionSeconds.toString().padStart(2, '0')}</span></h4>
             <form onSubmit={handleFormSubmit}>
               <input 
                 type="text" 
@@ -332,7 +332,7 @@ export default function FloatingContacts() {
                 </div>
               )}
               
-              <h4>Спец предложение действует {actionDays}д {actionHours.toString().padStart(2, '0')}:{actionMinutes.toString().padStart(2, '0')}:{actionSeconds.toString().padStart(2, '0')}</h4>
+              <h4>Спец предложение действует <span className="timer-number">{actionDays}д</span> <span className="timer-number">{actionHours.toString().padStart(2, '0')}:{actionMinutes.toString().padStart(2, '0')}:{actionSeconds.toString().padStart(2, '0')}</span></h4>
               <form onSubmit={handleFormSubmit}>
                 <input 
                   type="text" 
