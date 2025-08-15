@@ -191,7 +191,10 @@ export default function QuizModal({ isOpen, onClose }) {
           type: 'success' 
         })
         setFormData({ name: '', phone: '', agreed: false })
-        setTimeout(() => handleClose(), 3000)
+        setTimeout(() => {
+          setNotification(prev => ({ ...prev, show: false }))
+        }, 3000)
+        setTimeout(() => handleClose(), 4000)
       } else {
         setNotification({ 
           show: true, 
@@ -244,17 +247,11 @@ export default function QuizModal({ isOpen, onClose }) {
 
   return (
     <>
-      <Notification 
-        message={notification.message}
-        type={notification.type}
-        isVisible={notification.show}
-        onClose={() => setNotification({ ...notification, show: false })}
-      />
       <div className="quiz-modal-overlay" onClick={handleClose}>
         <div className="quiz-modal" onClick={(e) => e.stopPropagation()}>
         <button className="quiz-close" onClick={handleClose}>✕</button>
 
-        <div className="quiz-content">
+        <div className="quiz-content" style={{ position: 'relative' }}>
           {showForm ? (
             isSubmitted ? (
               <div className="quiz-success">
@@ -263,7 +260,31 @@ export default function QuizModal({ isOpen, onClose }) {
                 <p>Наш специалист свяжется с вами в течение 15 минут</p>
               </div>
             ) : (
-              <div className="quiz-form">
+              <div className="quiz-form" style={{ position: 'relative' }}>
+                {/* Уведомление формы */}
+                {notification.show && (
+                  <div style={{
+                    position: 'absolute',
+                    top: '-60px',
+                    left: '0',
+                    right: '0',
+                    zIndex: 1000,
+                    padding: '1rem',
+                    borderRadius: '0.75rem',
+                    background: notification.type === 'success' 
+                      ? 'linear-gradient(135deg, #10b981, #059669)' 
+                      : 'linear-gradient(135deg, #ef4444, #dc2626)',
+                    color: 'white',
+                    fontSize: '0.9rem',
+                    fontWeight: '500',
+                    textAlign: 'center',
+                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+                    animation: 'slideDown 0.3s ease-out'
+                  }}>
+                    {notification.message}
+                  </div>
+                )}
+                
                 <h2>Получить консультацию</h2>
                 <form onSubmit={handleFormSubmit}>
                   <div className="form-group">

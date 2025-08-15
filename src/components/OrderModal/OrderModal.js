@@ -76,7 +76,10 @@ export default function OrderModal({ product, isOpen, onClose }) {
           type: 'success' 
         })
         setFormData({ name: '', phone: '', agreed: false })
-        setTimeout(() => onClose(), 3000)
+        setTimeout(() => {
+          setNotification(prev => ({ ...prev, show: false }))
+        }, 3000)
+        setTimeout(() => onClose(), 4000)
       } else {
         setNotification({ 
           show: true, 
@@ -99,17 +102,11 @@ export default function OrderModal({ product, isOpen, onClose }) {
 
   return (
     <>
-      <Notification 
-        message={notification.message}
-        type={notification.type}
-        isVisible={notification.show}
-        onClose={() => setNotification({ ...notification, show: false })}
-      />
       <div className="order-modal-overlay" onClick={onClose}>
         <div className="order-modal" onClick={(e) => e.stopPropagation()}>
           <button className="order-modal-close" onClick={onClose}>✕</button>
           
-          <div className="order-modal-content">
+          <div className="order-modal-content" style={{ position: 'relative' }}>
             <div className="order-modal-header">
               <div className="product-preview">
                 <img src={product.image} alt={product.name} />
@@ -120,7 +117,31 @@ export default function OrderModal({ product, isOpen, onClose }) {
               </div>
             </div>
 
-            <div className="order-form">
+            <div className="order-form" style={{ position: 'relative' }}>
+              {/* Уведомление формы */}
+              {notification.show && (
+                <div style={{
+                  position: 'absolute',
+                  top: '-60px',
+                  left: '0',
+                  right: '0',
+                  zIndex: 1000,
+                  padding: '1rem',
+                  borderRadius: '0.75rem',
+                  background: notification.type === 'success' 
+                    ? 'linear-gradient(135deg, #10b981, #059669)' 
+                    : 'linear-gradient(135deg, #ef4444, #dc2626)',
+                  color: 'white',
+                  fontSize: '0.9rem',
+                  fontWeight: '500',
+                  textAlign: 'center',
+                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+                  animation: 'slideDown 0.3s ease-out'
+                }}>
+                  {notification.message}
+                </div>
+              )}
+              
               <h2>Оформить заказ</h2>
               <p>Заполните форму и мы свяжемся с вами для уточнения деталей</p>
               
