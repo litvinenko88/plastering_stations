@@ -78,8 +78,8 @@ export default function OrderModal({ product, isOpen, onClose }) {
         setFormData({ name: '', phone: '', agreed: false })
         setTimeout(() => {
           setNotification(prev => ({ ...prev, show: false }))
+          onClose()
         }, 3000)
-        setTimeout(() => onClose(), 4000)
       } else {
         setNotification({ 
           show: true, 

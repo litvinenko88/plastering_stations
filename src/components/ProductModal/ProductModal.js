@@ -245,7 +245,10 @@ export default function ProductModal({ product, isOpen, onClose }) {
       <OrderModal 
         product={product}
         isOpen={isOrderModalOpen}
-        onClose={() => setIsOrderModalOpen(false)}
+        onClose={() => {
+          setIsOrderModalOpen(false)
+          onClose()
+        }}
       />
     </>
   )

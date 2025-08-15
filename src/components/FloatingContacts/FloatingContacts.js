@@ -101,10 +101,20 @@ export default function FloatingContacts() {
   const handleFormSubmit = async (e) => {
     e.preventDefault()
     
-    if (!formData.name.trim() || !formData.phone.trim()) {
+    // Валидация
+    if (!formData.name.trim() || formData.name.trim().length < 2) {
       setNotification({
         show: true,
-        message: 'Пожалуйста, заполните все поля',
+        message: 'Имя должно содержать минимум 2 символа',
+        type: 'error'
+      })
+      return
+    }
+    
+    if (!formData.phone.trim() || formData.phone.replace(/[^\d]/g, '').length < 10) {
+      setNotification({
+        show: true,
+        message: 'Введите корректный номер телефона',
         type: 'error'
       })
       return
@@ -123,8 +133,11 @@ export default function FloatingContacts() {
           type: 'success'
         })
         setFormData({ name: '', phone: '' })
-        setShowSpecialOffer(false)
-        setShowChat(false)
+        setTimeout(() => {
+          setNotification(prev => ({ ...prev, show: false }))
+          setShowSpecialOffer(false)
+          setShowChat(false)
+        }, 3000)
       } else {
         setNotification({
           show: true,
@@ -219,7 +232,31 @@ export default function FloatingContacts() {
           <div className="operator-text">
             {messages[1]?.text}
           </div>
-          <div className="offer-form">
+          <div className="offer-form" style={{ position: 'relative' }}>
+            {/* Уведомление формы */}
+            {notification.show && (
+              <div style={{
+                position: 'absolute',
+                top: '-60px',
+                left: '0',
+                right: '0',
+                zIndex: 1000,
+                padding: '1rem',
+                borderRadius: '0.75rem',
+                background: notification.type === 'success' 
+                  ? 'linear-gradient(135deg, #10b981, #059669)' 
+                  : 'linear-gradient(135deg, #ef4444, #dc2626)',
+                color: 'white',
+                fontSize: '0.9rem',
+                fontWeight: '500',
+                textAlign: 'center',
+                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+                animation: 'slideDown 0.3s ease-out'
+              }}>
+                {notification.message}
+              </div>
+            )}
+            
             <h4>Спец предложение действует {actionDays}д {actionHours.toString().padStart(2, '0')}:{actionMinutes.toString().padStart(2, '0')}:{actionSeconds.toString().padStart(2, '0')}</h4>
             <form onSubmit={handleFormSubmit}>
               <input 
@@ -270,7 +307,31 @@ export default function FloatingContacts() {
                 <div className="message-text">{message.text}</div>
               </div>
             ))}
-            <div className="offer-form">
+            <div className="offer-form" style={{ position: 'relative' }}>
+              {/* Уведомление формы */}
+              {notification.show && (
+                <div style={{
+                  position: 'absolute',
+                  top: '-60px',
+                  left: '0',
+                  right: '0',
+                  zIndex: 1000,
+                  padding: '1rem',
+                  borderRadius: '0.75rem',
+                  background: notification.type === 'success' 
+                    ? 'linear-gradient(135deg, #10b981, #059669)' 
+                    : 'linear-gradient(135deg, #ef4444, #dc2626)',
+                  color: 'white',
+                  fontSize: '0.9rem',
+                  fontWeight: '500',
+                  textAlign: 'center',
+                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+                  animation: 'slideDown 0.3s ease-out'
+                }}>
+                  {notification.message}
+                </div>
+              )}
+              
               <h4>Спец предложение действует {actionDays}д {actionHours.toString().padStart(2, '0')}:{actionMinutes.toString().padStart(2, '0')}:{actionSeconds.toString().padStart(2, '0')}</h4>
               <form onSubmit={handleFormSubmit}>
                 <input 
