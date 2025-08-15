@@ -2,6 +2,7 @@
 class GlobalTimer {
   constructor() {
     this.listeners = []
+    this.intervalId = null
     this.actionDays = 5
     this.actionHours = 14
     this.actionMinutes = 32
@@ -11,30 +12,44 @@ class GlobalTimer {
   }
 
   startTimer() {
-    setInterval(() => {
-      this.actionSeconds--
+    if (this.intervalId) {
+      clearInterval(this.intervalId)
+    }
+    
+    this.intervalId = setInterval(() => {
+      this.decrementTime()
+      this.notifyListeners()
+    }, 1000)
+  }
+  
+  decrementTime() {
+    this.actionSeconds--
+    
+    if (this.actionSeconds < 0) {
+      this.actionSeconds = 59
+      this.actionMinutes--
       
-      if (this.actionSeconds < 0) {
-        this.actionSeconds = 59
-        this.actionMinutes--
+      if (this.actionMinutes < 0) {
+        this.actionMinutes = 59
+        this.actionHours--
         
-        if (this.actionMinutes < 0) {
-          this.actionMinutes = 59
-          this.actionHours--
+        if (this.actionHours < 0) {
+          this.actionHours = 23
+          this.actionDays--
           
-          if (this.actionHours < 0) {
-            this.actionHours = 23
-            this.actionDays--
-            
-            if (this.actionDays < 0) {
-              this.actionDays = 7
-            }
+          if (this.actionDays < 0) {
+            this.actionDays = 7
           }
         }
       }
-      
-      this.notifyListeners()
-    }, 1000)
+    }
+  }
+  
+  stopTimer() {
+    if (this.intervalId) {
+      clearInterval(this.intervalId)
+      this.intervalId = null
+    }
   }
 
   subscribe(callback) {
@@ -59,7 +74,18 @@ class GlobalTimer {
       seconds: this.actionSeconds
     }
     
-    this.listeners.forEach(callback => callback(time))
+    this.listeners.forEach(callback => {
+      try {
+        callback(time)
+      } catch (error) {
+        console.error('Timer callback error:', error)
+      }
+    })
+  }
+  
+  destroy() {
+    this.stopTimer()
+    this.listeners = []
   }
 }
 

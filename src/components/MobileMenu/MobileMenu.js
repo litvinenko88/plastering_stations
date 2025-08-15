@@ -1,10 +1,25 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './MobileMenu.css'
 
 export default function MobileMenu({ navItems, onConsultationClick }) {
   const [isOpen, setIsOpen] = useState(false)
   const [isClosing, setIsClosing] = useState(false)
+  const [timeoutIds, setTimeoutIds] = useState([])
+  
+  // Валидация URL для предотвращения open redirect
+  const isValidUrl = (url) => {
+    if (!url) return false
+    // Разрешаем только внутренние ссылки и якоря
+    return url.startsWith('#') || url.startsWith('/') || url.startsWith('./')
+  }
+  
+  // Очистка таймеров при размонтировании
+  useEffect(() => {
+    return () => {
+      timeoutIds.forEach(id => clearTimeout(id))
+    }
+  }, [timeoutIds])
 
   const toggleMenu = () => {
     if (isOpen) {
@@ -17,18 +32,21 @@ export default function MobileMenu({ navItems, onConsultationClick }) {
 
   const closeMenu = () => {
     setIsClosing(true)
-    setTimeout(() => {
+    const timeoutId = setTimeout(() => {
       setIsOpen(false)
       setIsClosing(false)
     }, 250)
+    setTimeoutIds(prev => [...prev, timeoutId])
   }
 
   const handleItemClick = (item) => {
-    if (item.onClick) {
+    if (item.onClick && typeof item.onClick === 'function') {
       closeMenu()
-      setTimeout(() => {
+      const timeoutId = setTimeout(() => {
+        // Безопасный вызов функции без eval
         item.onClick()
       }, 250)
+      setTimeoutIds(prev => [...prev, timeoutId])
     } else {
       closeMenu()
     }
@@ -79,14 +97,24 @@ export default function MobileMenu({ navItems, onConsultationClick }) {
                     {item.name}
                   </button>
                 ) : (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className="mobile-menu-item"
-                    onClick={() => handleItemClick(item)}
-                  >
-                    {item.name}
-                  </a>
+                  isValidUrl(item.href) ? (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      className="mobile-menu-item"
+                      onClick={() => handleItemClick(item)}
+                    >
+                      {item.name}
+                    </a>
+                  ) : (
+                    <span
+                      key={item.name}
+                      className="mobile-menu-item disabled"
+                      title="Недопустимая ссылка"
+                    >
+                      {item.name}
+                    </span>
+                  )
                 )
               ))}
             </div>

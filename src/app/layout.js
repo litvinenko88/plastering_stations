@@ -68,14 +68,14 @@ export default function RootLayout({ children }) {
     <html lang="ru">
       <head>
         <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
         <meta name="theme-color" content="#7d010b" />
         <meta name="format-detection" content="telephone=no" />
         <link rel="preload" href="/videos/fon_video.mp4" as="video" type="video/mp4" />
         <link rel="preload" href="/images/products/Persona 220_380_1 (1).webp" as="image" />
         <link rel="preconnect" href="https://rutube.ru" />
         <link rel="dns-prefetch" href="https://rutube.ru" />
-        <link rel="icon" href="/icons/favikon.png" type="image/png" />
+        <link rel="icon" href="/icons/favicon.png" type="image/png" />
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
