@@ -671,7 +671,7 @@ export default function Home() {
                         name="phone"
                         placeholder="+7 (999) 123-45-67 *"
                         value={contactFormData.phone}
-                        onChange={(e) => setContactFormData(prev => ({ ...prev, phone: e.target.value.replace(/[^+\d]/g, '').slice(0, 13) }))}
+                        onChange={(e) => setContactFormData(prev => ({ ...prev, phone: e.target.value.replace(/[^+0-9]/g, '').slice(0, 13) }))}
                         maxLength="13"
                         required
                         disabled={isContactSubmitting}

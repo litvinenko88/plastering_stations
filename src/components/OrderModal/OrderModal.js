@@ -109,7 +109,7 @@ export default function OrderModal({ product, isOpen, onClose }) {
           <div className="order-modal-content" style={{ position: 'relative' }}>
             <div className="order-modal-header">
               <div className="product-preview">
-                <img src={product.image} alt={product.name} />
+                <img src={product.image || '/images/placeholder.jpg'} alt={product.name} onError={(e) => { e.target.src = '/images/placeholder.jpg' }} />
                 <div className="product-info">
                   <h3>{product.name}</h3>
                   <div className="product-price">{product.price}</div>

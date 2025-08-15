@@ -2,6 +2,11 @@ const TELEGRAM_BOT_TOKEN = process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN
 const TELEGRAM_CHAT_ID = process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID
 
 export async function sendToTelegram(data, formSource) {
+  // Валидация входных данных
+  if (!data || typeof data !== 'object') {
+    return { success: false, error: 'Некорректные данные' }
+  }
+  
   // Проверка наличия конфигурации
   if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
     console.warn('Telegram configuration missing - using fallback')

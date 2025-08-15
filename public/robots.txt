@@ -1,25 +1,4 @@
 User-agent: *
 Allow: /
 
-# Sitemap
 Sitemap: https://stations-nova.ru/sitemap.xml
-Sitemap: https://stations-nova.ru/sitemap-images.xml
-
-# Основные страницы
-Allow: /
-Allow: /privacy/
-
-# Запрещаем индексацию служебных файлов
-Disallow: /_next/
-Disallow: /api/
-Disallow: /*.json$
-Disallow: /serve-static.js
-Disallow: /DEPLOY.md
-
-# Кэш и служебные файлы
-Disallow: /.git/
-Disallow: /node_modules/
-Disallow: /out/
-
-# Crawl-delay
-Crawl-delay: 1

@@ -2,7 +2,7 @@
 export const getAssetPath = (path = '') => {
   // Валидация входного параметра
   if (typeof path !== 'string') {
-    console.warn('getAssetPath: path must be a string, received:', typeof path)
+    console.warn('getAssetPath: invalid path parameter type')
     return ''
   }
   

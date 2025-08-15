@@ -35,8 +35,8 @@ export default function Hero() {
               muted 
               loop 
               playsInline
-              webkit-playsinline="true"
-              preload="none"
+    
+              preload="metadata"
               poster="/images/video-poster.jpg"
             >
               <source src="/videos/fon_video.mp4" type="video/mp4" />

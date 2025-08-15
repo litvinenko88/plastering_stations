@@ -11,7 +11,7 @@ export const forceVideoPlay = (videoElement) => {
     
     if (playPromise !== undefined) {
       playPromise.catch(error => {
-        console.log('Автовоспроизведение заблокировано:', error);
+        console.log('Автовоспроизведение заблокировано');
       });
     }
   }
@@ -19,5 +19,5 @@ export const forceVideoPlay = (videoElement) => {
 
 // Проверка мобильного устройства
 export const isMobileDevice = () => {
-  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  return typeof navigator !== 'undefined' && /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 };
