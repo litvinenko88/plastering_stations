@@ -280,7 +280,7 @@ export default function Home() {
                     fontWeight: '600',
                     cursor: 'pointer',
                     transition: 'all 0.3s ease',
-                    width: window.innerWidth <= 480 ? '100%' : 'auto',
+                    width: '100%',
                     maxWidth: '300px'
                   }}
                   onMouseEnter={(e) => e.target.style.transform = 'translateY(-2px)'}
