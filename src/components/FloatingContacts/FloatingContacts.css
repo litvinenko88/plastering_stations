@@ -343,8 +343,9 @@
   
   .operator-message, .special-offer {
     right: 0.75rem;
+    left: 0.75rem;
     bottom: 5rem;
-    max-width: 250px;
+    max-width: none;
   }
   
   .operator-chat {

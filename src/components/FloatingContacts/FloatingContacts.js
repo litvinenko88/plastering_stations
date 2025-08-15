@@ -375,7 +375,7 @@ export default function FloatingContacts() {
         </button>
         
         <a 
-          href="https://wa.me/79000000000" 
+          href="https://wa.me/79964179001" 
           className="contact-btn whatsapp"
           target="_blank"
           rel="noopener noreferrer"
@@ -385,7 +385,7 @@ export default function FloatingContacts() {
         </a>
         
         <a 
-          href="https://t.me/mixon_support" 
+          href="https://t.me/litvinenko_n_v" 
           className="contact-btn telegram"
           target="_blank"
           rel="noopener noreferrer"
@@ -395,7 +395,7 @@ export default function FloatingContacts() {
         </a>
         
         <a 
-          href="tel:+79000000000" 
+          href="tel:+79964179001" 
           className="contact-btn phone"
           aria-label="Позвонить"
         >
