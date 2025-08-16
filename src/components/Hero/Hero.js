@@ -22,6 +22,7 @@ export default function Hero() {
               <button 
                 onClick={() => window.dispatchEvent(new CustomEvent('openQuiz'))}
                 className="hero-btn secondary"
+                data-quiz-trigger
               >
                 Подобрать станцию
               </button>

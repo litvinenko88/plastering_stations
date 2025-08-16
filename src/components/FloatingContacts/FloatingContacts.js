@@ -1,14 +1,27 @@
 'use client'
+import { useState } from 'react'
 import './FloatingContacts.css'
+import OperatorNotification from '../OperatorNotification'
 
 export default function FloatingContacts() {
+  const [operatorClicked, setOperatorClicked] = useState(false)
+
+  const handleOperatorClick = () => {
+    setOperatorClicked(true)
+    // Дополнительная логика при клике на оператора
+  }
 
   return (
     <>
+      <OperatorNotification operatorClicked={operatorClicked} />
       <div className="floating-contacts">
-        <div className="contact-btn operator" aria-label="Оператор">
+        <button 
+          className="contact-btn operator" 
+          aria-label="Оператор"
+          onClick={handleOperatorClick}
+        >
           <img src="/images/operator.webp" alt="Оператор" />
-        </div>
+        </button>
         
         <a 
           href="https://wa.me/79964179001" 
