@@ -8,7 +8,7 @@ export default function Header() {
   const [isConsultationOpen, setIsConsultationOpen] = useState(false)
 
   const navItems = [
-    { name: 'Каталог', href: '#catalog' },
+    { name: 'Каталог', href: '#full-catalog' },
     { name: 'Подобрать', onClick: () => window.dispatchEvent(new CustomEvent('openQuiz')) },
     { name: 'Преимущества', href: '#advantages' },
     { name: 'Контакты', href: '#contacts' },
