@@ -41,19 +41,34 @@ export default function Home() {
 
   // Автоматическое открытие квиза при прокрутке до блока comparison
   useEffect(() => {
+    let ticking = false
+    
     const handleScroll = () => {
-      if (hasQuizTriggered || isQuizOpen) return
-      
-      const comparisonSection = document.getElementById('comparison')
-      if (!comparisonSection) return
-      
-      const rect = comparisonSection.getBoundingClientRect()
-      const windowHeight = window.innerHeight
-      
-      // Если блок comparison виден на 30% или больше
-      if (rect.top <= windowHeight * 0.7 && rect.bottom >= 0) {
-        setHasQuizTriggered(true)
-        setIsQuizOpen(true)
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          if (hasQuizTriggered || isQuizOpen) {
+            ticking = false
+            return
+          }
+          
+          const comparisonSection = document.getElementById('comparison')
+          if (!comparisonSection) {
+            ticking = false
+            return
+          }
+          
+          const rect = comparisonSection.getBoundingClientRect()
+          const windowHeight = window.innerHeight
+          
+          // Если блок comparison виден на 30% или больше
+          if (rect.top <= windowHeight * 0.7 && rect.bottom >= 0) {
+            setHasQuizTriggered(true)
+            setIsQuizOpen(true)
+          }
+          
+          ticking = false
+        })
+        ticking = true
       }
     }
 

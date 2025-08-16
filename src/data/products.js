@@ -24,6 +24,7 @@ export const products = [
     motorPower: "5.5 кВт",
     weight: "260 кг",
     distance: "до 30 м",
+    efficiency: "до 600 м²/смена",
     price: "от 535 000 ₽",
     description:
       "Мощная промышленная станция для больших объемов работ. Высокая производительность и надежность.",
@@ -32,7 +33,7 @@ export const products = [
     id: 3,
     name: "PERSONIYA V-1",
     image: "/images/products/Persona V1_1.png",
-    badge: { type: "", text: "Базовая модель" },
+    badge: { type: null, text: "Базовая модель" },
     productivity: "4-14 л/мин",
     power: "230 V",
     motorPower: "2.2 кВт",

@@ -37,9 +37,16 @@ export default function Hero() {
               loop 
               playsInline
               preload="metadata"
+              poster="/images/video-poster.jpg"
+              aria-label="Демонстрация работы штукатурной станции"
             >
               <source src="/videos/fon_video.mp4" type="video/mp4" />
-              <p>Ваш браузер не поддерживает видео.</p>
+              <source src="/videos/fon_video.webm" type="video/webm" />
+              <img 
+                src="/images/video-fallback.jpg" 
+                alt="Штукатурная станция PERSONIYA" 
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              />
             </video>
             <div className="hero-video-overlay"></div>
             <div className="certificates">

@@ -1,0 +1,23 @@
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^www.stations-nova.ru$ [NC]
+RewriteRule ^(.*)$ https://stations-nova.ru/$1 [R=301,L]
+
+#RewriteCond %{REQUEST_URI} ^(.+)/\?$
+#RewriteRule ^(.+)/\?$ /$1 [R=301,L]
+
+
+# Редирект домена с WWW на домен без WWW
+RewriteCond %{HTTP_HOST} ^www\.(.*)$
+RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+# Убираем лишние слеши на конце URL
+RewriteCond %{THE_REQUEST} //
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$0 [R=301,L]
+
+# Убираем index.php на конце
+RewriteCond %{REQUEST_URI} ^(.*)/index\.php$
+RewriteRule ^(.*)index\.php$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+# Убираем index.html на конце
+RewriteCond %{REQUEST_URI} ^(.*)/index\.html$
+RewriteRule ^(.*)index\.html$ https://%{HTTP_HOST}/$1 [R=301,L]
