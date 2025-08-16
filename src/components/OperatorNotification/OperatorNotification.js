@@ -18,6 +18,7 @@ export default function OperatorNotification({ operatorClicked }) {
   const [formSubmitted, setFormSubmitted] = useState(false)
   const [userInteracted, setUserInteracted] = useState(false)
   const [formInteracted, setFormInteracted] = useState(false)
+  const [chatFormInteracted, setChatFormInteracted] = useState(false)
   const [firstNotificationShown, setFirstNotificationShown] = useState(false)
   const [secondNotificationShown, setSecondNotificationShown] = useState(false)
 
@@ -101,6 +102,7 @@ export default function OperatorNotification({ operatorClicked }) {
     })
     
     setChatOpen(true)
+    setChatFormInteracted(false) // Сбрасываем флаг при новом открытии чата
     
     const messages = [{
       id: Date.now(),
@@ -125,7 +127,16 @@ export default function OperatorNotification({ operatorClicked }) {
   const handleFormChange = (e) => {
     const { name, value, type, checked } = e.target
     
-    setFormInteracted(true)
+    // Определяем, в какой форме происходит взаимодействие
+    const isNotificationForm = e.target.closest('.notification-form')
+    const isChatForm = e.target.closest('.chat-form')
+    
+    if (isNotificationForm) {
+      setFormInteracted(true)
+    }
+    if (isChatForm) {
+      setChatFormInteracted(true)
+    }
     
     if (type === 'checkbox') {
       setFormData(prev => ({ ...prev, [name]: checked }))
@@ -164,14 +175,9 @@ export default function OperatorNotification({ operatorClicked }) {
         setFormErrors({})
         
         setTimeout(() => {
-          if (typeof document !== 'undefined') {
-            const notification = document.querySelector('.second-notification')
-            if (notification) {
-              notification.classList.add('closing')
-              setTimeout(() => {
-                setNotifications(prev => ({ ...prev, second: { visible: false, closed: true } }))
-              }, 400)
-            }
+          // Не закрываем если пользователь взаимодействует с формой в чате
+          if (!chatFormInteracted) {
+            setNotifications(prev => ({ ...prev, second: { visible: false, closed: true } }))
           }
         }, 3000)
       }

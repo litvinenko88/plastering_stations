@@ -1,5 +1,10 @@
 .counters {
-  background: linear-gradient(135deg, #0a0a0a 0%, var(--color-dark) 50%, #1a1a1a 100%);
+  background: linear-gradient(
+    135deg,
+    #0a0a0a 0%,
+    var(--color-dark) 50%,
+    #1a1a1a 100%
+  );
   color: var(--color-white);
   padding: 4rem 0;
   position: relative;
@@ -7,28 +12,46 @@
 }
 
 .counters::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: 
-    radial-gradient(circle at 25% 25%, rgba(125, 1, 11, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 75% 75%, rgba(238, 232, 244, 0.05) 0%, transparent 50%),
-    linear-gradient(45deg, transparent 48%, rgba(255,255,255,0.02) 49%, rgba(255,255,255,0.02) 51%, transparent 52%);
+  background: radial-gradient(
+      circle at 25% 25%,
+      rgba(125, 1, 11, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 75% 75%,
+      rgba(238, 232, 244, 0.05) 0%,
+      transparent 50%
+    ),
+    linear-gradient(
+      45deg,
+      transparent 48%,
+      rgba(255, 255, 255, 0.02) 49%,
+      rgba(255, 255, 255, 0.02) 51%,
+      transparent 52%
+    );
   background-size: 100% 100%, 100% 100%, 30px 30px;
   animation: counterBgMove 15s ease-in-out infinite;
 }
 
 .counters::after {
-  content: '';
+  content: "";
   position: absolute;
   top: -2px;
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-primary),
+    transparent
+  );
   animation: topLineMove 3s ease-in-out infinite;
 }
 
@@ -48,7 +71,12 @@
 
 .counters-text p {
   font-size: var(--font-lg);
-  background: linear-gradient(135deg, var(--color-secondary), #ffffff, var(--color-secondary));
+  background: linear-gradient(
+    135deg,
+    var(--color-secondary),
+    #ffffff,
+    var(--color-secondary)
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -61,14 +89,19 @@
 }
 
 .counters-text p::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -15px;
   left: 50%;
   transform: translateX(-50%);
   width: 100px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-primary),
+    transparent
+  );
   animation: underlineExpand 2s ease-out 0.5s both;
 }
 
@@ -105,10 +138,12 @@
 
 .counter-item {
   padding: 2rem 1.5rem;
-  background: linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.1) 0%, 
-    rgba(255, 255, 255, 0.05) 50%, 
-    rgba(125, 1, 11, 0.1) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(125, 1, 11, 0.1) 100%
+  );
   border-radius: 1.5rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(20px);
@@ -118,19 +153,32 @@
   animation: counterSlideUp 0.8s ease-out both;
 }
 
-.counter-item:nth-child(1) { animation-delay: 0.1s; }
-.counter-item:nth-child(2) { animation-delay: 0.2s; }
-.counter-item:nth-child(3) { animation-delay: 0.3s; }
-.counter-item:nth-child(4) { animation-delay: 0.4s; }
+.counter-item:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.counter-item:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.counter-item:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.counter-item:nth-child(4) {
+  animation-delay: 0.4s;
+}
 
 .counter-item::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-primary),
+    transparent
+  );
   transform: scaleX(0);
   transition: transform 0.6s ease;
 }
@@ -140,13 +188,18 @@
 }
 
 .counter-item::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
   transition: left 0.8s;
 }
 
@@ -154,10 +207,12 @@
   transform: translateY(-8px) scale(1.02);
   box-shadow: 0 20px 60px rgba(125, 1, 11, 0.3);
   border-color: rgba(255, 255, 255, 0.4);
-  background: linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.15) 0%, 
-    rgba(255, 255, 255, 0.08) 50%, 
-    rgba(125, 1, 11, 0.15) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(125, 1, 11, 0.15) 100%
+  );
 }
 
 .counter-item:hover::after {
@@ -167,7 +222,12 @@
 .counter-number {
   font-size: var(--font-4xl);
   font-weight: 700;
-  background: linear-gradient(135deg, var(--color-secondary), #ffffff, var(--color-secondary));
+  background: linear-gradient(
+    135deg,
+    var(--color-secondary),
+    #ffffff,
+    var(--color-secondary)
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -178,7 +238,7 @@
 }
 
 .counter-number::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -187,7 +247,13 @@
   height: 120%;
   border: 2px solid transparent;
   border-radius: 50%;
-  background: linear-gradient(45deg, var(--color-primary), transparent, var(--color-secondary)) border-box;
+  background: linear-gradient(
+      45deg,
+      var(--color-primary),
+      transparent,
+      var(--color-secondary)
+    )
+    border-box;
   mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
   mask-composite: exclude;
   opacity: 0;
@@ -205,10 +271,12 @@
 
 /* Специальные стили для таймера акции */
 .special-timer {
-  background: linear-gradient(135deg, 
-    rgba(255, 107, 107, 0.2) 0%, 
-    rgba(255, 255, 255, 0.1) 50%, 
-    rgba(125, 1, 11, 0.2) 100%) !important;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 107, 107, 0.2) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(125, 1, 11, 0.2) 100%
+  ) !important;
   border: 2px solid rgba(255, 107, 107, 0.3) !important;
   animation: specialTimerPulse 2s ease-in-out infinite !important;
   position: relative;
@@ -216,7 +284,7 @@
 }
 
 .special-timer::before {
-  content: '🔥';
+  content: "🔥";
   position: absolute;
   top: -10px;
   right: -10px;
@@ -230,7 +298,7 @@
 
 .timer-part {
   display: inline-block;
-  background: linear-gradient(135deg, #ff6b6b, #ffffff, #ff4757);
+  background: var(--color-primary);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -257,24 +325,46 @@
 
 /* Анимации */
 @keyframes counterBgMove {
-  0%, 100% { transform: translateX(0) translateY(0); }
-  33% { transform: translateX(-20px) translateY(-10px); }
-  66% { transform: translateX(20px) translateY(10px); }
+  0%,
+  100% {
+    transform: translateX(0) translateY(0);
+  }
+  33% {
+    transform: translateX(-20px) translateY(-10px);
+  }
+  66% {
+    transform: translateX(20px) translateY(10px);
+  }
 }
 
 @keyframes topLineMove {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 @keyframes textGlow {
-  0% { text-shadow: 0 0 20px rgba(238, 232, 244, 0.5); }
-  100% { text-shadow: 0 0 30px rgba(238, 232, 244, 0.8), 0 0 40px rgba(255, 255, 255, 0.3); }
+  0% {
+    text-shadow: 0 0 20px rgba(238, 232, 244, 0.5);
+  }
+  100% {
+    text-shadow: 0 0 30px rgba(238, 232, 244, 0.8),
+      0 0 40px rgba(255, 255, 255, 0.3);
+  }
 }
 
 @keyframes underlineExpand {
-  0% { width: 0; opacity: 0; }
-  100% { width: 100px; opacity: 1; }
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+  100% {
+    width: 100px;
+    opacity: 1;
+  }
 }
 
 @keyframes counterSlideUp {
@@ -289,64 +379,88 @@
 }
 
 @keyframes numberPulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
 }
 
 @keyframes ringPulse {
-  0%, 100% { 
+  0%,
+  100% {
     opacity: 0;
     transform: translate(-50%, -50%) scale(0.8);
   }
-  50% { 
+  50% {
     opacity: 0.6;
     transform: translate(-50%, -50%) scale(1.2);
   }
 }
 
 @keyframes specialTimerPulse {
-  0%, 100% {
-    box-shadow: 0 20px 60px rgba(125, 1, 11, 0.3), 0 0 30px rgba(255, 107, 107, 0.2);
+  0%,
+  100% {
+    box-shadow: 0 20px 60px rgba(125, 1, 11, 0.3),
+      0 0 30px rgba(255, 107, 107, 0.2);
     transform: translateY(-8px) scale(1);
   }
   50% {
-    box-shadow: 0 25px 80px rgba(125, 1, 11, 0.5), 0 0 50px rgba(255, 107, 107, 0.4);
+    box-shadow: 0 25px 80px rgba(125, 1, 11, 0.5),
+      0 0 50px rgba(255, 107, 107, 0.4);
     transform: translateY(-10px) scale(1.02);
   }
 }
 
 @keyframes fireIcon {
-  0%, 100% { transform: rotate(-5deg) scale(1); }
-  50% { transform: rotate(5deg) scale(1.1); }
+  0%,
+  100% {
+    transform: rotate(-5deg) scale(1);
+  }
+  50% {
+    transform: rotate(5deg) scale(1.1);
+  }
 }
 
 @keyframes timerGlow {
-  0% { text-shadow: 0 0 20px rgba(255, 107, 107, 0.5); }
-  100% { text-shadow: 0 0 30px rgba(255, 107, 107, 0.8), 0 0 40px rgba(255, 71, 87, 0.6); }
+  0% {
+    text-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
+  }
+  100% {
+    text-shadow: 0 0 30px rgba(255, 107, 107, 0.8),
+      0 0 40px rgba(255, 71, 87, 0.6);
+  }
 }
 
 @keyframes accentPulse {
-  0%, 100% { opacity: 0.8; }
-  50% { opacity: 1; }
+  0%,
+  100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 @media (max-width: 640px) {
   .counters {
     padding: 3rem 0;
   }
-  
+
   .counters-text {
     margin-bottom: 3rem;
   }
-  
+
   .counters-text p {
     font-size: var(--font-lg);
   }
-  
+
   .counter-item {
     padding: 1.5rem 1rem;
   }
-  
+
   .counter-number {
     font-size: var(--font-3xl);
   }
@@ -357,7 +471,7 @@
     grid-template-columns: 1fr;
     gap: 1rem;
   }
-  
+
   .counter-item {
     padding: 1.5rem;
   }
