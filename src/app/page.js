@@ -183,11 +183,59 @@ export default function Home() {
         {/* Hero секция */}
         <Hero onQuizOpen={() => setIsQuizOpen(true)} />
         
-        {/* Счетчики */}
-        <Counter />
-        
         {/* Основной контент */}
         <main>
+          {/* Полный каталог товаров */}
+          <section id="full-catalog" style={{ padding: 'clamp(2rem, 5vw, 4rem) 0' }}>
+            <div className="container">
+              <h2 style={{ 
+                fontSize: 'var(--font-3xl)', 
+                color: 'var(--color-primary)',
+                textAlign: 'center',
+                marginBottom: '3rem',
+                fontWeight: 'bold'
+              }}>
+                Модели штукатурных станций
+              </h2>
+              
+              <div className="products-grid">
+                {products.map((product, index) => (
+                  <ProductCard 
+                    key={index} 
+                    product={product} 
+                    onDetailsClick={handleProductDetails}
+                  />
+                ))}
+              </div>
+              
+              <div style={{ textAlign: 'center', marginTop: 'clamp(2rem, 4vw, 3rem)' }}>
+                <button 
+                  onClick={() => setIsComparisonOpen(true)}
+                  style={{
+                    padding: 'clamp(0.75rem, 2vw, 1rem) clamp(1.5rem, 4vw, 2rem)',
+                    background: 'var(--color-primary)',
+                    color: 'var(--color-white)',
+                    border: 'none',
+                    borderRadius: '0.5rem',
+                    fontSize: 'var(--font-lg)',
+                    fontWeight: '600',
+                    cursor: 'pointer',
+                    transition: 'all 0.3s ease',
+                    width: '100%',
+                    maxWidth: '300px'
+                  }}
+                  onMouseEnter={(e) => e.target.style.transform = 'translateY(-2px)'}
+                  onMouseLeave={(e) => e.target.style.transform = 'translateY(0)'}
+                >
+                  Сравнить модели
+                </button>
+              </div>
+            </div>
+          </section>
+
+          {/* Счетчики */}
+          <Counter />
+          
           {/* Преимущества */}
           <section id="advantages" style={{ padding: 'clamp(2rem, 5vw, 4rem) 0' }}>
             <div className="container">
@@ -241,54 +289,6 @@ export default function Home() {
               </div>
               
 
-            </div>
-          </section>
-
-          {/* Полный каталог товаров */}
-          <section id="full-catalog" style={{ padding: 'clamp(2rem, 5vw, 4rem) 0' }}>
-            <div className="container">
-              <h2 style={{ 
-                fontSize: 'var(--font-3xl)', 
-                color: 'var(--color-primary)',
-                textAlign: 'center',
-                marginBottom: '3rem',
-                fontWeight: 'bold'
-              }}>
-                Модели штукатурных станций
-              </h2>
-              
-              <div className="products-grid">
-                {products.map((product, index) => (
-                  <ProductCard 
-                    key={index} 
-                    product={product} 
-                    onDetailsClick={handleProductDetails}
-                  />
-                ))}
-              </div>
-              
-              <div style={{ textAlign: 'center', marginTop: 'clamp(2rem, 4vw, 3rem)' }}>
-                <button 
-                  onClick={() => setIsComparisonOpen(true)}
-                  style={{
-                    padding: 'clamp(0.75rem, 2vw, 1rem) clamp(1.5rem, 4vw, 2rem)',
-                    background: 'var(--color-primary)',
-                    color: 'var(--color-white)',
-                    border: 'none',
-                    borderRadius: '0.5rem',
-                    fontSize: 'var(--font-lg)',
-                    fontWeight: '600',
-                    cursor: 'pointer',
-                    transition: 'all 0.3s ease',
-                    width: '100%',
-                    maxWidth: '300px'
-                  }}
-                  onMouseEnter={(e) => e.target.style.transform = 'translateY(-2px)'}
-                  onMouseLeave={(e) => e.target.style.transform = 'translateY(0)'}
-                >
-                  Сравнить модели
-                </button>
-              </div>
             </div>
           </section>
 

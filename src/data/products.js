@@ -24,7 +24,7 @@ export const products = [
     motorPower: "5.5 кВт",
     weight: "260 кг",
     distance: "до 30 м",
-    price: "535 000 ₽",
+    price: "от 535 000 ₽",
     description:
       "Мощная промышленная станция для больших объемов работ. Высокая производительность и надежность.",
   },
@@ -39,7 +39,7 @@ export const products = [
     weight: "141,5 кг",
     distance: "до 20 м",
     efficiency: "до 300 м²/смена",
-    price: "408 000 ₽",
+    price: "от 408 000 ₽",
     description:
       "Компактная модель с шнековой парой PFT B4-2L. Оптимальное соотношение цены и качества.",
   },
@@ -54,7 +54,7 @@ export const products = [
     weight: "149 кг",
     distance: "до 22 м",
     efficiency: "до 350 м²/смена",
-    price: "428 000 ₽",
+    price: "от 428 000 ₽",
     description:
       "Улучшенная модель с шнековой парой PFT SD6-3 Slim. Повышенная производительность и надежность.",
   },
