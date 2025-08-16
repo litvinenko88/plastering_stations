@@ -72,6 +72,7 @@ export default function RootLayout({ children }) {
     <html lang="ru">
       <head>
         <meta charSet="utf-8" />
+        <meta name="google-site-verification" content="1LCOpJWtJuiYpIkbYRg1u5MUo8vbxa5-iQu5wnvXtSo" />
 
         <meta name="theme-color" content="#7d010b" />
         <meta name="format-detection" content="telephone=yes" />
