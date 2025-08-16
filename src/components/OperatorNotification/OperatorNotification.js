@@ -22,17 +22,14 @@ export default function OperatorNotification({ operatorClicked }) {
   const [secondNotificationShown, setSecondNotificationShown] = useState(false)
 
   useEffect(() => {
-    // Подписка на глобальный таймер
     const handleTimerUpdate = (time) => setTimer(time)
     globalTimer.subscribe(handleTimerUpdate)
 
-    // Первое уведомление через 12 секунд
     const firstTimer = setTimeout(() => {
       if (!notifications.first.closed && !chatOpen && !operatorClicked) {
         setNotifications(prev => ({ ...prev, first: { ...prev.first, visible: true } }))
         setFirstNotificationShown(true)
         
-        // Автозакрытие через 10 секунд если нет взаимодействия
         setTimeout(() => {
           if (!userInteracted) {
             const notification = document.querySelector('.first-notification')
@@ -43,13 +40,11 @@ export default function OperatorNotification({ operatorClicked }) {
               }, 400)
             }
             
-            // Второе уведомление через 20 секунд после закрытия первого (только если не было взаимодействия)
             setTimeout(() => {
               if (!notifications.second.closed && !chatOpen && !operatorClicked && !userInteracted) {
                 setNotifications(prev => ({ ...prev, second: { ...prev.second, visible: true } }))
                 setSecondNotificationShown(true)
                 
-                // Автозакрытие второго через 12 секунд если нет взаимодействия с формой
                 setTimeout(() => {
                   if (!formInteracted) {
                     const notification = document.querySelector('.second-notification')
@@ -74,16 +69,14 @@ export default function OperatorNotification({ operatorClicked }) {
     }
   }, [])
 
-  // Обработка клика по оператору
   useEffect(() => {
-    if (operatorClicked) {
+    if (operatorClicked > 0) {
       handleOperatorClick()
     }
   }, [operatorClicked])
 
   const handleFirstNotificationClick = () => {
     setUserInteracted(true)
-    // Добавляем класс для анимации закрытия
     const notification = document.querySelector('.first-notification')
     if (notification) {
       notification.classList.add('closing')
@@ -91,52 +84,41 @@ export default function OperatorNotification({ operatorClicked }) {
         setNotifications(prev => ({ ...prev, first: { visible: false, closed: true } }))
       }, 400)
     }
-    // Открываем квиз или другое действие
     const quizButton = document.querySelector('[data-quiz-trigger]')
     if (quizButton) quizButton.click()
   }
 
   const handleOperatorClick = () => {
-    setChatOpen(true)
-    
-    // Закрываем все уведомления
     setNotifications({
       first: { visible: false, closed: true },
       second: { visible: false, closed: true }
     })
     
-    // Постепенно добавляем сообщения в чат
-    const messages = []
+    setChatOpen(true)
     
-    // Первое сообщение сразу
-    if (firstNotificationShown) {
-      messages.push({
-        id: 1,
-        text: "Здравствуйте! Готов помочь вам подобрать штукатурную станцию, для ваших объектов",
-        type: 'operator',
-        timestamp: new Date()
-      })
-    }
+    const messages = [{
+      id: Date.now(),
+      text: "Здравствуйте! Готов помочь вам подобрать штукатурную станцию, для ваших объектов",
+      type: 'operator',
+      timestamp: new Date()
+    }]
     
     setChatMessages(messages)
     
-    // Второе сообщение через некоторое время
-    if (secondNotificationShown) {
-      setTimeout(() => {
-        setChatMessages(prev => [...prev, {
-          id: 2,
-          text: "Сейчас у нас действует специальное предложение, на покупку штукатурных станции, хотите узнать подробнее?",
-          type: 'operator',
-          timestamp: new Date()
-        }])
-      }, 1500)
-    }
+    setTimeout(() => {
+      setChatMessages(prev => [...prev, {
+        id: Date.now() + 1,
+        text: "Сейчас у нас действует специальное предложение, на покупку штукатурных станции, хотите узнать подробнее?",
+        type: 'operator',
+        timestamp: new Date(),
+        hasSpecialOffer: true
+      }])
+    }, 1500)
   }
 
   const handleFormChange = (e) => {
     const { name, value, type, checked } = e.target
     
-    // Пользователь взаимодействует с формой - не закрываем уведомление
     setFormInteracted(true)
     
     if (type === 'checkbox') {
@@ -204,7 +186,6 @@ export default function OperatorNotification({ operatorClicked }) {
 
   return (
     <>
-      {/* Первое уведомление */}
       {notifications.first.visible && (
         <div className="operator-notification first-notification">
           <div className="notification-content">
@@ -225,7 +206,6 @@ export default function OperatorNotification({ operatorClicked }) {
         </div>
       )}
 
-      {/* Второе уведомление */}
       {notifications.second.visible && (
         <div className="operator-notification second-notification">
           <button 
@@ -313,7 +293,6 @@ export default function OperatorNotification({ operatorClicked }) {
         </div>
       )}
 
-      {/* Чат с оператором */}
       {chatOpen && (
         <div className="operator-chat">
           <div className="chat-header">
@@ -334,7 +313,7 @@ export default function OperatorNotification({ operatorClicked }) {
               <div key={message.id} className={`chat-message ${message.type}`}>
                 <div className="message-content">
                   <p>{message.text}</p>
-                  {message.id === 2 && (
+                  {message.hasSpecialOffer && (
                     <div className="chat-special-offer">
                       <div className="special-timer">
                         <p>Специальное предложение действует:</p>
@@ -356,6 +335,7 @@ export default function OperatorNotification({ operatorClicked }) {
                             placeholder="Ваше имя"
                             value={formData.name}
                             onChange={handleFormChange}
+                            maxLength="20"
                             required
                           />
                           <input
@@ -364,6 +344,7 @@ export default function OperatorNotification({ operatorClicked }) {
                             placeholder="+7 (999) 123-45-67"
                             value={formData.phone}
                             onChange={handleFormChange}
+                            maxLength="13"
                             required
                           />
                           <div className="checkbox-group">

@@ -4,11 +4,11 @@ import './FloatingContacts.css'
 import OperatorNotification from '../OperatorNotification'
 
 export default function FloatingContacts() {
-  const [operatorClicked, setOperatorClicked] = useState(false)
+  const [operatorClicked, setOperatorClicked] = useState(0)
 
   const handleOperatorClick = () => {
-    setOperatorClicked(true)
-    // Дополнительная логика при клике на оператора
+    // Увеличиваем счетчик для принудительного обновления
+    setOperatorClicked(prev => prev + 1)
   }
 
   return (
