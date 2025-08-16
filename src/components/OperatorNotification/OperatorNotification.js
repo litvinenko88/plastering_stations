@@ -32,12 +32,14 @@ export default function OperatorNotification({ operatorClicked }) {
         
         setTimeout(() => {
           if (!userInteracted) {
-            const notification = document.querySelector('.first-notification')
-            if (notification) {
-              notification.classList.add('closing')
-              setTimeout(() => {
-                setNotifications(prev => ({ ...prev, first: { visible: false, closed: true } }))
-              }, 400)
+            if (typeof document !== 'undefined') {
+              const notification = document.querySelector('.first-notification')
+              if (notification) {
+                notification.classList.add('closing')
+                setTimeout(() => {
+                  setNotifications(prev => ({ ...prev, first: { visible: false, closed: true } }))
+                }, 400)
+              }
             }
             
             setTimeout(() => {
@@ -47,12 +49,14 @@ export default function OperatorNotification({ operatorClicked }) {
                 
                 setTimeout(() => {
                   if (!formInteracted) {
-                    const notification = document.querySelector('.second-notification')
-                    if (notification) {
-                      notification.classList.add('closing')
-                      setTimeout(() => {
-                        setNotifications(prev => ({ ...prev, second: { visible: false, closed: true } }))
-                      }, 400)
+                    if (typeof document !== 'undefined') {
+                      const notification = document.querySelector('.second-notification')
+                      if (notification) {
+                        notification.classList.add('closing')
+                        setTimeout(() => {
+                          setNotifications(prev => ({ ...prev, second: { visible: false, closed: true } }))
+                        }, 400)
+                      }
                     }
                   }
                 }, 12000)
@@ -77,15 +81,17 @@ export default function OperatorNotification({ operatorClicked }) {
 
   const handleFirstNotificationClick = () => {
     setUserInteracted(true)
-    const notification = document.querySelector('.first-notification')
-    if (notification) {
-      notification.classList.add('closing')
-      setTimeout(() => {
-        setNotifications(prev => ({ ...prev, first: { visible: false, closed: true } }))
-      }, 400)
+    if (typeof document !== 'undefined') {
+      const notification = document.querySelector('.first-notification')
+      if (notification) {
+        notification.classList.add('closing')
+        setTimeout(() => {
+          setNotifications(prev => ({ ...prev, first: { visible: false, closed: true } }))
+        }, 400)
+      }
+      const quizButton = document.querySelector('[data-quiz-trigger]')
+      if (quizButton) quizButton.click()
     }
-    const quizButton = document.querySelector('[data-quiz-trigger]')
-    if (quizButton) quizButton.click()
   }
 
   const handleOperatorClick = () => {
@@ -158,12 +164,14 @@ export default function OperatorNotification({ operatorClicked }) {
         setFormErrors({})
         
         setTimeout(() => {
-          const notification = document.querySelector('.second-notification')
-          if (notification) {
-            notification.classList.add('closing')
-            setTimeout(() => {
-              setNotifications(prev => ({ ...prev, second: { visible: false, closed: true } }))
-            }, 400)
+          if (typeof document !== 'undefined') {
+            const notification = document.querySelector('.second-notification')
+            if (notification) {
+              notification.classList.add('closing')
+              setTimeout(() => {
+                setNotifications(prev => ({ ...prev, second: { visible: false, closed: true } }))
+              }, 400)
+            }
           }
         }, 3000)
       }
@@ -175,12 +183,14 @@ export default function OperatorNotification({ operatorClicked }) {
   }
 
   const closeSecondNotification = () => {
-    const notification = document.querySelector('.second-notification')
-    if (notification) {
-      notification.classList.add('closing')
-      setTimeout(() => {
-        setNotifications(prev => ({ ...prev, second: { visible: false, closed: true } }))
-      }, 400)
+    if (typeof document !== 'undefined') {
+      const notification = document.querySelector('.second-notification')
+      if (notification) {
+        notification.classList.add('closing')
+        setTimeout(() => {
+          setNotifications(prev => ({ ...prev, second: { visible: false, closed: true } }))
+        }, 400)
+      }
     }
   }
 

@@ -36,9 +36,7 @@ export default function Hero() {
               muted 
               loop 
               playsInline
-    
               preload="metadata"
-              poster="/images/video-poster.jpg"
             >
               <source src="/videos/fon_video.mp4" type="video/mp4" />
               <p>Ваш браузер не поддерживает видео.</p>
