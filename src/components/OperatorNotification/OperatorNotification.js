@@ -35,7 +35,13 @@ export default function OperatorNotification({ operatorClicked }) {
         // Автозакрытие через 10 секунд если нет взаимодействия
         setTimeout(() => {
           if (!userInteracted) {
-            setNotifications(prev => ({ ...prev, first: { visible: false, closed: true } }))
+            const notification = document.querySelector('.first-notification')
+            if (notification) {
+              notification.classList.add('closing')
+              setTimeout(() => {
+                setNotifications(prev => ({ ...prev, first: { visible: false, closed: true } }))
+              }, 400)
+            }
             
             // Второе уведомление через 20 секунд после закрытия первого (только если не было взаимодействия)
             setTimeout(() => {
@@ -46,7 +52,13 @@ export default function OperatorNotification({ operatorClicked }) {
                 // Автозакрытие второго через 12 секунд если нет взаимодействия с формой
                 setTimeout(() => {
                   if (!formInteracted) {
-                    setNotifications(prev => ({ ...prev, second: { visible: false, closed: true } }))
+                    const notification = document.querySelector('.second-notification')
+                    if (notification) {
+                      notification.classList.add('closing')
+                      setTimeout(() => {
+                        setNotifications(prev => ({ ...prev, second: { visible: false, closed: true } }))
+                      }, 400)
+                    }
                   }
                 }, 12000)
               }
@@ -71,7 +83,14 @@ export default function OperatorNotification({ operatorClicked }) {
 
   const handleFirstNotificationClick = () => {
     setUserInteracted(true)
-    setNotifications(prev => ({ ...prev, first: { visible: false, closed: true } }))
+    // Добавляем класс для анимации закрытия
+    const notification = document.querySelector('.first-notification')
+    if (notification) {
+      notification.classList.add('closing')
+      setTimeout(() => {
+        setNotifications(prev => ({ ...prev, first: { visible: false, closed: true } }))
+      }, 400)
+    }
     // Открываем квиз или другое действие
     const quizButton = document.querySelector('[data-quiz-trigger]')
     if (quizButton) quizButton.click()
@@ -157,7 +176,13 @@ export default function OperatorNotification({ operatorClicked }) {
         setFormErrors({})
         
         setTimeout(() => {
-          setNotifications(prev => ({ ...prev, second: { visible: false, closed: true } }))
+          const notification = document.querySelector('.second-notification')
+          if (notification) {
+            notification.classList.add('closing')
+            setTimeout(() => {
+              setNotifications(prev => ({ ...prev, second: { visible: false, closed: true } }))
+            }, 400)
+          }
         }, 3000)
       }
     } catch (error) {
@@ -168,7 +193,13 @@ export default function OperatorNotification({ operatorClicked }) {
   }
 
   const closeSecondNotification = () => {
-    setNotifications(prev => ({ ...prev, second: { visible: false, closed: true } }))
+    const notification = document.querySelector('.second-notification')
+    if (notification) {
+      notification.classList.add('closing')
+      setTimeout(() => {
+        setNotifications(prev => ({ ...prev, second: { visible: false, closed: true } }))
+      }, 400)
+    }
   }
 
   return (
@@ -204,9 +235,6 @@ export default function OperatorNotification({ operatorClicked }) {
             ×
           </button>
           <div className="notification-content">
-            <div className="notification-avatar">
-              <img src="/images/operator.webp" alt="Оператор" />
-            </div>
             <div className="notification-message">
               <p>Сейчас у нас действует специальное предложение, на покупку штукатурных станции, хотите узнать подробнее?</p>
               
@@ -276,7 +304,7 @@ export default function OperatorNotification({ operatorClicked }) {
                 </form>
               ) : (
                 <div className="success-message">
-                  <p>✅ Спасибо! Мы получили вашу заявку и скоро свяжемся с вами</p>
+                  <p>Спасибо! Мы получили вашу заявку и скоро свяжемся с вами</p>
                 </div>
               )}
             </div>
@@ -357,7 +385,7 @@ export default function OperatorNotification({ operatorClicked }) {
                         </form>
                       ) : (
                         <div className="success-message">
-                          <p>✅ Спасибо! Мы получили вашу заявку и скоро свяжемся с вами</p>
+                          <p>Спасибо! Мы получили вашу заявку и скоро свяжемся с вами</p>
                         </div>
                       )}
                     </div>

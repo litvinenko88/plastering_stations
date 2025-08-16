@@ -1,9 +1,9 @@
 .operator-notification {
   position: fixed;
-  right: 5rem;
-  bottom: 1rem;
+  right: 6rem;
+  bottom: 6rem;
   z-index: 1002;
-  max-width: 350px;
+  max-width: 320px;
   background: linear-gradient(135deg, #ffffff, #fafafa);
   border-radius: 16px;
   box-shadow: 
@@ -11,8 +11,10 @@
     0 0 0 1px rgba(255, 255, 255, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.3);
   border: 1px solid rgba(125, 1, 11, 0.1);
-  animation: slideInFromRight 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: slideInFromOperator 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
   overflow: hidden;
+  opacity: 0;
+  animation-fill-mode: forwards;
 }
 
 .operator-notification::before {
@@ -51,11 +53,15 @@
   transform: rotate(90deg);
 }
 
-.notification-content {
+.first-notification .notification-content {
   display: flex;
   gap: 0.75rem;
   padding: 1rem;
   align-items: flex-start;
+}
+
+.second-notification .notification-content {
+  padding: 0.9rem;
 }
 
 .notification-avatar {
@@ -75,13 +81,22 @@
 
 .notification-message {
   flex: 1;
+  min-width: 0;
 }
 
-.notification-message p {
+.first-notification .notification-message p {
   font-size: var(--font-sm);
   color: var(--color-dark);
   margin-bottom: 0.75rem;
   line-height: 1.4;
+}
+
+.second-notification .notification-message p {
+  font-size: 0.85rem;
+  color: var(--color-dark);
+  margin-bottom: 0.6rem;
+  line-height: 1.4;
+  font-weight: 500;
 }
 
 .notification-btn {
@@ -105,8 +120,8 @@
 
 .notification-tail {
   position: absolute;
-  bottom: 20px;
-  right: -8px;
+  bottom: -8px;
+  right: 40px;
   width: 16px;
   height: 16px;
   background: linear-gradient(135deg, #ffffff, #fafafa);
@@ -115,42 +130,51 @@
   transform: rotate(45deg);
 }
 
-.special-timer {
-  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-  padding: 0.75rem;
+.second-notification .special-timer {
+  background: linear-gradient(135deg, var(--color-primary), #a00109);
+  padding: 0.6rem;
   border-radius: 8px;
-  margin: 0.75rem 0;
-  border: 1px solid rgba(125, 1, 11, 0.1);
+  margin: 0.6rem 0;
+  border: none;
+  box-shadow: 0 4px 12px rgba(125, 1, 11, 0.2);
 }
 
-.special-timer p {
-  font-size: var(--font-xs);
-  color: var(--color-gray);
-  margin-bottom: 0.5rem !important;
+.second-notification .special-timer p {
+  font-size: 0.75rem;
+  color: white;
+  margin-bottom: 0.4rem !important;
   text-align: center;
+  font-weight: 500;
 }
 
-.timer-display {
+.second-notification .timer-display {
   display: flex;
   justify-content: center;
-  gap: 0.5rem;
-  font-weight: 600;
+  gap: 0.4rem;
+  font-weight: 700;
+  align-items: center;
+}
+
+.second-notification .timer-part {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 0.3rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 800;
   color: var(--color-primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  min-width: 28px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.timer-part {
-  background: white;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  font-size: var(--font-sm);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.notification-form {
+.second-notification .notification-form {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  margin-top: 0.75rem;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  align-items: center;
+  width: 100%;
 }
 
 .form-group {
@@ -159,13 +183,15 @@
   gap: 0.25rem;
 }
 
-.notification-form input[type="text"],
-.notification-form input[type="tel"] {
-  padding: 0.5rem;
+.second-notification .notification-form input[type="text"],
+.second-notification .notification-form input[type="tel"] {
+  padding: 0.4rem;
   border: 1px solid #e2e8f0;
-  border-radius: 6px;
-  font-size: var(--font-sm);
+  border-radius: 4px;
+  font-size: 0.8rem;
   transition: all 0.3s ease;
+  width: 100%;
+  text-align: center;
 }
 
 .notification-form input:focus {
@@ -183,10 +209,12 @@
   font-size: 0.75rem;
 }
 
-.checkbox-group {
+.second-notification .checkbox-group {
   display: flex;
   align-items: flex-start;
   gap: 0.5rem;
+  justify-content: center;
+  width: 100%;
 }
 
 .checkbox-group input {
@@ -194,22 +222,25 @@
   accent-color: var(--color-primary);
 }
 
-.checkbox-group label {
-  font-size: 0.75rem;
+.second-notification .checkbox-group label {
+  font-size: 0.65rem;
   color: var(--color-gray);
-  line-height: 1.3;
+  line-height: 1.2;
+  text-align: center;
+  flex: 1;
 }
 
-.submit-btn {
+.second-notification .submit-btn {
   background: linear-gradient(135deg, var(--color-primary), #a00109);
   color: white;
   border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  font-size: var(--font-sm);
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
+  width: 100%;
 }
 
 .submit-btn:hover:not(:disabled) {
@@ -223,7 +254,7 @@
   transform: none;
 }
 
-.success-message {
+.first-notification .success-message {
   background: linear-gradient(135deg, #10b981, #059669);
   color: white;
   padding: 0.75rem;
@@ -232,10 +263,27 @@
   text-align: center;
 }
 
-.success-message p {
+.second-notification .success-message {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  padding: 0.6rem;
+  border-radius: 6px;
+  margin-top: 0.5rem;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.first-notification .success-message p {
   margin: 0 !important;
   font-size: var(--font-sm) !important;
   color: white !important;
+}
+
+.second-notification .success-message p {
+  margin: 0 !important;
+  font-size: 0.8rem !important;
+  color: white !important;
+  font-weight: 500;
 }
 
 /* Чат с оператором */
@@ -371,14 +419,29 @@
   color: white !important;
 }
 
-@keyframes slideInFromRight {
-  from {
+@keyframes slideInFromOperator {
+  0% {
     opacity: 0;
-    transform: translateX(100%) scale(0.9);
+    transform: translateY(20px) translateX(20px) scale(0.8);
   }
-  to {
+  50% {
+    opacity: 0.8;
+    transform: translateY(-5px) translateX(-5px) scale(1.05);
+  }
+  100% {
     opacity: 1;
-    transform: translateX(0) scale(1);
+    transform: translateY(0) translateX(0) scale(1);
+  }
+}
+
+@keyframes slideOutToOperator {
+  0% {
+    opacity: 1;
+    transform: translateY(0) translateX(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(20px) translateX(20px) scale(0.8);
   }
 }
 
@@ -393,11 +456,17 @@
   }
 }
 
+/* Плавное закрытие */
+.operator-notification.closing {
+  animation: slideOutToOperator 0.4s ease-in forwards;
+}
+
 /* Адаптивность */
 @media (max-width: 768px) {
   .operator-notification {
     right: 1rem;
-    max-width: 300px;
+    bottom: 5rem;
+    max-width: 280px;
   }
   
   .operator-chat {
@@ -411,7 +480,8 @@
 @media (max-width: 480px) {
   .operator-notification {
     right: 0.5rem;
-    max-width: 280px;
+    bottom: 4.5rem;
+    max-width: 260px;
   }
   
   .notification-content {
