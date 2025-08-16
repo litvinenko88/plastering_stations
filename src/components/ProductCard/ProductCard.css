@@ -318,8 +318,8 @@
     padding: 1rem;
   }
   
-  .product-actions {
-    flex-direction: column;
+  .product-btn {
+    width: 100%;
   }
   
   .product-title {

@@ -68,17 +68,6 @@ export default function ProductCard({ product, onDetailsClick }) {
         <div className="product-actions">
           <button 
             className="product-btn primary"
-            onClick={() => {
-              // Открываем модальное окно с деталями товара
-              if (onDetailsClick) {
-                onDetailsClick(product)
-              }
-            }}
-          >
-            Заказать
-          </button>
-          <button 
-            className="product-btn secondary"
             onClick={() => onDetailsClick && onDetailsClick(product)}
           >
             Подробнее
